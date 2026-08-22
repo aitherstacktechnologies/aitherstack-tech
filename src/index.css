@@ -1,0 +1,496 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap');
+
+:root {
+  --bg-primary: #fbfbfb;
+  --bg-secondary: #f3f3f1;
+  --text-primary: #121212;
+  --text-muted: #666666;
+  --accent: #0f52ba;
+  --border-light: #e5e5e2;
+  --font-main: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .font-heading {
+  font-family: var(--font-heading);
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+/* Editorial Spacing Classes */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section-padding {
+  padding: 8rem 0;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-light);
+  border-radius: 3px;
+}
+
+
+/* Smooth Scroll Behavior */
+html {
+  scroll-behavior: smooth;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fafafa;
+  color: #111111;
+}
+
+/* Humaan Blur Accent Glows */
+body::before {
+  content: '';
+  position: fixed;
+  top: -10vw;
+  right: -10vw;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(0, 102, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #fbfbfb;
+  --bg-secondary: #f3f3f5;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --accent: #2563eb;
+  --border-light: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  line-height: 1.5;
+}
+
+.section-padding {
+  padding: 8rem 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Humaan Blur Background Accent */
+body::before {
+  content: '';
+  position: fixed;
+  top: -15vw;
+  right: -15vw;
+  width: 50vw;
+  height: 50vw;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Smooth Card Hover Lift */
+.humaan-card {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.humaan-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(37, 99, 235, 0.3) !important;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* Interactive Scroll & Button Hover States */
+.animated-btn {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.animated-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
+}
+
+.animated-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Card Pinning & Layer Stacking Rules */
+.stack-card {
+  position: sticky;
+  top: 120px;
+  will-change: transform, opacity;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Section Smooth Overlap */
+.section-padding {
+  padding: 6rem 0;
+}
+
+/* Solid Stacking Deck & Depth Fix */
+.stack-card {
+  position: sticky;
+  top: 100px;
+  will-change: transform;
+  background-color: #ffffff !important;
+  z-index: 1;
+}
+
+/* Clear Blur Bug on Bottom Element */
+.section-padding {
+  padding: 6rem 0 10rem 0;
+  overflow: visible !important;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f1f5f9;
+  --bg-dark: #0f172a;
+  --text-primary: #0f172a;
+  --text-muted: #64748b;
+  --accent: #2563eb;
+  --border-light: #e2e8f0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide Default Cursor for Desktop */
+@media (min-width: 1024px) {
+  *, html, body, a, button, input, textarea {
+    cursor: none !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
+
+/* Solid Stacking Deck & Depth Fix */
+.stack-card {
+  position: sticky;
+  top: 100px;
+  will-change: transform;
+  background-color: #ffffff !important;
+  z-index: 1;
+}
+
+.animated-btn {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.animated-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px -5px rgba(37, 99, 235, 0.3);
+}
+
+.animated-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Mobile & Tablet Responsive Adjustments */
+@media (max-width: 900px) {
+  .stack-card {
+    grid-template-columns: 1fr !important;
+    padding: 2rem !important;
+    gap: 2rem !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+  
+  .section-padding {
+    padding: 3.5rem 0;
+  }
+}
+
+/* Smooth Scroll behavior & Hardware acceleration */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Optimize Framer Motion Rendering */
+div, section, article {
+  will-change: transform, opacity;
+}
+
+/* Force Standard Default Cursor */
+*, html, body {
+  cursor: auto !important;
+}
+
+/* Force Clickable Elements to Pointer Hand */
+a, button, input[type="submit"], input[type="button"], select, [role="button"] {
+  cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  .team-card-row {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+    gap: 1.5rem !important;
+  }
+}
+
+/* Force text cursor on all input fields and textareas */
+input, textarea, select {
+  cursor: text !important;
+}
+
+/* Force pointer on file upload buttons */
+input[type="file"] {
+  cursor: pointer !important;
+}
+
+/* Smooth Scroll & Stacked Card Animation */
+html {
+  scroll-behavior: smooth;
+}
+
+.stacked-card {
+  position: sticky;
+  top: 100px;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease;
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+
+/* Clickable Hover Cursor */
+.clickable-card {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clickable-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.15);
+}
+
+/* Subtle Glow Animations */
+@keyframes floatGlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: floatGlow 6s ease-in-out infinite;
+}
+
+/* Card Elevation & Hover Shadow Effects */
+.light-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.clickable-card {
+  cursor: pointer;
+}
+
+.clickable-card:hover, .feature-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #2563eb !important;
+  box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.2) !important;
+}
+
+/* Dark Footer Styling for Contrast */
+.footer-dark-custom {
+  background-color: #0b0f19 !important;
+  border-top: 1px solid #1e293b;
+  padding: 4rem 2rem 2rem;
+  margin-top: 5rem;
+  color: #ffffff !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+
+
+/* Cards Scaling & Glow Shadow Animation */
+.animated-card {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+.animated-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: #2563eb !important;
+  box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.25), 0 8px 15px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Automatically animate ALL light cards across the site */
+.light-card, [class*="card"] {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.light-card:hover, [class*="card"]:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 20px 35px -10px rgba(37, 99, 235, 0.25) !important;
+}
+
+/* Web-Style Smooth Transition Card Animation */
+.web-service-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle Hover Glow & Lift */
+.web-service-card:hover {
+  transform: translateY(-6px);
+  border-color: #2563eb !important;
+  box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.15) !important;
+}
+
+.web-service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: #2563eb;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.web-service-card:hover::before {
+  opacity: 1;
+}
+
+/* Universal Button & CTA Hover Scale Animation */
+button,
+a,
+input[type="submit"],
+input[type="button"],
+[role="button"] {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              background-color 0.2s ease, 
+              box-shadow 0.2s ease !important;
+}
+
+button:hover,
+a:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+[role="button"]:hover {
+  transform: scale(1.05) !important;
+}
+
+button:active,
+a:active,
+input[type="submit"]:active,
+input[type="button"]:active,
+[role="button"]:active {
+  transform: scale(0.98) !important;
+}
