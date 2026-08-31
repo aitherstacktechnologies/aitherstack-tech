@@ -51,9 +51,9 @@ export default function Footer() {
               <div className="space-y-3">
                 <a 
                   href="mailto:muhammadzaman.dev@gmail.com" 
-                  className="flex items-center gap-3 text-sm text-gray-400 hover:text-ast-accent transition-colors group"
+                  className="flex items-center gap-3 text-sm text-gray-400 hover:text-ast-accent transition-colors group break-all"
                 >
-                  <div className="w-8 h-8 rounded-lg border border-ast-stone/50 bg-ast-surface flex items-center justify-center group-hover:border-ast-accent/50 transition-colors">
+                  <div className="w-8 h-8 rounded-lg border border-ast-stone/50 bg-ast-surface flex items-center justify-center group-hover:border-ast-accent/50 transition-colors flex-shrink-0">
                     <Mail className="w-4 h-4" />
                   </div>
                   muhammadzaman.dev@gmail.com
@@ -133,12 +133,12 @@ export default function Footer() {
             © {currentYear} Aither Stack Technologies. All rights reserved.
           </div>
           <div className="flex items-center gap-6 text-xs font-mono">
-            <a href="/privacy" className="text-gray-500 hover:text-white transition-colors">
+            <Link to="/privacy" className="text-gray-500 hover:text-white transition-colors">
               Privacy Policy
-            </a>
-            <a href="/terms" className="text-gray-500 hover:text-white transition-colors">
+            </Link>
+            <Link to="/terms" className="text-gray-500 hover:text-white transition-colors">
               Terms of Service
-            </a>
+            </Link>
           </div>
         </div>
       </div>

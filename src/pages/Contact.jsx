@@ -117,7 +117,7 @@ export default function Contact() {
             </h1>
             <p className="text-lg text-gray-400 leading-relaxed">
               Have a project in mind? Send us a message and we'll get back to you within 24 hours. For immediate assistance, email us directly at{' '}
-              <a href="mailto:muhammadzaman.dev@gmail.com" className="text-ast-accent hover:underline">
+              <a href="mailto:muhammadzaman.dev@gmail.com" className="text-ast-accent hover:underline break-all">
                 muhammadzaman.dev@gmail.com
               </a>
             </p>
@@ -320,7 +320,7 @@ export default function Contact() {
                 </p>
                 <a 
                   href="mailto:muhammadzaman.dev@gmail.com" 
-                  className="text-xl text-ast-accent hover:underline font-bold"
+                  className="text-xl text-ast-accent hover:underline font-bold break-all"
                 >
                   muhammadzaman.dev@gmail.com
                 </a>

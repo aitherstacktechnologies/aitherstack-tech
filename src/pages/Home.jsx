@@ -220,10 +220,10 @@ export default function Home() {
 
       <section className="tech-section relative py-16 px-6 sm:px-8 lg:px-12 border-y border-ast-stone/30 bg-ast-surface/20 overflow-hidden">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-32 h-full bg-gradient-to-r from-ast-bg to-transparent z-10" />
+          <div className="w-32 h-full bg-gradient-to-r from-ast-bg to-transparent z-10 pointer-events-none" />
           <div className="flex-1 overflow-hidden">
-            <div className="flex gap-12 animate-marquee whitespace-nowrap">
-              {[...techStack, ...techStack, ...techStack].map((tech, i) => (
+            <div className="flex gap-12 whitespace-nowrap animate-marquee">
+              {[...techStack, ...techStack].map((tech, i) => (
                 <span key={i} className="tech-item flex items-center gap-3 text-sm font-mono text-gray-500 hover:text-ast-accent transition-colors">
                   <span className="w-1.5 h-1.5 rounded-full bg-ast-accent/50" />
                   {tech}
@@ -231,7 +231,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="w-32 h-full bg-gradient-to-l from-ast-bg to-transparent z-10" />
+          <div className="w-32 h-full bg-gradient-to-l from-ast-bg to-transparent z-10 pointer-events-none" />
         </div>
       </section>
 
