@@ -1,118 +1,250 @@
-import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowUpRight, Globe, Zap, Shield, Users } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const journeyEvents = [
+gsap.registerPlugin(ScrollTrigger);
+
+const stats = [
+  { number: '50+', label: 'Projects Delivered' },
+  { number: '30+', label: 'Happy Clients' },
+  { number: '5+', label: 'Years Experience' },
+  { number: '24/7', label: 'Support Available' },
+];
+
+const values = [
   {
-    phase: "FOUNDATION",
-    title: "The Beginning",
-    description: "AITHER begins with a simple goal: build meaningful digital solutions."
+    icon: Zap,
+    title: 'Innovation',
+    description: 'We push boundaries with cutting-edge technology and creative solutions that set your business apart from the competition.',
   },
   {
-    phase: "EARLY WORK",
-    title: "First Digital Products",
-    description: "The team begins developing custom web applications and working with early clients."
+    icon: Shield,
+    title: 'Reliability',
+    description: 'We deliver on our promises. Every project is built with quality, care, and attention to detail that you can depend on.',
   },
   {
-    phase: "TECHNICAL EXPANSION",
-    title: "Scaling Systems & AI",
-    description: "The team grows technical capabilities into full-stack web platforms and automated workflows."
+    icon: Globe,
+    title: 'Global Reach',
+    description: 'We work with businesses worldwide, understanding diverse markets and delivering solutions that transcend borders.',
   },
   {
-    phase: "AGENCY DEVELOPMENT",
-    title: "Aither Stack Technologies",
-    description: "AITHER evolves into a dedicated digital technology agency serving ambitious clients."
+    icon: Users,
+    title: 'Client Focus',
+    description: 'Your success is our success. We build lasting partnerships through transparent communication and genuine care.',
   },
-  {
-    phase: "TODAY",
-    title: "Building What Comes Next",
-    description: "AITHER continues building modern digital experiences, products, and tailored systems."
-  }
 ];
 
 export default function About() {
+  const sectionRef = useRef(null);
+  const statsRef = useRef([]);
+  const valuesRef = useRef([]);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      statsRef.current.forEach((stat, index) => {
+        if (!stat) return;
+        gsap.fromTo(
+          stat,
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: stat,
+              start: 'top 85%',
+            },
+          }
+        );
+      });
+
+      valuesRef.current.forEach((value, index) => {
+        if (!value) return;
+        gsap.fromTo(
+          value,
+          { y: 40, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: 'power3.out',
+            delay: index * 0.1,
+            scrollTrigger: {
+              trigger: value,
+              start: 'top 85%',
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="section-padding">
-      <div className="container">
-        {/* Editorial Heading */}
-        <div style={{ borderBottom: '1px solid var(--border-light)', pb: '4rem', marginBottom: '5rem' }}>
-          <div style={{ fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', marginBottom: '1.5rem' }}>
-            ABOUT AITHER STACK TECHNOLOGIES
+    <div className="bg-sunset-bg text-sunset-text min-h-screen">
+      <div className="relative pt-32 pb-16 px-6 sm:px-8 lg:px-12 border-b border-sunset-border overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <span className="absolute -bottom-20 -right-10 text-[20vw] font-black tracking-tighter text-sunset-text opacity-[0.04] select-none">
+            AST
+          </span>
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sunset-border bg-sunset-surface/50 text-xs font-mono uppercase tracking-wider text-sunset-muted mb-6">
+            <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+            About Us
           </div>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', lineHeight: '1.1', maxWidth: '1000px', marginBottom: '2.5rem' }}>
-            WE'RE A DIGITAL TECHNOLOGY TEAM BUILDING WHAT COMES NEXT.
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-4">
+            Who We Are
           </h1>
-          <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', maxWidth: '750px', lineHeight: '1.6' }}>
-            AITHER STACK TECHNOLOGIES is a modern digital technology agency. We turn complex ideas, operational challenges, and new opportunities into clean, high-performance digital products and systems.
+          <p className="text-lg text-sunset-muted max-w-3xl leading-relaxed">
+            Aither Stack Technologies is a digital solutions agency that builds web platforms, AI systems, and business software for forward-thinking enterprises worldwide.
           </p>
         </div>
+      </div>
 
-        {/* Philosophy Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '4rem', marginBottom: '8rem' }}>
-          <h2 style={{ fontSize: '1rem', textTransform: 'uppercase', color: 'var(--text-muted)' }}>HOW WE THINK</h2>
-          <div>
-            <h3 style={{ fontSize: '2rem', marginBottom: '1.5rem', lineHeight: '1.3' }}>
-              Built around the problem, not a rigid preset template.
-            </h3>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '1.5rem', lineHeight: '1.7' }}>
-              We believe technology should serve a practical purpose. We don't push trendy gimmicks or bloated frameworks. Instead, we analyze what your business actually needs, then design and engineer scalable web products to solve it directly.
-            </p>
-            <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', lineHeight: '1.7' }}>
-              From initial strategy through long-term maintenance, our approach combines thoughtful UX/UI, modern frontend frameworks, and resilient backend integrations.
-            </p>
-          </div>
-        </div>
-
-        {/* AITHER JOURNEY TIMELINE */}
-        <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '5rem' }}>
-          <h2 style={{ fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)', marginBottom: '4rem' }}>
-            OUR JOURNEY
-          </h2>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-            {journeyEvents.map((item, index) => (
-              <div 
-                key={index} 
-                style={{ 
-                  display: 'grid', 
-                  gridTemplateColumns: '1fr 2fr 3fr', 
-                  gap: '2rem', 
-                  padding: '2.5rem 0', 
-                  borderBottom: '1px solid var(--border-light)',
-                  alignItems: 'baseline'
-                }}
+      <section ref={sectionRef} className="py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+            {stats.map((stat, index) => (
+              <div
+                key={stat.label}
+                ref={(el) => (statsRef.current[index] = el)}
+                className="text-center"
               >
-                <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--accent)', letterSpacing: '0.05em' }}>
-                  [{item.phase}]
+                <div className="text-4xl lg:text-5xl font-black tracking-tight text-sunset-pop mb-2">
+                  {stat.number}
                 </div>
-                <h3 style={{ fontSize: '1.5rem' }}>{item.title}</h3>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', lineHeight: '1.6' }}>
-                  {item.description}
-                </p>
+                <div className="text-sm text-sunset-muted font-mono uppercase tracking-wider">
+                  {stat.label}
+                </div>
               </div>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* CTA */}
-        <div style={{ marginTop: '8rem', padding: '4rem', backgroundColor: 'var(--bg-secondary)', borderRadius: '12px', textAlign: 'center' }}>
-          <h2 style={{ fontSize: '2.25rem', marginBottom: '1rem' }}>Want to work with our team?</h2>
-          <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>We're always ready for new ideas and ambitious technical projects.</p>
-          <Link to="/contact" style={{
-            padding: '1rem 2rem',
-            backgroundColor: 'var(--text-primary)',
-            color: '#fff',
-            borderRadius: '100px',
-            textDecoration: 'none',
-            fontWeight: '600',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
-            Get In Touch <ArrowUpRight size={18} />
-          </Link>
+      <section className="py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div>
+              <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-6">
+                Built for Business Growth
+              </h2>
+              <p className="text-sunset-muted leading-relaxed mb-6">
+                We're not just developers — we're business partners focused on your success. Our team combines technical expertise with strategic thinking to deliver solutions that drive real results.
+              </p>
+              <p className="text-sunset-muted leading-relaxed mb-8">
+                From startups to established enterprises, we work with ambitious businesses ready to transform their digital presence. Every project is custom-built to meet your specific needs, goals, and timeline.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sunset-surface border border-sunset-border text-sm">
+                  <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+                  React & TypeScript
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sunset-surface border border-sunset-border text-sm">
+                  <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+                  AI & Automation
+                </div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sunset-surface border border-sunset-border text-sm">
+                  <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+                  Cloud & API
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
+                <span className="absolute -bottom-10 -right-10 text-[15vw] font-black tracking-tighter text-sunset-text opacity-[0.04] select-none">
+                  AST
+                </span>
+              </div>
+              <div className="bg-sunset-surface border border-sunset-border rounded-2xl p-8">
+                <h3 className="text-xl font-bold mb-6">Why Choose Us?</h3>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
+                    <span className="text-sunset-muted">Dedicated team focused on your success</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
+                    <span className="text-sunset-muted">Transparent communication throughout</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
+                    <span className="text-sunset-muted">Clean, maintainable code quality</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
+                    <span className="text-sunset-muted">Post-launch support and maintenance</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
+                    <span className="text-sunset-muted">Scalable solutions for future growth</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      <section className="py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+              Our Values
+            </h2>
+            <p className="text-sunset-muted max-w-2xl mx-auto">
+              The principles that guide everything we do at Aither Stack Technologies.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div
+                key={value.title}
+                ref={(el) => (valuesRef.current[index] = el)}
+                className="text-center"
+              >
+                <div className="w-16 h-16 rounded-2xl bg-sunset-surface border border-sunset-border flex items-center justify-center mx-auto mb-6">
+                  <value.icon className="w-8 h-8 text-sunset-pop" />
+                </div>
+                <h3 className="text-lg font-bold mb-3">{value.title}</h3>
+                <p className="text-sm text-sunset-muted leading-relaxed">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-sunset-surface">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+            Ready to Work Together?
+          </h2>
+          <p className="text-sunset-muted max-w-xl mx-auto mb-8">
+            Let's discuss your project and create something amazing together.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 bg-sunset-pop text-sunset-bg px-8 py-4 rounded-full font-bold text-base transition-all hover:bg-sunset-pop/90"
+            >
+              <span>Start a Project</span>
+              <ArrowUpRight className="w-5 h-5" />
+            </Link>
+            <Link
+              to="/team"
+              className="inline-flex items-center gap-2 text-sunset-text px-8 py-4 rounded-full font-semibold text-base border border-sunset-border transition-all hover:border-sunset-muted"
+            >
+              Meet the Team
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

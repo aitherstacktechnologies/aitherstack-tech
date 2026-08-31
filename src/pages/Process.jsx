@@ -1,146 +1,201 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import ScrollReveal from '../components/ScrollReveal';
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import { Search, Hammer, Rocket, TrendingUp, ArrowRight, CheckCircle2 } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const steps = [
+gsap.registerPlugin(ScrollTrigger);
+
+const phases = [
   {
-    number: "01",
-    title: "DISCOVER",
-    subtitle: "Understanding the problem space",
-    description: "We dive deep into your business goals, target audience, existing systems, and specific technical obstacles."
+    num: '01',
+    title: 'Discovery & Planning',
+    icon: Search,
+    description: 'We analyze your requirements, technical landscape, and business objectives to create a comprehensive project roadmap.',
+    activities: [
+      'Requirements Analysis',
+      'Technical Architecture Design',
+      'Timeline & Milestone Planning',
+      'Resource Allocation',
+    ],
+    duration: '1-2 Weeks',
   },
   {
-    number: "02",
-    title: "DEFINE",
-    subtitle: "Structuring the digital strategy",
-    description: "We turn raw ideas into an actionable plan, selecting the right architecture, user journeys, and feature scope."
+    num: '02',
+    title: 'Design & Prototyping',
+    icon: Hammer,
+    description: 'We create detailed designs and functional prototypes to ensure alignment before full development begins.',
+    activities: [
+      'UI/UX Design',
+      'Interactive Prototypes',
+      'Design Review Cycles',
+      'Technical Specifications',
+    ],
+    duration: '1-3 Weeks',
   },
   {
-    number: "03",
-    title: "DESIGN",
-    subtitle: "Crafting modern, accessible UX/UI",
-    description: "We create clean, editorial visual layouts, intuitive navigation, and interactive prototypes tailored to your brand identity."
+    num: '03',
+    title: 'Development & Testing',
+    icon: Rocket,
+    description: 'Iterative development with continuous integration, automated testing, and transparent progress updates.',
+    activities: [
+      'Agile Development',
+      'Unit & Integration Testing',
+      'Performance Optimization',
+      'Weekly Progress Updates',
+    ],
+    duration: '4-12 Weeks',
   },
   {
-    number: "04",
-    title: "BUILD",
-    subtitle: "Clean, performant engineering",
-    description: "We build your product using modern React tools, ensuring fast response times, accessibility, and robust integrations."
+    num: '04',
+    title: 'Deployment & Scale',
+    icon: TrendingUp,
+    description: 'Careful deployment with monitoring, documentation, and ongoing support to ensure long-term success.',
+    activities: [
+      'Production Deployment',
+      'Performance Monitoring',
+      'Documentation & Training',
+      'Ongoing Support',
+    ],
+    duration: '1-2 Weeks + Ongoing',
   },
-  {
-    number: "05",
-    title: "LAUNCH",
-    subtitle: "Testing and smooth deployment",
-    description: "Thorough testing across browsers and devices ensures a secure, high-quality deployment to live servers."
-  },
-  {
-    number: "06",
-    title: "GROW",
-    subtitle: "Continuous improvement & scaling",
-    description: "We help evolve your platform post-launch through performance tuning, feature expansions, and automated workflows."
-  }
 ];
 
 export default function Process() {
-  const navigate = useNavigate();
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo('.hero-content',
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
+      );
+
+      gsap.fromTo('.phase-card',
+        { y: 50, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.5, stagger: 0.2, ease: 'power3.out',
+          scrollTrigger: { trigger: '.phases-grid', start: 'top 80%' }
+        }
+      );
+
+      gsap.fromTo('.cta-section',
+        { y: 30, opacity: 0 },
+        {
+          y: 0, opacity: 1, duration: 0.6, ease: 'power3.out',
+          scrollTrigger: { trigger: '.cta-section', start: 'top 85%' }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '4rem 1.5rem 8rem' }}>
-      
-      {/* Header */}
-      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <span style={{ backgroundColor: '#eff6ff', color: '#2563eb', fontWeight: '800', fontSize: '0.85rem', padding: '0.5rem 1.25rem', borderRadius: '50px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-          Our Framework
-        </span>
-        <h1 style={{ fontSize: '3rem', fontWeight: '800', color: '#0f172a', margin: '1rem 0 0.5rem' }}>
-          How We Architect Your Systems
-        </h1>
-        <p style={{ color: '#475569', fontSize: '1.1rem', maxWidth: '600px', margin: '0 auto' }}>
-          A battle-tested 6-step execution framework designed to deliver production-ready software with zero friction.
-        </p>
-      </div>
-
-      {/* 6-Step Cards Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.75rem', marginBottom: '5rem' }}>
-        {steps.map((item, index) => (
-          <ScrollReveal key={item.number} delay={index * 0.08}>
-            <div 
-              style={{ 
-                backgroundColor: '#ffffff', 
-                border: '1px solid #e2e8f0', 
-                borderRadius: '12px', 
-                padding: '2rem', 
-                boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justify: 'space-between'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.borderColor = '#2563eb';
-                e.currentTarget.style.boxShadow = '0 12px 20px -5px rgba(37, 99, 235, 0.12)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0px)';
-                e.currentTarget.style.borderColor = '#e2e8f0';
-                e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.05)';
-              }}
-            >
-              <div>
-                <span style={{ color: '#2563eb', fontWeight: '800', fontSize: '1.8rem', display: 'block', marginBottom: '0.5rem' }}>
-                  {item.number}
-                </span>
-                <h3 style={{ color: '#0f172a', fontWeight: '800', fontSize: '1.3rem', letterSpacing: '0.03em', margin: '0 0 0.25rem' }}>
-                  {item.title}
-                </h3>
-                <h4 style={{ color: '#2563eb', fontWeight: '600', fontSize: '0.9rem', marginBottom: '1rem' }}>
-                  {item.subtitle}
-                </h4>
-                <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.65', margin: 0 }}>
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
-        ))}
-      </div>
-
-      {/* CTA Box with Hover Scale Button */}
-      <ScrollReveal delay={0.2}>
-        <div style={{ textAlign: 'center', backgroundColor: '#0a0a0a', borderRadius: '16px', padding: '3.5rem 1.5rem', color: '#ffffff' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '1rem' }}>Ready to Launch Your Project?</h2>
-          <p style={{ color: '#a1a1aa', marginBottom: '2rem', fontSize: '1.05rem' }}>Book a discovery call to walk through your technical requirements.</p>
-          <button 
-            onClick={() => navigate('/book')}
-            style={{ 
-              backgroundColor: '#2563eb', 
-              color: '#ffffff', 
-              border: 'none', 
-              padding: '0.9rem 2.2rem', 
-              borderRadius: '10px', 
-              fontWeight: '700', 
-              fontSize: '1rem', 
-              cursor: 'pointer',
-              transition: 'all 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
-              boxShadow: '0 10px 20px -5px rgba(37, 99, 235, 0.4)',
-              display: 'inline-block'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'scale(1.05)';
-              e.currentTarget.style.backgroundColor = '#1d4ed8';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.transform = 'scale(1)';
-              e.currentTarget.style.backgroundColor = '#2563eb';
-            }}
-          >
-            Book Strategy Call →
-          </button>
+    <div ref={sectionRef} className="pt-16">
+      <section className="relative py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-stone">
+        <div className="absolute inset-0 grid-bg opacity-20" />
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="hero-content max-w-3xl">
+            <span className="text-xs font-mono uppercase tracking-widest text-ast-accent mb-4 block">
+              // EXECUTION PROCESS
+            </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-6">
+              How We Operate
+            </h1>
+            <p className="text-lg text-gray-400 leading-relaxed">
+              A structured, transparent approach to delivering high-quality digital solutions. Every project follows our proven four-phase methodology.
+            </p>
+          </div>
         </div>
-      </ScrollReveal>
+      </section>
 
+      <section className="py-24 px-6 sm:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="phases-grid relative">
+            <div className="hidden lg:block absolute left-[calc(12.5%+1px)] top-0 bottom-0 w-px bg-ast-stone" />
+            <div className="hidden lg:block absolute left-[calc(37.5%+1px)] top-0 bottom-0 w-px bg-ast-stone" />
+            <div className="hidden lg:block absolute left-[calc(62.5%+1px)] top-0 bottom-0 w-px bg-ast-stone" />
+            <div className="hidden lg:block absolute left-[calc(87.5%+1px)] top-0 bottom-0 w-px bg-ast-stone" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+              {phases.map((phase, i) => (
+                <div key={phase.num} className="phase-card relative group">
+                  <div className="flex items-center gap-4 mb-6 lg:flex-col lg:items-start">
+                    <div className="w-12 h-12 rounded-lg border border-ast-stone bg-ast-surface flex items-center justify-center flex-shrink-0 group-hover:border-ast-accent group-hover:bg-ast-accent/10 transition-all duration-300">
+                      <phase.icon className="w-6 h-6 text-ast-accent" />
+                    </div>
+                    <div className="lg:mt-4">
+                      <span className="text-xs font-mono text-ast-accent">
+                        PHASE {phase.num}
+                      </span>
+                      <h3 className="text-xl font-bold text-white mt-1 group-hover:text-ast-accent transition-colors duration-300">
+                        {phase.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="border border-ast-stone bg-ast-surface rounded-lg p-6 group-hover:border-ast-accent transition-all duration-500">
+                    <p className="text-sm text-gray-400 leading-relaxed mb-4">
+                      {phase.description}
+                    </p>
+
+                    <ul className="space-y-2 mb-4">
+                      {phase.activities.map((activity) => (
+                        <li key={activity} className="flex items-center gap-2 text-sm text-gray-400">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-ast-accent flex-shrink-0" />
+                          {activity}
+                        </li>
+                      ))}
+                    </ul>
+
+                    <div className="pt-4 border-t border-ast-stone">
+                      <span className="text-xs font-mono text-gray-500">
+                        Duration: {phase.duration}
+                      </span>
+                    </div>
+                  </div>
+
+                  {i < phases.length - 1 && (
+                    <div className="hidden lg:flex absolute -right-4 top-6 z-10">
+                      <ArrowRight className="w-8 h-8 text-ast-stone" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-section py-24 px-6 sm:px-8 lg:px-12 border-t border-ast-stone">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-xs font-mono uppercase tracking-widest text-ast-accent mb-4 block">
+            // START YOUR PROJECT
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-6">
+            Ready to Begin?
+          </h2>
+          <p className="text-lg text-gray-400 mb-10">
+            Let's discuss your project and create a custom roadmap for success.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/booking"
+              className="inline-flex items-center gap-2 bg-ast-accent text-white px-8 py-4 rounded-lg font-bold text-base transition-all duration-300 hover:bg-ast-accent-hover hover:-translate-y-1"
+            >
+              <span>Start a Project</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link
+              to="/services"
+              className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-lg font-semibold text-base border border-ast-stone transition-all duration-300 hover:border-gray-500 hover:bg-ast-surface hover:-translate-y-1"
+            >
+              View Services
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
