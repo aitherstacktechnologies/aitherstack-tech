@@ -17,7 +17,7 @@ export default function Footer() {
 
   const socialLinks = [
     { name: 'GitHub', href: 'https://github.com/aitherstacktechnologies' },
-    { name: 'Instagram', href: 'https://www.instagram.com/ast_official_7/?hl=en' },
+    { name: 'Instagram', href: 'https://www.instagram.com/muhammad_official.dev/' },
   ];
 
   return (
