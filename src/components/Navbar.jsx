@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { motion } from 'framer-motion';
+import gsap from 'gsap';
 import logoAsset from '../assets/logo.png';
 
 export default function Navbar() {
@@ -9,6 +11,7 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const location = useLocation();
   const lastScrollY = useRef(0);
+  const bookBtnRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +35,41 @@ export default function Navbar() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const btn = bookBtnRef.current;
+    if (!btn) return;
+
+    const handleMouseMove = (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      
+      gsap.to(btn, {
+        x: x * 0.25,
+        y: y * 0.25,
+        duration: 0.3,
+        ease: 'power2.out'
+      });
+    };
+
+    const handleMouseLeave = () => {
+      gsap.to(btn, {
+        x: 0,
+        y: 0,
+        duration: 0.5,
+        ease: 'elastic.out(1, 0.3)'
+      });
+    };
+
+    btn.addEventListener('mousemove', handleMouseMove);
+    btn.addEventListener('mouseleave', handleMouseLeave);
+
+    return () => {
+      btn.removeEventListener('mousemove', handleMouseMove);
+      btn.removeEventListener('mouseleave', handleMouseLeave);
+    };
   }, []);
 
   useEffect(() => {
@@ -63,11 +101,11 @@ export default function Navbar() {
   return (
     <>
       <header 
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           hidden ? '-translate-y-full' : 'translate-y-0'
         } ${
           scrolled 
-            ? 'bg-ast-bg/95 backdrop-blur-md border-b border-ast-stone/50' 
+            ? 'glassmorphic border-b border-white/5' 
             : 'bg-transparent'
         }`}
       >
@@ -94,13 +132,20 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`px-4 py-2 text-sm font-medium tracking-wide transition-all duration-200 rounded-md ${
+                className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-all duration-200 rounded-full ${
                   isActive(link.path)
-                    ? 'text-ast-accent bg-ast-surface/80'
+                    ? 'text-white bg-ast-surface/80'
                     : 'text-gray-300 hover:text-white hover:bg-ast-surface/50'
                 }`}
               >
-                {link.name}
+                {isActive(link.path) && (
+                  <motion.span
+                    layoutId="navbar-pill"
+                    className="absolute inset-0 bg-ast-accent/20 border border-ast-accent/30 rounded-full"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                  />
+                )}
+                <span className="relative z-10">{link.name}</span>
               </Link>
             ))}
           </nav>
@@ -108,7 +153,8 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <Link
               to="/booking"
-              className="group relative inline-flex items-center gap-2 bg-ast-accent text-white px-6 py-3 rounded-lg font-bold text-sm transition-all duration-300 hover:bg-ast-accent-hover hover:shadow-[0_0_30px_rgba(255,77,0,0.3)] hover:-translate-y-0.5 overflow-hidden"
+              className="group relative inline-flex items-center gap-2 bg-ast-accent text-white px-6 py-3 rounded-lg font-bold text-sm transition-all duration-300 hover:bg-ast-accent-hover hover:shadow-[0_0_30px_rgba(255,77,0,0.3)] hover:-translate-y-0.5 overflow-hidden magnetic-hover"
+              ref={bookBtnRef}
             >
               <span className="relative z-10">Book a Call</span>
               <svg className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

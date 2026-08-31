@@ -3,6 +3,7 @@ import { X, ArrowRight, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Link } from 'react-router-dom';
+import { TiltCard } from '../components/AnimationProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,9 +80,45 @@ const projects = [
     metrics: ['500+ Listings', 'Virtual Tours', 'AI Valuation'],
     color: 'from-cyan-500/20',
   },
+  {
+    id: '07',
+    title: 'Document Intelligence System',
+    category: 'AI SYSTEMS & AUTOMATION',
+    client: 'LegalFlow Inc',
+    year: '2024',
+    description: 'AI-powered document processing system that automatically extracts, classifies, and routes legal documents. Reduced manual processing time by 85% and improved accuracy to 99.2%.',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80',
+    tags: ['GPT-4', 'Computer Vision', 'Supabase', 'Python'],
+    metrics: ['85% Time Saved', '99.2% Accuracy', '50K+ Docs/Month'],
+    color: 'from-violet-500/20',
+  },
+  {
+    id: '08',
+    title: 'Payment Gateway Integration',
+    category: 'API & INTEGRATIONS',
+    client: 'FinanceFlow',
+    year: '2024',
+    description: 'Unified payment processing platform connecting multiple gateways (Stripe, PayPal, Square) with real-time currency conversion and fraud detection. Processed $10M+ monthly.',
+    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80',
+    tags: ['Stripe API', 'PayPal', 'Node.js', 'Redis'],
+    metrics: ['$10M+/Month', '99.99% Uptime', 'Multi-currency'],
+    color: 'from-emerald-500/20',
+  },
+  {
+    id: '09',
+    title: 'CRM Synchronization Hub',
+    category: 'API & INTEGRATIONS',
+    client: 'SalesHub Pro',
+    year: '2023',
+    description: 'Bidirectional sync between HubSpot, Salesforce, and Pipedrive with conflict resolution and field mapping. Eliminated manual data entry and improved team productivity by 40%.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+    tags: ['HubSpot API', 'Salesforce', 'Webhooks', 'PostgreSQL'],
+    metrics: ['40% Productivity', 'Real-time Sync', 'Zero Data Loss'],
+    color: 'from-amber-500/20',
+  },
 ];
 
-const categories = ['All', 'WEB DEVELOPMENT', 'AI SYSTEMS & AUTOMATION', 'BUSINESS SOFTWARE'];
+const categories = ['All', 'WEB DEVELOPMENT', 'AI SYSTEMS & AUTOMATION', 'BUSINESS SOFTWARE', 'API & INTEGRATIONS'];
 
 export default function Portfolio() {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -160,46 +197,47 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto">
           <div className="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredProjects.map((project) => (
-              <article
-                key={project.id}
-                className="project-card group relative rounded-2xl overflow-hidden border border-ast-stone/50 bg-ast-surface transition-all duration-500 hover:border-ast-accent/30 hover:shadow-2xl hover:shadow-ast-accent/10 hover:-translate-y-2 cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className="relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ast-bg via-ast-bg/30 to-transparent" />
-                  <div className="absolute top-4 left-4 px-4 py-2 rounded-full bg-ast-bg/90 backdrop-blur-sm border border-ast-stone/50 text-sm font-mono font-bold text-white">
-                    {project.id}
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-ast-bg/60">
-                    <span className="px-6 py-3 rounded-full bg-ast-accent text-white font-bold text-sm">
-                      View Details
-                    </span>
-                  </div>
-                </div>
-                
-                <div className="p-6">
-                  <div className="text-xs font-mono uppercase tracking-wider text-ast-accent mb-2">
-                    {project.category}
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-ast-accent transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm text-gray-400 line-clamp-2 mb-4">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="text-[10px] font-mono px-3 py-1.5 rounded-full border border-ast-stone/50 text-gray-400 bg-ast-surface/50">
-                        {tag}
+              <TiltCard key={project.id} intensity={10} className="cursor-pointer">
+                <article
+                  className="group relative rounded-2xl overflow-hidden border border-ast-stone/50 bg-ast-surface transition-all duration-500 hover:border-ast-accent/30 hover:shadow-2xl hover:shadow-ast-accent/10 hover:-translate-y-2"
+                  onClick={() => setSelectedProject(project)}
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ast-bg via-ast-bg/30 to-transparent" />
+                    <div className="absolute top-4 left-4 px-4 py-2 rounded-full bg-ast-bg/90 backdrop-blur-sm border border-ast-stone/50 text-sm font-mono font-bold text-white">
+                      {project.id}
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-ast-bg/60">
+                      <span className="px-6 py-3 rounded-full bg-ast-accent text-white font-bold text-sm">
+                        View Details
                       </span>
-                    ))}
+                    </div>
                   </div>
-                </div>
-              </article>
+                  
+                  <div className="p-6">
+                    <div className="text-xs font-mono uppercase tracking-wider text-ast-accent mb-2">
+                      {project.category}
+                    </div>
+                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-ast-accent transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-sm text-gray-400 line-clamp-2 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.slice(0, 3).map(tag => (
+                        <span key={tag} className="text-[10px] font-mono px-3 py-1.5 rounded-full border border-ast-stone/50 text-gray-400 bg-ast-surface/50">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </article>
+              </TiltCard>
             ))}
           </div>
         </div>
