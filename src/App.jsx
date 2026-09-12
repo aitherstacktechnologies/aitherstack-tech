@@ -17,8 +17,6 @@ const Booking = lazy(() => import('./pages/Booking'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const FAQ = lazy(() => import('./pages/FAQ'));
-const AuraSeoRealEngine = lazy(() => import('./components/Projects/AuraSeoRealEngine'));
-const NexusEcomRealEngine = lazy(() => import('./components/Projects/NexusEcomRealEngine'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -37,8 +35,6 @@ function AnimatedRoutes() {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/project/auraseo" element={<AuraSeoRealEngine />} />
-          <Route path="/project/nexus-ecom" element={<NexusEcomRealEngine />} />
         </Routes>
       </AnimatePresence>
     </Suspense>
