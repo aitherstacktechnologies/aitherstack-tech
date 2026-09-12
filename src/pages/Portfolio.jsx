@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
@@ -63,6 +63,12 @@ const projects = [
 ];
 
 export default function Portfolio() {
+  const [activeProjectMobile, setActiveProjectMobile] = useState(null);
+
+  const handleProjectClick = (projectId) => {
+    setActiveProjectMobile((previousProject) => previousProject === projectId ? null : projectId);
+  };
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-[#08080A] px-6 pb-20 pt-20 text-white sm:px-8 lg:px-12">
       {/* HERO SECTION */}
@@ -103,6 +109,16 @@ export default function Portfolio() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
               className="group relative mx-auto w-full max-w-lg transform-gpu will-change-transform"
+              onClick={() => handleProjectClick(project.title)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault();
+                  handleProjectClick(project.title);
+                }
+              }}
+              role="button"
+              tabIndex={0}
+              aria-expanded={activeProjectMobile === project.title}
             >
               {/* Expandable Card */}
               <div className="relative overflow-hidden rounded-3xl bg-[#0E0E12] border border-white/10 transition-all duration-300 ease-out group-hover:border-ast-accent/50 shadow-2xl group-hover:shadow-ast-accent/10">
@@ -117,7 +133,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* Expandable Content Section - Faster & Smoother */}
-                <div className="max-h-0 opacity-0 group-hover:max-h-175 group-hover:opacity-100 transition-all duration-300 ease-out overflow-hidden">
+                <div className={`max-h-0 overflow-hidden opacity-0 transition-all duration-300 ease-out group-hover:max-h-175 group-hover:opacity-100 ${activeProjectMobile === project.title ? 'max-h-175 opacity-100' : ''}`}>
                   <div className="p-8 pt-0 space-y-8 text-left">
                     {/* Project Title & Category */}
                     <div className="pt-6 border-t border-white/5">
@@ -150,6 +166,7 @@ export default function Portfolio() {
                       <span className="text-[10px] font-mono uppercase tracking-widest text-ast-accent block mb-4">Deployment Link</span>
                       <a 
                         href="#" 
+                        onClick={(event) => event.stopPropagation()}
                         className="inline-flex items-center justify-center gap-2 bg-[#FF5500] text-white border border-[#FF5500] px-8 py-3 rounded-full font-bold text-xs uppercase tracking-wider transition-all duration-300 shadow-lg active:scale-95 hover:bg-white hover:text-[#FF5500] hover:border-white"
                       >
                         Visit Project <ArrowUpRight className="w-4 h-4" />

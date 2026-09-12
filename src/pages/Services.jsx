@@ -36,15 +36,15 @@ const gridReveal = { hidden: {}, visible: { transition: { staggerChildren: 0.09 
 function ProjectCard({ project }) {
   const Icon = project.icon;
   return (
-    <motion.article variants={reveal} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} whileHover={{ y: -6 }} className="group relative flex transform-gpu flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E12] p-8 transition-all duration-300 will-change-transform hover:border-orange-500/40 sm:p-10">
+    <motion.article variants={reveal} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} whileHover={{ y: -6 }} className="group relative flex min-w-0 transform-gpu flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E12] p-6 transition-all duration-300 will-change-transform sm:p-10">
       <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-orange-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <div className="relative">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 font-mono text-[11px] uppercase text-orange-400">{project.category}</span>
           <span className="font-mono text-2xl font-bold text-white">{project.price}</span>
         </div>
         <div className="mt-7 flex h-11 w-11 items-center justify-center rounded-xl bg-white/4 text-[#FF5500]"><Icon size={21} strokeWidth={1.7} /></div>
-        <h3 className="mt-4 mb-2 text-2xl font-bold text-white transition-colors group-hover:text-orange-400">{project.title}</h3>
+        <h3 className="mt-4 mb-2 wrap-break-word text-[clamp(1.35rem,6vw,1.5rem)] font-bold text-white transition-colors group-hover:text-orange-400">{project.title}</h3>
         <p className="mb-6 text-sm leading-relaxed text-neutral-400">{project.description}</p>
         <ul className="mb-8 space-y-3">{project.features.map((feature) => <li key={feature} className="flex items-start gap-3 text-sm text-neutral-300"><Check size={16} className="mt-0.5 shrink-0 font-bold text-orange-500" /><span>{feature}</span></li>)}</ul>
       </div>
@@ -55,15 +55,15 @@ function ProjectCard({ project }) {
 
 function RetainerCard({ plan }) {
   return (
-    <motion.article variants={reveal} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} whileHover={{ y: -6 }} className={`group relative flex transform-gpu flex-col justify-between overflow-hidden rounded-3xl border p-8 transition-all duration-300 will-change-transform hover:border-orange-500/40 sm:p-10 ${plan.featured ? 'border-orange-500/40 bg-gradient-to-b from-orange-500/10 via-[#0E0E12] to-[#0E0E12] shadow-[0_0_25px_rgba(255,85,0,0.12)]' : 'border-white/10 bg-[#0E0E12]'}`}>
+    <motion.article variants={reveal} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} whileHover={{ y: -6 }} className={`group relative flex min-w-0 transform-gpu flex-col justify-between overflow-hidden rounded-3xl border p-6 transition-all duration-300 will-change-transform hover:border-orange-500/40 sm:p-10 ${plan.featured ? 'border-orange-500/40 bg-linear-to-b from-orange-500/10 via-[#0E0E12] to-[#0E0E12] shadow-[0_0_25px_rgba(255,85,0,0.12)]' : 'border-white/10 bg-[#0E0E12]'}`}>
       <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-orange-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <div className="relative">
-        <div className="flex items-center justify-between gap-4">
+        <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 font-mono text-[11px] uppercase text-orange-400">{plan.category}</span>
           <span className="font-mono text-2xl font-bold text-white">{plan.price}</span>
         </div>
         <div className="mt-7 flex items-center justify-between gap-4">
-          <h3 className="text-2xl font-bold text-white transition-colors group-hover:text-orange-400">{plan.title}</h3>
+          <h3 className="wrap-break-word text-[clamp(1.35rem,6vw,1.5rem)] font-bold text-white transition-colors group-hover:text-orange-400">{plan.title}</h3>
           {plan.featured && <span className="shrink-0 rounded-full bg-orange-500 text-black font-bold text-[10px] tracking-wider uppercase px-2.5 py-0.5">Popular</span>}
         </div>
         <ul className="mb-8 mt-6 space-y-3">{plan.features.map((feature) => <li key={feature} className="flex items-start gap-3 text-sm text-neutral-300"><Check size={16} className="mt-0.5 shrink-0 font-bold text-orange-500" /><span>{feature}</span></li>)}</ul>
@@ -76,12 +76,12 @@ function RetainerCard({ plan }) {
 export default function Services() {
   const [activeTab, setActiveTab] = useState('projects');
   return (
-    <main className="min-h-screen overflow-hidden bg-[#08080A] text-white">
-      <section className="relative px-6 py-32 sm:py-48 overflow-hidden">
+    <main className="min-h-screen min-w-0 max-w-full overflow-x-hidden bg-[#08080A] text-white">
+      <section className="relative overflow-hidden px-4 py-24 sm:px-6 sm:py-48">
         <div className="mobile-motion-lite pointer-events-none absolute inset-x-0 top-0 h-175 bg-linear-to-t from-orange-500/20 via-purple-900/10 to-transparent blur-3xl opacity-60" />
         <div className="mobile-motion-lite absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-orange-500/15 rounded-full blur-[120px] pointer-events-none -z-10" />
         <motion.div initial="hidden" animate="visible" variants={reveal} className="relative mx-auto max-w-5xl text-center">
-          <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-8xl">
+          <h1 className="wrap-break-word text-[clamp(2.5rem,11vw,5rem)] font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-8xl">
             <span className="text-[#FF5500]">TRANSPARENT</span>{' '}
             <span className="text-white">ARCHITECTURE.</span>
             <br className="hidden sm:block" />
@@ -101,19 +101,19 @@ export default function Services() {
         </motion.div>
       </section>
 
-      <section className="px-6 py-24 sm:py-32">
+      <section className="min-w-0 px-4 py-20 sm:px-6 sm:py-32">
         <div className="mx-auto max-w-6xl">
           <div className="flex justify-center mb-16">
-            <div className="inline-flex p-1.5 rounded-full bg-neutral-900/80 border border-white/10 backdrop-blur-xl">
+            <div className="flex w-full max-w-md flex-col rounded-2xl bg-neutral-900/80 p-1.5 backdrop-blur-xl sm:inline-flex sm:w-auto sm:max-w-none sm:flex-row sm:rounded-full">
               <button 
                 onClick={() => setActiveTab('projects')} 
-                className={`relative rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:px-8 ${activeTab === 'projects' ? 'bg-[#FF5500] text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]' : 'text-neutral-500 hover:text-neutral-200'}`}
+                className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${activeTab === 'projects' ? 'bg-[#FF5500] text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]' : 'text-neutral-500 hover:text-neutral-200'}`}
               >
                 One-Time Projects
               </button>
               <button 
                 onClick={() => setActiveTab('retainers')} 
-                className={`relative rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:px-8 ${activeTab === 'retainers' ? 'bg-[#FF5500] text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]' : 'text-neutral-500 hover:text-neutral-200'}`}
+                className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${activeTab === 'retainers' ? 'bg-[#FF5500] text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]' : 'text-neutral-500 hover:text-neutral-200'}`}
               >
                 Monthly Retainers
               </button>
@@ -124,7 +124,7 @@ export default function Services() {
             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-neutral-400">Choose a focused build for immediate momentum or ongoing support that keeps your digital system sharp.</p>
           </div>
           <AnimatePresence mode="wait">
-            {activeTab === 'projects' ? <motion.div key="projects" initial="hidden" animate="visible" exit={{ opacity: 0, y: -12 }} variants={gridReveal} className="grid gap-8 sm:gap-12 md:grid-cols-2">{oneTimeProjects.map((project) => <ProjectCard key={project.title} project={project} />)}</motion.div> : <motion.div key="retainers" initial="hidden" animate="visible" exit={{ opacity: 0, y: -12 }} variants={gridReveal} className="grid gap-8 sm:gap-12 md:grid-cols-2">{retainers.map((plan) => <RetainerCard key={plan.title} plan={plan} />)}</motion.div>}
+            {activeTab === 'projects' ? <motion.div key="projects" initial="hidden" animate="visible" exit={{ opacity: 0, y: -12 }} variants={gridReveal} className="grid min-w-0 grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2">{oneTimeProjects.map((project) => <ProjectCard key={project.title} project={project} />)}</motion.div> : <motion.div key="retainers" initial="hidden" animate="visible" exit={{ opacity: 0, y: -12 }} variants={gridReveal} className="grid min-w-0 grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2">{retainers.map((plan) => <RetainerCard key={plan.title} plan={plan} />)}</motion.div>}
           </AnimatePresence>
         </div>
       </section>
