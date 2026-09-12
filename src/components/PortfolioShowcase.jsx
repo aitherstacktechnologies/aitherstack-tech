@@ -111,7 +111,7 @@ export default function PortfolioShowcase() {
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute top-4 left-4 bg-sunset-bg/90 backdrop-blur-md border border-sunset-border px-3 py-1 rounded text-xs font-mono font-bold text-sunset-text">
+                <div className="absolute top-4 left-4 rounded border border-sunset-border bg-sunset-bg px-3 py-1 text-xs font-mono font-bold text-sunset-text">
                   {project.id}
                 </div>
               </div>

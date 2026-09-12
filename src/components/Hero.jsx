@@ -58,7 +58,7 @@ export default function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-[85vh] flex flex-col justify-center bg-sunset-bg text-sunset-text px-6 sm:px-8 lg:px-12 overflow-hidden"
+      className="relative min-h-[85vh] flex flex-col justify-center bg-sunset-bg text-sunset-text px-6 sm:px-8 lg:px-12 overflow-hidden page-gradient"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black tracking-tighter text-sunset-text opacity-[0.04] select-none">
@@ -67,7 +67,7 @@ export default function Hero() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div ref={badgeRef} className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-sunset-border bg-sunset-surface/50 backdrop-blur-sm mb-8">
+        <div ref={badgeRef} className="inline-flex items-center gap-2 rounded-full border border-sunset-border bg-sunset-surface px-4 py-2 mb-8">
           <span className="w-2 h-2 rounded-full bg-sunset-pop animate-pulse" />
           <span className="text-xs font-mono uppercase tracking-wider text-sunset-muted">
             Digital Solutions Agency
@@ -77,10 +77,10 @@ export default function Hero() {
         <div className="max-w-4xl">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1] uppercase mb-6">
             <span ref={line1Ref} className="block">
-              We Build
+              We Engineer Elite Web Platforms
             </span>
             <span ref={line2Ref} className="block text-sunset-text mt-2">
-              Digital Systems.
+              & Intelligent AI Systems
             </span>
           </h1>
 
@@ -88,7 +88,7 @@ export default function Hero() {
             ref={subtitleRef}
             className="text-lg sm:text-xl text-sunset-muted max-w-xl mb-10 leading-relaxed"
           >
-            Aither Stack Technologies specializes in web development, AI automation, and custom business software. We help forward-thinking businesses scale through intelligent digital solutions.
+            We bridge the gap between high-end web design and autonomous systems. By combining ultra-fast React architectures, bespoke Framer Motion UI, and deeply integrated AI voice infrastructure, we build complete digital ecosystems designed for maximum conversion and effortless scale.
           </p>
 
           <div ref={ctaRef} className="flex flex-wrap items-center gap-4">

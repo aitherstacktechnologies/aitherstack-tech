@@ -8,6 +8,7 @@ export default function PageTransition({ children }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      className="transform-gpu will-change-transform"
     >
       {children}
     </motion.div>

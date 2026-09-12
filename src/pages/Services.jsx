@@ -1,223 +1,148 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Code2, Brain, BarChart3, Zap, ArrowUpRight, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowUpRight, Check, Code2, Compass, Cpu, Gauge, Palette, ShieldCheck, Sparkles, Waypoints } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const services = [
-  {
-    icon: Code2,
-    title: 'Web Development',
-    description: 'High-performance web platforms built with modern frameworks and enterprise-grade architecture. From custom applications to e-commerce solutions.',
-    features: [
-      'Custom Web Applications',
-      'E-commerce Platforms',
-      'Progressive Web Apps',
-      'Landing Pages',
-      'Web Portals',
-      'Performance Optimization',
-    ],
-    tags: ['React', 'Next.js', 'TypeScript', 'Node.js', 'Tailwind'],
-    color: 'from-blue-500',
-    gradient: 'group-hover:from-blue-500/20',
-  },
-  {
-    icon: Brain,
-    title: 'AI Systems & Automation',
-    description: 'Bespoke AI agents and automation pipelines that streamline operations and enhance customer interactions across all touchpoints.',
-    features: [
-      'AI Voice Agents',
-      'Chatbot Development',
-      'Workflow Automation',
-      'Lead Qualification',
-      'Document Processing',
-      'Custom AI Solutions',
-    ],
-    tags: ['OpenAI', 'Vapi', 'LangChain', 'Supabase', 'GPT-4'],
-    color: 'from-purple-500',
-    gradient: 'group-hover:from-purple-500/20',
-  },
-  {
-    icon: BarChart3,
-    title: 'Business Software',
-    description: 'Custom dashboards, CRM systems, and enterprise tools designed for your specific workflows and business requirements.',
-    features: [
-      'Custom Dashboards',
-      'CRM Systems',
-      'Inventory Management',
-      'Project Tracking',
-      'Invoice Processing',
-      'Analytics & Reporting',
-    ],
-    tags: ['React', 'Supabase', 'PostgreSQL', 'REST APIs', 'GraphQL'],
-    color: 'from-green-500',
-    gradient: 'group-hover:from-green-500/20',
-  },
-  {
-    icon: Zap,
-    title: 'Integrations & APIs',
-    description: 'Seamless connections between platforms with robust API development and third-party integrations for unified ecosystems.',
-    features: [
-      'API Development',
-      'Third-party Integrations',
-      'Payment Processing',
-      'Webhooks',
-      'Data Synchronization',
-      'Webhook Automation',
-    ],
-    tags: ['REST', 'GraphQL', 'Stripe', 'Zapier', 'Webhook'],
-    color: 'from-orange-500',
-    gradient: 'group-hover:from-orange-500/20',
-  },
+const oneTimeProjects = [
+  { icon: Sparkles, category: 'E-Commerce & Apps', title: 'Luxury E-Commerce & Web Apps', price: 'Starting $1,499', description: 'High-performance digital storefronts and web applications built around your product and customer journey.', features: ['Fast frontend with smooth Framer Motion animation transitions', 'Custom checkout infrastructure & database integration (Supabase/Postgres)', 'Dark mode native UI support & interactive product showcases', 'Sub-second performance optimization & SEO readiness'] },
+  { icon: Gauge, category: 'Conversion Systems', title: 'High-Converting Landing Pages', price: 'Starting $499', description: 'Focused landing pages designed to turn paid and organic attention into qualified leads.', features: ['Ultra-responsive UI with conversion-focused micro-interactions', 'Enterprise security, anti-spam & reCAPTCHA protection', 'Google Search Console/GA4 setup & direct API lead capture forms', 'Bespoke copywriting layout structure & dynamic asset loading'] },
+  { icon: Cpu, category: 'AI & Automation', title: 'AI Voice Assistant & Chatbot Setup', price: 'Starting $899', description: 'Website-based AI assistant that answers questions, captures intent, and moves visitors toward a booking.', features: ['Custom Vapi AI voice agent & LLM knowledge base configuration', 'Real-time Cal.com / Calendly automated booking integration', 'Supabase lead storage & automated n8n/Make CRM workflows', 'Custom voice prompt tuning & continuous fallback handling'] },
+  { icon: Palette, category: 'Design Systems', title: 'UI/UX Design & Brand System', price: 'Starting $599', description: 'A practical visual system that gives your product a clear, consistent, and build-ready identity.', features: ['Production-ready Figma design system, auto-layout kits & wireframes', 'Pixel-perfect design-to-code implementation guidelines', 'High-resolution SVG iconography, vector assets & design tokens', 'Interactive desktop & mobile prototype walkthroughs'] },
 ];
 
-export default function Services() {
-  const sectionRef = useRef(null);
+const retainers = [
+  { category: 'Care & Stability', title: 'Website Maintenance & Support', price: '$299/mo', features: ['Weekly updates, speed fixes, bug fixes', 'Auto backups and downtime monitoring', '2 minor UI edits per month', 'Monthly performance health check', 'Priority support for critical production issues'] },
+  { category: 'AI Operations', title: 'AI Agent & Voice Bot Management', price: '$499/mo', features: ['Vapi/LLM maintenance and response tuning', 'n8n/Make integrations and workflow upkeep', 'Conversation log review and API token management', 'Knowledge base updates for new offers and FAQs', 'Monthly quality and fallback-flow review'] },
+  { category: 'Growth Engine', title: 'Performance Marketing & Social Media', price: '$599/mo', features: ['Social content and ad creative design', 'Lead form optimization and landing page insights', 'Conversion tracking setup and reporting', 'Campaign testing for offers and messaging', 'Monthly growth recommendations'] },
+  { category: 'Embedded Engineering', title: 'Dedicated Developer Support', price: '$899/mo', featured: true, features: ['Monthly dev hours for feature builds', 'Ongoing feature rollouts and release planning', 'Continuous product support', 'Technical backlog grooming and prioritization', 'Direct engineering communication and progress updates'] },
+];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.hero-content',
-        { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }
-      );
+const executionSteps = [
+  { number: '01', icon: Compass, title: 'Discovery & Strategy', description: 'We clarify the opportunity, audience, technical requirements, and success metrics before a line of code is written.' },
+  { number: '02', icon: Code2, title: 'Custom Engineering', description: 'We design and build the system around your workflow, with fast interfaces, durable integrations, and clear ownership.' },
+  { number: '03', icon: Waypoints, title: 'Launch & AI Automation', description: 'We launch with confidence, connect the automations that matter, and give your team a system that keeps improving.' },
+];
 
-      gsap.fromTo('.service-card',
-        { y: 60, opacity: 0, scale: 0.95 },
-        {
-          y: 0, opacity: 1, scale: 1, duration: 0.6, stagger: 0.15, ease: 'power3.out',
-          scrollTrigger: { trigger: '.services-grid', start: 'top 75%' }
-        }
-      );
+const guarantees = [
+  { icon: ShieldCheck, title: '100% Code & Asset Ownership', description: 'You retain full ownership of the Git repo, Figma files, and Supabase database.' },
+  { icon: Gauge, title: 'Sub-Second Speed SLA', description: 'Every build is optimized for fast load times and clean core web vitals.' },
+  { icon: Waypoints, title: 'Seamless Handover', description: 'Video walkthroughs and 30-day post-launch bug warranty included with every project.' },
+  { icon: Sparkles, title: 'Direct Dev Communication', description: 'Direct communication via Slack and Loom updates with zero middle management delay.' },
+];
 
-      gsap.fromTo('.cta-content',
-        { y: 30, opacity: 0 },
-        {
-          y: 0, opacity: 1, duration: 0.6, ease: 'power3.out',
-          scrollTrigger: { trigger: '.cta-section', start: 'top 85%' }
-        }
-      );
-    }, sectionRef);
+const reveal = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } } };
+const gridReveal = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
 
-    return () => ctx.revert();
-  }, []);
-
+function ProjectCard({ project }) {
+  const Icon = project.icon;
   return (
-    <div ref={sectionRef} className="pt-16">
-      <section className="relative py-32 px-6 sm:px-8 lg:px-12 border-b border-ast-stone/30 overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-ast-accent/5 rounded-full blur-[150px]" />
-        
-        <div className="max-w-7xl mx-auto relative z-10">
-          <div className="hero-content max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-ast-stone/50 bg-ast-surface/50 backdrop-blur-sm mb-6">
-              <Sparkles className="w-4 h-4 text-ast-accent" />
-              <span className="text-xs font-mono uppercase tracking-wider text-gray-400">
-                Our Capabilities
-              </span>
-            </div>
-            
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight uppercase mb-6">
-              What We <span className="text-ast-accent">Build</span>
-            </h1>
-            <p className="text-xl text-gray-400 leading-relaxed">
-              From high-performance web platforms to intelligent AI systems, we deliver comprehensive digital solutions engineered for scale, reliability, and growth.
-            </p>
-          </div>
+    <motion.article variants={reveal} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} whileHover={{ y: -6 }} className="group relative flex transform-gpu flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E12] p-8 transition-all duration-300 will-change-transform hover:border-orange-500/40 sm:p-10">
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-orange-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="relative">
+        <div className="flex items-center justify-between gap-4">
+          <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 font-mono text-[11px] uppercase text-orange-400">{project.category}</span>
+          <span className="font-mono text-2xl font-bold text-white">{project.price}</span>
         </div>
+        <div className="mt-7 flex h-11 w-11 items-center justify-center rounded-xl bg-white/4 text-[#FF5500]"><Icon size={21} strokeWidth={1.7} /></div>
+        <h3 className="mt-4 mb-2 text-2xl font-bold text-white transition-colors group-hover:text-orange-400">{project.title}</h3>
+        <p className="mb-6 text-sm leading-relaxed text-neutral-400">{project.description}</p>
+        <ul className="mb-8 space-y-3">{project.features.map((feature) => <li key={feature} className="flex items-start gap-3 text-sm text-neutral-300"><Check size={16} className="mt-0.5 shrink-0 font-bold text-orange-500" /><span>{feature}</span></li>)}</ul>
+      </div>
+      <Link to="/booking" className="group/btn relative z-10 mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] text-white border border-[#FF5500] px-6 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-white hover:text-[#FF5500] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] active:scale-95">Book Strategy Call <ArrowUpRight size={17} className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" /></Link>
+    </motion.article>
+  );
+}
+
+function RetainerCard({ plan }) {
+  return (
+    <motion.article variants={reveal} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} whileHover={{ y: -6 }} className={`group relative flex transform-gpu flex-col justify-between overflow-hidden rounded-3xl border p-8 transition-all duration-300 will-change-transform hover:border-orange-500/40 sm:p-10 ${plan.featured ? 'border-orange-500/40 bg-gradient-to-b from-orange-500/10 via-[#0E0E12] to-[#0E0E12] shadow-[0_0_25px_rgba(255,85,0,0.12)]' : 'border-white/10 bg-[#0E0E12]'}`}>
+      <div className="pointer-events-none absolute inset-0 bg-linear-to-b from-orange-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+      <div className="relative">
+        <div className="flex items-center justify-between gap-4">
+          <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 font-mono text-[11px] uppercase text-orange-400">{plan.category}</span>
+          <span className="font-mono text-2xl font-bold text-white">{plan.price}</span>
+        </div>
+        <div className="mt-7 flex items-center justify-between gap-4">
+          <h3 className="text-2xl font-bold text-white transition-colors group-hover:text-orange-400">{plan.title}</h3>
+          {plan.featured && <span className="shrink-0 rounded-full bg-orange-500 text-black font-bold text-[10px] tracking-wider uppercase px-2.5 py-0.5">Popular</span>}
+        </div>
+        <ul className="mb-8 mt-6 space-y-3">{plan.features.map((feature) => <li key={feature} className="flex items-start gap-3 text-sm text-neutral-300"><Check size={16} className="mt-0.5 shrink-0 font-bold text-orange-500" /><span>{feature}</span></li>)}</ul>
+      </div>
+      <Link to="/booking" className="group/btn relative z-10 mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5500] text-white border border-[#FF5500] px-6 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-white hover:text-[#FF5500] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] active:scale-95">Select Package <ArrowUpRight size={17} className="transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" /></Link>
+    </motion.article>
+  );
+}
+
+export default function Services() {
+  const [activeTab, setActiveTab] = useState('projects');
+  return (
+    <main className="min-h-screen overflow-hidden bg-[#08080A] text-white">
+      <section className="relative px-6 py-32 sm:py-48 overflow-hidden">
+        <div className="mobile-motion-lite pointer-events-none absolute inset-x-0 top-0 h-175 bg-linear-to-t from-orange-500/20 via-purple-900/10 to-transparent blur-3xl opacity-60" />
+        <div className="mobile-motion-lite absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-75 bg-orange-500/15 rounded-full blur-[120px] pointer-events-none -z-10" />
+        <motion.div initial="hidden" animate="visible" variants={reveal} className="relative mx-auto max-w-5xl text-center">
+          <h1 className="text-5xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-8xl">
+            <span className="text-[#FF5500]">TRANSPARENT</span>{' '}
+            <span className="text-white">ARCHITECTURE.</span>
+            <br className="hidden sm:block" />
+            <span className="text-white">EXPONENTIAL VALUE.</span>
+          </h1>
+          <p className="mx-auto mt-12 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg">
+            Clear scope, high-end execution, and no template bloat. Select a bespoke one-time build or an ongoing engineering retainer.
+          </p>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ delay: 0.6, duration: 1 }}
+            className="mt-16 flex justify-center"
+          >
+            <div className="h-px w-24 bg-linear-to-r from-transparent via-[#FF5500] to-transparent opacity-60" />
+          </motion.div>
+        </motion.div>
       </section>
 
-      <section className="py-24 px-6 sm:px-8 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="services-grid grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {services.map((service, i) => (
-              <div
-                key={service.title}
-                className={`service-card group relative border border-ast-stone/50 bg-ast-surface/80 p-8 lg:p-10 rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:border-ast-accent/30 hover:shadow-2xl hover:shadow-ast-accent/10 overflow-hidden`}
+      <section className="px-6 py-24 sm:py-32">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex justify-center mb-16">
+            <div className="inline-flex p-1.5 rounded-full bg-neutral-900/80 border border-white/10 backdrop-blur-xl">
+              <button 
+                onClick={() => setActiveTab('projects')} 
+                className={`relative rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:px-8 ${activeTab === 'projects' ? 'bg-[#FF5500] text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]' : 'text-neutral-500 hover:text-neutral-200'}`}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.color}/0 ${service.gradient} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                
-                <div className="relative z-10">
-                  <div className="flex items-start justify-between mb-8">
-                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-ast-surface to-ast-surface/50 border border-ast-stone/50 flex items-center justify-center group-hover:border-ast-accent/50 transition-colors duration-300 group-hover:scale-110">
-                      <service.icon className="w-8 h-8 text-ast-accent" />
-                    </div>
-                    <span className="text-sm font-mono text-gray-500">
-                      0{i + 1}
-                    </span>
-                  </div>
-
-                  <h2 className="text-2xl lg:text-3xl font-bold text-white mb-4 group-hover:text-ast-accent transition-colors duration-300">
-                    {service.title}
-                  </h2>
-                  
-                  <p className="text-gray-400 leading-relaxed mb-8">
-                    {service.description}
-                  </p>
-
-                  <div className="grid grid-cols-2 gap-3 mb-8">
-                    {service.features.map((feature) => (
-                      <div key={feature} className="flex items-center gap-2 text-sm text-gray-300">
-                        <CheckCircle2 className="w-4 h-4 text-ast-accent flex-shrink-0" />
-                        {feature}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {service.tags.map(tag => (
-                      <span key={tag} className="text-[11px] font-mono px-3 py-1.5 rounded-full border border-ast-stone/50 text-gray-400 bg-ast-surface/50">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Link
-                    to="/booking"
-                    className="group/btn inline-flex items-center gap-2 text-sm font-bold text-ast-accent hover:text-white transition-colors duration-300"
-                  >
-                    <span>Book Consultation</span>
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-
-                <div className="absolute -bottom-2 -right-2 w-32 h-32 bg-ast-accent/5 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="cta-section py-24 px-6 sm:px-8 lg:px-12 border-t border-ast-stone/30 bg-ast-surface/30">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="cta-content">
-            <h2 className="text-4xl font-black tracking-tight uppercase mb-6">
-              Ready to Start Your <span className="text-ast-accent">Project</span>?
-            </h2>
-            <p className="text-lg text-gray-400 mb-10">
-              Book a consultation to discuss your requirements and get a custom solution tailored to your needs.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-5">
-              <Link
-                to="/booking"
-                className="group relative inline-flex items-center gap-3 bg-ast-accent text-white px-8 py-4 rounded-xl font-bold text-base transition-all duration-300 hover:bg-ast-accent-hover hover:shadow-[0_0_40px_rgba(255,77,0,0.4)] hover:-translate-y-1 overflow-hidden"
+                One-Time Projects
+              </button>
+              <button 
+                onClick={() => setActiveTab('retainers')} 
+                className={`relative rounded-full px-6 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:px-8 ${activeTab === 'retainers' ? 'bg-[#FF5500] text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]' : 'text-neutral-500 hover:text-neutral-200'}`}
               >
-                <span className="relative z-10">Book a Consultation</span>
-                <ArrowUpRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-              </Link>
-              <a
-                href="mailto:muhammadzaman.dev@gmail.com"
-                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-semibold text-base border-2 border-ast-stone/50 transition-all duration-300 hover:border-white/30 hover:bg-white/5 hover:-translate-y-1"
-              >
-                <span>Email Us Directly</span>
-                <ArrowRight className="w-5 h-5" />
-              </a>
+                Monthly Retainers
+              </button>
             </div>
           </div>
+          <div className="mb-8 text-center sm:mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Build the next version of your business.</h2>
+            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-neutral-400">Choose a focused build for immediate momentum or ongoing support that keeps your digital system sharp.</p>
+          </div>
+          <AnimatePresence mode="wait">
+            {activeTab === 'projects' ? <motion.div key="projects" initial="hidden" animate="visible" exit={{ opacity: 0, y: -12 }} variants={gridReveal} className="grid gap-8 sm:gap-12 md:grid-cols-2">{oneTimeProjects.map((project) => <ProjectCard key={project.title} project={project} />)}</motion.div> : <motion.div key="retainers" initial="hidden" animate="visible" exit={{ opacity: 0, y: -12 }} variants={gridReveal} className="grid gap-8 sm:gap-12 md:grid-cols-2">{retainers.map((plan) => <RetainerCard key={plan.title} plan={plan} />)}</motion.div>}
+          </AnimatePresence>
         </div>
       </section>
-    </div>
+
+      <section className="px-6 py-24 sm:py-32"><div className="mx-auto max-w-6xl">
+        <div className="mb-12 max-w-2xl sm:mb-16"><h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">A clear path from first conversation to compounding growth.</h2><p className="mt-4 text-sm leading-7 text-neutral-400">A disciplined process keeps every decision clear, useful, and connected to the outcome.</p></div>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={gridReveal} className="relative grid transform-gpu gap-8 will-change-transform sm:gap-12 lg:grid-cols-3">
+          <div className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-10 hidden border-t border-dashed border-white/10 lg:block" />
+          {executionSteps.map((step) => { const Icon = step.icon; return <motion.article key={step.number} variants={reveal} whileHover={{ y: -6 }} className="group relative transform-gpu overflow-hidden rounded-2xl bg-[#0E0E12]/80 border border-white/10 p-8 transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_10px_30px_rgba(255,85,0,0.1)] sm:p-10"><div className="pointer-events-none absolute inset-0 bg-linear-to-b from-orange-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" /><div className="relative flex items-center justify-between"><span className="font-mono text-2xl text-neutral-500 transition-colors duration-300 group-hover:text-orange-500">{step.number}</span><Icon size={22} className="text-neutral-500 transition-colors duration-300 group-hover:text-orange-400" /></div><div className="relative"><h3 className="mt-12 text-2xl font-semibold text-white transition-colors duration-300 group-hover:text-orange-400">{step.title}</h3><p className="mt-4 text-sm leading-7 text-neutral-400">{step.description}</p></div></motion.article>; })}
+        </motion.div>
+      </div></section>
+
+      <section className="border-t border-white/5 bg-white/1.5 px-6 py-24 sm:py-32"><div className="mx-auto max-w-6xl">
+        <div className="mb-12 max-w-2xl sm:mb-16"><h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">Built for ownership, speed, and momentum.</h2><p className="mt-4 text-sm leading-7 text-neutral-400">The details that protect your investment before, during, and after launch.</p></div>
+        <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={gridReveal} className="grid transform-gpu gap-8 will-change-transform sm:gap-12 sm:grid-cols-2">{guarantees.map((guarantee) => { const Icon = guarantee.icon; return <motion.article key={guarantee.title} variants={reveal} whileHover={{ y: -6 }} className="group relative transform-gpu overflow-hidden rounded-3xl border border-white/10 bg-[#0E0E12] p-8 transition-all duration-300 will-change-transform hover:border-orange-500/40 sm:p-10"><div className="pointer-events-none absolute inset-0 bg-linear-to-b from-orange-500/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" /><div className="relative"><Icon size={24} className="text-[#FF5500] transition-colors duration-300 group-hover:text-orange-300" /><h3 className="mt-8 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-orange-400">{guarantee.title}</h3><p className="mt-3 max-w-md text-sm leading-7 text-neutral-400">{guarantee.description}</p></div></motion.article>; })}</motion.div>
+      </div></section>
+
+      <section className="bg-[#08080A] px-6 py-24 text-center sm:py-32"><motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={reveal} className="transform-gpu will-change-transform"><h2 className="mx-auto max-w-3xl text-4xl font-black uppercase tracking-tight text-white sm:text-6xl">LET&apos;S BUILD SOMETHING EXTRAORDINARY.</h2><Link to="/booking" className="mt-10 inline-flex items-center gap-3 rounded-xl bg-linear-to-r from-[#FF5500] to-orange-600 px-7 py-4 text-sm font-semibold text-white transition-all duration-300 hover:bg-none hover:bg-white hover:text-[#FF5500] hover:shadow-[0_0_25px_rgba(255,85,0,0.4)] active:scale-95">Book Strategy Call <ArrowUpRight size={18} /></Link></motion.div></section>
+    </main>
   );
 }

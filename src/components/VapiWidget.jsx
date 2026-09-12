@@ -46,7 +46,7 @@ export default function VapiWidget() {
       setConnecting(true);
       try {
         // Force request browser permission & bind active stream
-        const stream = await navigator.mediaDevices.getUserMedia({
+        await navigator.mediaDevices.getUserMedia({
           audio: {
             echoCancellation: true,
             noiseSuppression: false, // Krisp SDK buffer drop fixed by turning false

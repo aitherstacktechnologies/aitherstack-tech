@@ -11,10 +11,12 @@ export default function InteractiveCanvas() {
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
+    let canvasRect = canvas.getBoundingClientRect();
 
     const handleResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
+      canvasRect = canvas.getBoundingClientRect();
     };
 
     window.addEventListener('resize', handleResize);
@@ -24,9 +26,8 @@ export default function InteractiveCanvas() {
     let mouse = { x: -1000, y: -1000 };
 
     const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
+      mouse.x = e.clientX - canvasRect.left;
+      mouse.y = e.clientY - canvasRect.top;
     };
 
     window.addEventListener('mousemove', handleMouseMove);

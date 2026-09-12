@@ -1,15 +1,12 @@
 import React, { useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 export function AnimationProvider({ children }) {
   const lenisRef = useRef(null);
 
   useEffect(() => {
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -17,30 +14,54 @@ export function AnimationProvider({ children }) {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      syncTouch: !isTouchDevice,
+      touchMultiplier: 1,
     });
 
     lenisRef.current = lenis;
+    let frameId;
+    let scrollTrigger;
+    let idleId;
+    let isActive = true;
+    const animate = (time) => {
+      lenis.raf(time);
+      frameId = requestAnimationFrame(animate);
+    };
+    frameId = requestAnimationFrame(animate);
 
-    lenis.on('scroll', ScrollTrigger.update);
+    const loadScrollTrigger = async () => {
+      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+        import('gsap'),
+        import('gsap/ScrollTrigger'),
+      ]);
+      if (!isActive) return;
+      gsap.registerPlugin(ScrollTrigger);
+      scrollTrigger = ScrollTrigger;
+      lenis.on('scroll', ScrollTrigger.update);
+    };
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
+    if ('requestIdleCallback' in window) {
+      idleId = window.requestIdleCallback(loadScrollTrigger, { timeout: 2000 });
+    } else {
+      idleId = window.setTimeout(loadScrollTrigger, 1000);
+    }
 
     return () => {
+      isActive = false;
+      cancelAnimationFrame(frameId);
+      if ('cancelIdleCallback' in window) {
+        window.cancelIdleCallback(idleId);
+      } else {
+        window.clearTimeout(idleId);
+      }
+      if (scrollTrigger) {
+        lenis.off('scroll', scrollTrigger.update);
+      }
       lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
     };
   }, []);
 
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }
 
 export function PageTransition({ children, routeKey }) {
@@ -51,9 +72,10 @@ export function PageTransition({ children, routeKey }) {
       exit={{ opacity: 0, y: -20 }}
       transition={{
         duration: 0.4,
-        ease: [0.16, 1, 0.3, 1]
+        ease: [0.16, 1, 0.3, 1],
       }}
       key={routeKey}
+      className="transform-gpu will-change-transform"
     >
       {children}
     </motion.div>
@@ -62,93 +84,88 @@ export function PageTransition({ children, routeKey }) {
 
 export function MagneticButton({ children, className = '' }) {
   const ref = useRef(null);
-
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-
-    const handleMouseMove = (e) => {
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      
-      gsap.to(element, {
-        x: x * 0.3,
-        y: y * 0.3,
-        duration: 0.3,
-        ease: 'power2.out'
-      });
+    if (window.matchMedia('(pointer: coarse), (max-width: 767px)').matches) return;
+    let rect;
+    let frameId;
+    let pointer;
+    const updateRect = () => { rect = element.getBoundingClientRect(); };
+    const handlePointerEnter = () => updateRect();
+    const handlePointerMove = (event) => {
+      pointer = event;
+      if (!frameId) {
+        frameId = requestAnimationFrame(() => {
+          if (rect && pointer) {
+            const x = pointer.clientX - rect.left - rect.width / 2;
+            const y = pointer.clientY - rect.top - rect.height / 2;
+            element.style.transform = `translate3d(${x * 0.3}px, ${y * 0.3}px, 0)`;
+          }
+          frameId = undefined;
+        });
+      }
     };
-
     const handleMouseLeave = () => {
-      gsap.to(element, {
-        x: 0,
-        y: 0,
-        duration: 0.5,
-        ease: 'elastic.out(1, 0.3)'
-      });
+      element.style.transform = '';
     };
-
-    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('pointerenter', handlePointerEnter);
+    element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('mouseleave', handleMouseLeave);
-
+    window.addEventListener('resize', updateRect, { passive: true });
     return () => {
-      element.removeEventListener('mousemove', handleMouseMove);
+      if (frameId) cancelAnimationFrame(frameId);
+      element.removeEventListener('pointerenter', handlePointerEnter);
+      element.removeEventListener('pointermove', handlePointerMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', updateRect);
     };
   }, []);
-
-  return (
-    <div ref={ref} className={className}>
-      {children}
-    </div>
-  );
+  return <div ref={ref} className={`transform-gpu will-change-transform ${className}`}>{children}</div>;
 }
 
 export function TiltCard({ children, className = '', intensity = 15 }) {
   const ref = useRef(null);
-
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-
-    const handleMouseMove = (e) => {
-      const rect = element.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width - 0.5;
-      const y = (e.clientY - rect.top) / rect.height - 0.5;
-      
-      gsap.to(element, {
-        rotateY: x * intensity,
-        rotateX: -y * intensity,
-        duration: 0.3,
-        ease: 'power2.out',
-        transformPerspective: 1000
-      });
+    if (window.matchMedia('(pointer: coarse), (max-width: 767px)').matches) return;
+    let rect;
+    let frameId;
+    let pointer;
+    const updateRect = () => { rect = element.getBoundingClientRect(); };
+    const handlePointerEnter = () => updateRect();
+    const handlePointerMove = (event) => {
+      pointer = event;
+      if (!frameId) {
+        frameId = requestAnimationFrame(() => {
+          if (rect && pointer) {
+            const x = (pointer.clientX - rect.left) / rect.width - 0.5;
+            const y = (pointer.clientY - rect.top) / rect.height - 0.5;
+            element.style.transform = `perspective(1000px) rotateY(${x * intensity}deg) rotateX(${-y * intensity}deg)`;
+          }
+          frameId = undefined;
+        });
+      }
     };
-
     const handleMouseLeave = () => {
-      gsap.to(element, {
-        rotateY: 0,
-        rotateX: 0,
-        duration: 0.5,
-        ease: 'elastic.out(1, 0.3)'
-      });
+      element.style.transform = '';
     };
-
-    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('pointerenter', handlePointerEnter);
+    element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('mouseleave', handleMouseLeave);
-
+    window.addEventListener('resize', updateRect, { passive: true });
     return () => {
-      element.removeEventListener('mousemove', handleMouseMove);
+      if (frameId) cancelAnimationFrame(frameId);
+      element.removeEventListener('pointerenter', handlePointerEnter);
+      element.removeEventListener('pointermove', handlePointerMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', updateRect);
     };
   }, [intensity]);
-
   return (
-    <div ref={ref} className={`card-3d ${className}`}>
-      <div className="card-3d-inner">
-        {children}
-      </div>
+    <div ref={ref} className={`card-3d transform-gpu will-change-transform ${className}`}>
+      <div className="card-3d-inner">{children}</div>
     </div>
   );
 }
@@ -160,12 +177,9 @@ export function ScrollReveal({ children, className = '', stagger = true }) {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{
-            duration: 0.5,
-            delay: stagger ? i * 0.1 : 0,
-            ease: [0.16, 1, 0.3, 1]
-          }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.5, delay: stagger ? i * 0.1 : 0, ease: [0.16, 1, 0.3, 1] }}
+          className="transform-gpu will-change-transform"
         >
           {child}
         </motion.div>
@@ -176,32 +190,20 @@ export function ScrollReveal({ children, className = '', stagger = true }) {
 
 export function HoverSpotlight({ children, className = '' }) {
   const ref = useRef(null);
-
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
-
     const handleMouseMove = (e) => {
       const rect = element.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
-      
       element.style.setProperty('--mouse-x', `${x}%`);
       element.style.setProperty('--mouse-y', `${y}%`);
     };
-
     element.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      element.removeEventListener('mousemove', handleMouseMove);
-    };
+    return () => { element.removeEventListener('mousemove', handleMouseMove); };
   }, []);
-
-  return (
-    <div ref={ref} className={`spotlight-glow ${className}`}>
-      {children}
-    </div>
-  );
+  return <div ref={ref} className={`spotlight-glow ${className}`}>{children}</div>;
 }
 
 export default AnimationProvider;

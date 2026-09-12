@@ -62,7 +62,7 @@ export function InteractiveStack() {
           return (
             <div
               key={index}
-              className={`absolute inset-0 rounded-2xl p-6 bg-gradient-to-br ${block.color} shadow-2xl border border-white/20 backdrop-blur-md flex flex-col justify-between transition-all duration-300`}
+              className={`absolute inset-0 flex flex-col justify-between rounded-2xl border border-white/20 bg-gradient-to-br ${block.color} p-6 shadow-2xl transition-all duration-300`}
               style={{
                 transform: `translateZ(${offsetZ}px) translateY(${translateY}px)`,
                 boxShadow: "0 20px 50px rgba(0,0,0,0.5)",

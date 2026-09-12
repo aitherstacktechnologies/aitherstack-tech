@@ -1,118 +1,82 @@
 import React from 'react';
-import { ArrowLeft, Calendar, Clock, Video } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, CalendarClock, Check, Clock3, Video } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import CalBooking from '../components/CalBooking';
 
 export default function Booking() {
   return (
-    <div className="pt-16 min-h-screen">
-      <section className="relative py-16 px-6 sm:px-8 lg:px-12 border-b border-ast-stone">
+    <main className="min-h-screen overflow-hidden bg-[#08080A] pt-16 text-white">
+      <section className="relative border-b border-white/10 px-6 pb-14 pt-20 sm:px-8 lg:px-12 lg:pb-20">
         <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="max-w-7xl mx-auto relative z-10">
-          <Link 
-            to="/" 
-            className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm font-mono">Back to Home</span>
+        <div className="mobile-motion-lite absolute -right-32 -top-40 h-96 w-96 rounded-full bg-[#FF5500]/10 blur-[120px]" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <Link to="/" className="mb-12 inline-flex items-center gap-2 text-sm text-gray-500 transition-colors hover:text-white">
+            <ArrowLeft className="h-4 w-4" />
+            <span>Back to home</span>
           </Link>
-          
-          <div className="max-w-3xl">
-            <span className="text-xs font-mono uppercase tracking-widest text-ast-accent mb-4 block">
-              // BOOK A CALL
-            </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-6">
-              Schedule a Consultation
-            </h1>
-            <p className="text-lg text-gray-400 leading-relaxed">
-              Book a free 30-minute consultation to discuss your project requirements. We'll analyze your needs and provide actionable insights for your digital transformation.
+
+          <div className="grid gap-8 lg:grid-cols-[1fr_320px] lg:items-end">
+            <div className="max-w-4xl">
+              <p className="mb-5 font-mono text-xs uppercase tracking-[0.28em] text-[#FF5500]">// A CONVERSATION WITH THE BUILD TEAM</p>
+              <h1 className="max-w-4xl text-5xl font-black uppercase leading-[0.95] tracking-tight sm:text-6xl lg:text-8xl">
+                Bring the next version into focus.
+              </h1>
+            </div>
+            <p className="max-w-sm text-base leading-relaxed text-gray-400 lg:pb-1">
+              Choose a time for a practical strategy call. We will map the opportunity, pressure-test the scope, and leave you with a clear next move.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-16 px-6 sm:px-8 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2">
-              <div className="border border-ast-stone bg-ast-surface rounded-lg overflow-hidden">
-                <CalBooking />
+      <section className="px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start lg:gap-14">
+          <div>
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="font-mono text-xs uppercase tracking-[0.2em] text-gray-500">Select your slot</p>
+                <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">Let’s make the first move.</h2>
               </div>
+              <ArrowUpRight className="hidden h-6 w-6 text-[#FF5500] sm:block" />
             </div>
-            
-            <div className="space-y-8">
-              <div className="border border-ast-stone bg-ast-surface p-6 rounded-lg">
-                <h3 className="text-lg font-bold text-white mb-6">
-                  What to Expect
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg border border-ast-stone bg-ast-bg flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-5 h-5 text-ast-accent" />
-                    </div>
-                    <div>
-                      <span className="text-sm font-medium text-white block">30 Minute Session</span>
-                      <span className="text-xs text-gray-500">Free consultation to discuss your project</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg border border-ast-stone bg-ast-bg flex items-center justify-center flex-shrink-0">
-                      <Video className="w-5 h-5 text-ast-accent" />
-                    </div>
-                    <div>
-                      <span className="text-sm font-medium text-white block">Video Call</span>
-                      <span className="text-xs text-gray-500">Google Meet or Zoom - your choice</span>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-lg border border-ast-stone bg-ast-bg flex items-center justify-center flex-shrink-0">
-                      <Calendar className="w-5 h-5 text-ast-accent" />
-                    </div>
-                    <div>
-                      <span className="text-sm font-medium text-white block">Flexible Scheduling</span>
-                      <span className="text-xs text-gray-500">Mon-Fri, 9AM-6PM EST</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="border border-ast-stone bg-ast-surface p-6 rounded-lg">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4">
-                  // TOPICS WE COVER
-                </h3>
-                <ul className="space-y-2">
-                  {[
-                    'Project scope & requirements',
-                    'Technical architecture',
-                    'Timeline & milestones',
-                    'Budget & pricing',
-                    'Next steps & roadmap',
-                  ].map((topic) => (
-                    <li key={topic} className="flex items-center gap-2 text-sm text-gray-400">
-                      <span className="w-1.5 h-1.5 rounded-full bg-ast-accent" />
-                      {topic}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="border border-ast-stone bg-ast-surface p-6 rounded-lg">
-                <h3 className="text-sm font-mono uppercase tracking-wider text-gray-400 mb-4">
-                  // CONTACT DIRECTLY
-                </h3>
-                <a 
-                  href="mailto:muhammadzaman.dev@gmail.com" 
-                  className="text-lg text-white hover:text-ast-accent transition-colors font-medium"
-                >
-                  muhammadzaman.dev@gmail.com
-                </a>
-              </div>
-            </div>
+            <CalBooking />
           </div>
+
+          <aside className="space-y-8 lg:pt-12">
+            <div className="border-l-2 border-[#FF5500] pl-5">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#FF5500]">The briefing</p>
+              <p className="mt-3 text-sm leading-relaxed text-gray-400">A focused 30-minute video call with the people who will shape and ship the work.</p>
+            </div>
+
+            <div className="space-y-5 border-t border-white/10 pt-6">
+              <div className="flex gap-3">
+                <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-[#FF5500]" />
+                <div><h3 className="text-sm font-semibold">30 minutes, well spent</h3><p className="mt-1 text-xs leading-relaxed text-gray-500">Enough time to get specific without filling your calendar.</p></div>
+              </div>
+              <div className="flex gap-3">
+                <Video className="mt-0.5 h-5 w-5 shrink-0 text-[#FF5500]" />
+                <div><h3 className="text-sm font-semibold">Remote by default</h3><p className="mt-1 text-xs leading-relaxed text-gray-500">A simple video link arrives with your confirmation.</p></div>
+              </div>
+              <div className="flex gap-3">
+                <CalendarClock className="mt-0.5 h-5 w-5 shrink-0 text-[#FF5500]" />
+                <div><h3 className="text-sm font-semibold">No sales script</h3><p className="mt-1 text-xs leading-relaxed text-gray-500">We focus on fit, constraints, and the highest-leverage path.</p></div>
+              </div>
+            </div>
+
+            <div className="border-t border-white/10 pt-6">
+              <p className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-gray-500">We can cover</p>
+              <ul className="space-y-3">
+                {['Product direction', 'Technical architecture', 'Timeline and investment'].map((topic) => (
+                  <li key={topic} className="flex items-center gap-3 text-sm text-gray-300">
+                    <Check className="h-4 w-4 text-[#FF5500]" />{topic}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+          </aside>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
