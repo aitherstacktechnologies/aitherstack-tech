@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Hero from '../components/Hero';
 
 const sections = [
   ['collect', 'What We Collect', 'Your contact info, booking details, and any project data you share with us.', 'Contact form submissions (name, email, message, and service interest); booking details via Cal.com (name, email, and meeting time); business or CRM data you provide access to via Google Sheets integrations for automation and AI-agent setup; and project data stored in our Supabase database, including client records and project status.'],
@@ -34,27 +36,108 @@ export default function PrivacyPolicy() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden pt-16">
-      <section className="relative py-16 px-6 sm:px-8 lg:px-12 border-b border-ast-stone/30">
-        <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="max-w-5xl mx-auto relative z-10">
-          <Link to="/" className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8"><ArrowLeft className="w-4 h-4" /><span className="text-sm font-mono">Back to Home</span></Link>
-          <span className="text-xs font-mono uppercase tracking-widest text-ast-accent mb-4 block">// LEGAL</span>
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight uppercase mb-4">Privacy Policy</h1>
-          <span className="inline-flex text-xs font-mono text-gray-300 border border-ast-stone/50 bg-ast-surface/80 rounded-full px-3 py-1 mb-4">Last updated: September 8, 2026</span>
-          <p className="text-gray-400 max-w-xl">What we collect, why, and how it's handled.</p>
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text pt-16">
+      <Hero
+        eyebrow="// LEGAL"
+        title="Privacy Policy."
+        subtitle="What we collect, why, and how it's handled."
+        align="left"
+        compact
+        showScroll={false}
+      >
+        <Link to="/" className="mb-8 inline-flex items-center gap-2 text-ast-muted hover:text-ast-accent transition-colors">
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-sm font-mono">Back to Home</span>
+        </Link>
+        <span className="inline-flex text-xs font-mono text-ast-muted border border-ast-border bg-ast-surface/80 rounded-full px-3 py-1">Last updated: September 8, 2026</span>
+      </Hero>
+
+      <section className="py-12 sm:py-16 px-6 sm:px-8 lg:px-12 section-gradient-bg-alt">
+        <div className="max-w-5xl mx-auto">
+          <div className="lg:hidden mb-8 relative">
+            <button
+              type="button"
+              onClick={() => setIsJumpMenuOpen((open) => !open)}
+              className="w-full flex items-center justify-between glassmorphic-card border border-ast-border px-4 py-3 text-left text-sm font-medium text-ast-text"
+              aria-expanded={isJumpMenuOpen}
+            >
+              Jump to section
+              <motion.div animate={{ rotate: isJumpMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+                <ChevronDown className="w-4 h-4 text-ast-accent" />
+              </motion.div>
+            </button>
+            {isJumpMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="absolute z-20 w-full border border-ast-border bg-ast-surface shadow-xl"
+              >
+                {sections.map(([id, title], index) => (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => jumpToSection(id)}
+                    className={`block w-full px-4 py-3 text-left text-sm transition-colors ${
+                      activeSection === id
+                        ? 'bg-ast-accent/10 text-ast-accent'
+                        : 'text-ast-muted hover:bg-ast-surface/50'
+                    }`}
+                  >
+                    {String(index + 1).padStart(2, '0')} / {title}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </div>
+          <div className="lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-16">
+            <aside className="hidden lg:block">
+              <nav className="sticky top-28" aria-label="Privacy Policy sections">
+                <p className="text-xs uppercase tracking-widest text-ast-muted font-mono mb-4">Contents</p>
+                <div className="space-y-1 border-l border-ast-border">
+                  {sections.map(([id, title], index) => (
+                    <button
+                      key={id}
+                      type="button"
+                      onClick={() => jumpToSection(id)}
+                      className={`block w-full border-l-2 -ml-px px-3 py-2 text-left text-xs transition-colors duration-300 ${
+                        activeSection === id
+                          ? 'border-ast-accent text-ast-accent'
+                          : 'border-transparent text-ast-muted hover:text-ast-text'
+                      }`}
+                    >
+                      {String(index + 1).padStart(2, '0')} <span className="ml-1">{title}</span>
+                    </button>
+                  ))}
+                </div>
+              </nav>
+            </aside>
+            <main className="min-w-0 space-y-6">
+              {sections.map(([id, title, summary, body], index) => (
+                <motion.article
+                  id={id}
+                  key={id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="scroll-mt-28 glassmorphic-card border border-ast-border rounded-xl p-6 sm:p-8"
+                >
+                  <div className="flex items-start gap-4 mb-5">
+                    <span className="text-xs font-mono text-ast-accent pt-1">{String(index + 1).padStart(2, '0')}</span>
+                    <h2 className="text-xl sm:text-2xl font-bold text-ast-text">{title}</h2>
+                  </div>
+                  <div className="border-l-2 border-ast-accent bg-ast-accent/5 px-4 py-3 mb-6">
+                    <p className="text-sm text-ast-muted leading-relaxed">
+                      <span className="font-semibold text-ast-accent">In short:</span> {summary}
+                    </p>
+                  </div>
+                  <p className="text-ast-muted leading-relaxed">{body}</p>
+                </motion.article>
+              ))}
+            </main>
+          </div>
         </div>
       </section>
-
-      <section className="py-12 sm:py-16 px-6 sm:px-8 lg:px-12"><div className="max-w-5xl mx-auto">
-        <div className="lg:hidden mb-8 relative"><button type="button" onClick={() => setIsJumpMenuOpen((open) => !open)} className="w-full flex items-center justify-between border border-ast-stone/50 bg-ast-surface px-4 py-3 text-left text-sm font-medium text-white" aria-expanded={isJumpMenuOpen}>Jump to section <ChevronDown className={`w-4 h-4 transition-transform ${isJumpMenuOpen ? 'rotate-180' : ''}`} /></button>
-          {isJumpMenuOpen && <div className="absolute z-20 w-full border-x border-b border-ast-stone/50 bg-ast-surface shadow-xl">{sections.map(([id, title], index) => <button type="button" key={id} onClick={() => jumpToSection(id)} className={`block w-full px-4 py-3 text-left text-sm transition-colors hover:bg-ast-surface-2 ${activeSection === id ? 'text-ast-accent' : 'text-gray-400'}`}>{String(index + 1).padStart(2, '0')} / {title}</button>)}</div>}
-        </div>
-        <div className="lg:grid lg:grid-cols-[180px_minmax(0,1fr)] lg:gap-16">
-          <aside className="hidden lg:block"><nav className="sticky top-28" aria-label="Privacy Policy sections"><p className="text-xs uppercase tracking-widest text-gray-600 font-mono mb-4">Contents</p><div className="space-y-1 border-l border-ast-stone/50">{sections.map(([id, title], index) => <button type="button" key={id} onClick={() => jumpToSection(id)} className={`block w-full border-l-2 -ml-px px-3 py-2 text-left text-xs transition-colors duration-300 ${activeSection === id ? 'border-ast-accent text-ast-accent' : 'border-transparent text-gray-500 hover:text-gray-200'}`}>{String(index + 1).padStart(2, '0')} <span className="ml-1">{title}</span></button>)}</div></nav></aside>
-          <main className="min-w-0 space-y-6">{sections.map(([id, title, summary, body], index) => <article id={id} key={id} className="scroll-mt-28 border border-ast-stone/30 bg-ast-surface/50 rounded-xl p-6 sm:p-8 animate-slide-up"><div className="flex items-start gap-4 mb-5"><span className="text-xs font-mono text-ast-accent pt-1">{String(index + 1).padStart(2, '0')}</span><h2 className="text-xl sm:text-2xl font-bold text-white">{title}</h2></div><div className="border-l-2 border-ast-accent bg-orange-500/5 px-4 py-3 mb-6"><p className="text-sm text-gray-200 leading-relaxed"><span className="font-semibold text-ast-accent">In short:</span> {summary}</p></div><p className="text-gray-400 leading-relaxed">{body}</p></article>)}</main>
-        </div>
-      </div></section>
     </div>
   );
 }

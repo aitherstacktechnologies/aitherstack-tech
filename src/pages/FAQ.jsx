@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Hero from '../components/Hero';
 
 const categories = [
   {
@@ -50,38 +52,62 @@ export default function FAQ() {
   const [openQuestion, setOpenQuestion] = useState(null);
 
   return (
-    <div className="min-h-screen overflow-x-hidden page-gradient pt-16">
-      <section className="relative py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-stone/30 overflow-hidden">
-        <div className="absolute inset-0 grid-bg opacity-20" />
-        <div className="relative z-10 max-w-5xl mx-auto">
-          <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-ast-accent mb-4"><HelpCircle className="w-4 h-4" /> Answers, plainly</span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-5">Frequently Asked <span className="text-ast-accent">Questions</span></h1>
-          <p className="text-lg text-gray-400 max-w-xl">The practical answers about our projects, retainers, technology, and policies.</p>
-        </div>
-      </section>
-      <section className="py-16 px-6 sm:px-8 lg:px-12">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text pt-16">
+      <Hero
+        eyebrow="// FREQUENTLY ASKED QUESTIONS"
+        title="Frequently Asked Questions."
+        subtitle="The practical answers about our projects, retainers, technology, and policies."
+        align="left"
+        compact
+        showScroll={false}
+      />
+      <section className="py-16 px-6 sm:px-8 lg:px-12 section-gradient-bg-alt">
         <div className="max-w-4xl mx-auto space-y-12">
-          {categories.map((category) => (
-            <section key={category.title}>
+          {categories.map((category, catIndex) => (
+            <motion.section
+              key={category.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: catIndex * 0.1 }}
+            >
               <h2 className="text-xs font-mono uppercase tracking-widest text-ast-accent mb-4">{category.title}</h2>
               <div className="space-y-3">
-                {category.items.map(([question, answer]) => {
+                {category.items.map(([question, answer], itemIndex) => {
                   const key = `${category.title}-${question}`;
                   const isOpen = openQuestion === key;
                   return (
-                    <div key={question} className="border border-ast-stone/50 bg-ast-surface/70 rounded-xl overflow-hidden transition-colors duration-200 hover:border-ast-accent/40">
-                      <button type="button" onClick={() => setOpenQuestion(isOpen ? null : key)} aria-expanded={isOpen} className="w-full flex items-center justify-between gap-6 text-left px-5 py-5 text-white font-semibold">
+                    <motion.div
+                      key={question}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: catIndex * 0.1 + itemIndex * 0.03 }}
+                      className="glassmorphic-card border border-ast-border rounded-xl overflow-hidden transition-all duration-200 hover:border-ast-accent/40"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setOpenQuestion(isOpen ? null : key)}
+                        aria-expanded={isOpen}
+                        className="w-full flex items-center justify-between gap-6 text-left px-5 py-5 text-ast-text font-semibold hover:text-ast-accent transition-colors"
+                      >
                         <span>{question}</span>
-                        <ChevronDown className={`w-5 h-5 shrink-0 text-ast-accent transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                        <motion.div
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ChevronDown className="w-5 h-5 shrink-0 text-ast-accent" />
+                        </motion.div>
                       </button>
                       <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
-                        <div className="overflow-hidden"><p className="px-5 pb-5 text-sm leading-relaxed text-gray-400">{answer}</p></div>
+                        <div className="overflow-hidden">
+                          <p className="px-5 pb-5 text-sm leading-relaxed text-ast-muted">{answer}</p>
+                        </div>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
-            </section>
+            </motion.section>
           ))}
         </div>
       </section>

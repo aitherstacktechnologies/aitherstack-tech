@@ -1,135 +1,104 @@
-import React, { useEffect, useRef } from 'react';
-import { ArrowUpRight } from 'lucide-react';
-import gsap from 'gsap';
+import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 
-export default function Hero() {
-  const heroRef = useRef(null);
-  const line1Ref = useRef(null);
-  const line2Ref = useRef(null);
-  const subtitleRef = useRef(null);
-  const ctaRef = useRef(null);
-  const badgeRef = useRef(null);
+const alignmentClasses = {
+  center: 'text-center items-center',
+  left: 'text-left items-start',
+};
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-      tl.fromTo(
-        badgeRef.current,
-        { y: -20, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6 }
-      )
-        .fromTo(
-          line1Ref.current,
-          { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          '-=0.3'
-        )
-        .fromTo(
-          line2Ref.current,
-          { y: 60, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8 },
-          '-=0.6'
-        )
-        .fromTo(
-          subtitleRef.current,
-          { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6 },
-          '-=0.4'
-        )
-        .fromTo(
-          ctaRef.current,
-          { y: 20, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6 },
-          '-=0.3'
-        );
-    }, heroRef);
-
-    return () => ctx.revert();
-  }, []);
+export default function Hero({
+  eyebrow,
+  title,
+  subtitle,
+  actions,
+  align = 'center',
+  compact = false,
+  showScroll = true,
+  children,
+  className = '',
+}) {
+  const prefersReducedMotion = useReducedMotion();
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.85, ease: [0.16, 1, 0.3, 1] };
 
   return (
-    <section
-      ref={heroRef}
-      className="relative min-h-[85vh] flex flex-col justify-center bg-sunset-bg text-sunset-text px-6 sm:px-8 lg:px-12 overflow-hidden page-gradient"
-    >
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[18vw] font-black tracking-tighter text-sunset-text opacity-[0.04] select-none">
-          AST
-        </span>
-      </div>
+    <section className={`relative isolate overflow-hidden bg-transparent px-4 pb-16 pt-24 sm:px-6 sm:pb-24 sm:pt-32 lg:px-8 lg:pt-40 xl:px-12 ${compact ? 'min-h-[68vh]' : 'min-h-[88vh]'} flex flex-col justify-center ${className}`}>
+      <div className="pointer-events-none absolute inset-0 hero-scene-grid" aria-hidden="true" />
+      <div className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-ast-accent/10 blur-[100px]" aria-hidden="true" />
+      <div className="pointer-events-none absolute -right-24 bottom-0 h-96 w-96 rounded-full bg-ast-accent/5 blur-[120px]" aria-hidden="true" />
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full">
-        <div ref={badgeRef} className="inline-flex items-center gap-2 rounded-full border border-sunset-border bg-sunset-surface px-4 py-2 mb-8">
-          <span className="w-2 h-2 rounded-full bg-sunset-pop animate-pulse" />
-          <span className="text-xs font-mono uppercase tracking-wider text-sunset-muted">
-            Digital Solutions Agency
-          </span>
-        </div>
-
-        <div className="max-w-4xl">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1] uppercase mb-6">
-            <span ref={line1Ref} className="block">
-              We Engineer Elite Web Platforms
-            </span>
-            <span ref={line2Ref} className="block text-sunset-text mt-2">
-              & Intelligent AI Systems
-            </span>
-          </h1>
-
-          <p
-            ref={subtitleRef}
-            className="text-lg sm:text-xl text-sunset-muted max-w-xl mb-10 leading-relaxed"
+      <motion.div
+        initial={{ opacity: 0, y: 28 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={transition}
+        className={`relative z-10 mx-auto flex w-full max-w-6xl flex-col ${alignmentClasses[align]}`}
+      >
+        {eyebrow && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...transition, delay: 0.12 }}
+            className="mb-7 inline-flex items-center gap-3 rounded-full border border-ast-border/80 bg-ast-surface/60 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.24em] text-ast-accent backdrop-blur-md"
           >
-            We bridge the gap between high-end web design and autonomous systems. By combining ultra-fast React architectures, bespoke Framer Motion UI, and deeply integrated AI voice infrastructure, we build complete digital ecosystems designed for maximum conversion and effortless scale.
-          </p>
+            <span className="h-1.5 w-1.5 rounded-full bg-ast-accent shadow-[0_0_12px_rgba(255,107,26,0.9)] animate-pulse" />
+            {eyebrow}
+          </motion.div>
+        )}
 
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-4">
-            <button
-              onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center gap-2 bg-sunset-pop text-sunset-bg px-8 py-4 rounded-full font-bold text-base transition-all duration-300 hover:bg-sunset-pop/90 hover:shadow-xl hover:shadow-sunset-pop/20 focus-sunset"
-            >
-              <span>Start a Project</span>
-              <ArrowUpRight className="w-5 h-5" />
-            </button>
+        <motion.h1
+          initial={{ opacity: 0, y: 26, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ ...transition, delay: 0.22 }}
+          className="font-display text-[clamp(2.85rem,7.2vw,7.25rem)] font-semibold leading-[0.94] tracking-[-0.045em] text-ast-text"
+        >
+          {title}
+        </motion.h1>
 
-            <button
-              onClick={() => scrollToSection('services')}
-              className="inline-flex items-center gap-2 text-sunset-text px-8 py-4 rounded-full font-semibold text-base border border-sunset-border transition-all duration-300 hover:border-sunset-muted hover:bg-sunset-surface focus-sunset"
-            >
-              Our Services
-            </button>
-          </div>
-        </div>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ ...transition, delay: 0.38 }}
+          className={`mt-7 max-w-2xl text-base leading-relaxed text-ast-muted sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
+        >
+          {subtitle}
+        </motion.p>
 
-        <div className="mt-16 pt-8 border-t border-sunset-border/50">
-          <div className="flex flex-wrap items-center gap-8 text-sm text-sunset-muted">
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-sunset-pop" />
-              Web Development
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-sunset-pop" />
-              AI Systems & Automation
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-sunset-pop" />
-              Business Software
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="w-2 h-2 rounded-full bg-sunset-pop" />
-              Integrations
-            </div>
-          </div>
-        </div>
-      </div>
+        {actions && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ ...transition, delay: 0.52 }}
+            className={`mt-10 flex flex-col items-center gap-3 sm:flex-row ${align === 'center' ? 'mx-auto' : ''}`}
+          >
+            {actions}
+          </motion.div>
+        )}
+
+        {children}
+      </motion.div>
+
+      {showScroll && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-ast-muted"
+          aria-hidden="true"
+        >
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em]">Scroll to explore</span>
+          <motion.span animate={{ y: [0, 7, 0] }} transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}>
+            <ArrowDown className="h-4 w-4 stroke-ast-accent/70" />
+          </motion.span>
+        </motion.div>
+      )}
     </section>
+  );
+}
+
+export function HeroArrow({ label = 'Learn more' }) {
+  return (
+    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-ast-accent">
+      {label}
+      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    </span>
   );
 }

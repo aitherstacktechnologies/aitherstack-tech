@@ -67,7 +67,7 @@ export default function ProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-sunset-bg text-sunset-text py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border overflow-hidden"
+      className="relative bg-ast-bg text-ast-text py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-border overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <span className="absolute top-1/2 left-0 -translate-y-1/2 pointer-events-none select-none text-watermark z-0 opacity-[0.04]">
@@ -76,9 +76,9 @@ export default function ProcessSection() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="max-w-3xl mb-16 pb-6 border-b border-sunset-border">
-          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-sunset-pop mb-3">
-            <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+        <div className="max-w-3xl mb-16 pb-6 border-b border-ast-border">
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-ast-accent mb-3">
+            <span className="w-2 h-2 rounded-full bg-ast-accent" />
             Execution Methodology
           </div>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight uppercase">
@@ -92,30 +92,30 @@ export default function ProcessSection() {
             <div
               key={item.step}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="group relative bg-sunset-surface border border-sunset-border p-8 rounded-lg flex flex-col justify-between transition-all duration-300 hover:border-sunset-pop hover:shadow-lg hover:shadow-sunset-pop/10"
+              className="group relative bg-ast-surface border border-ast-border p-8 rounded-lg flex flex-col justify-between transition-all duration-300 hover:border-ast-accent hover:shadow-lg hover:shadow-ast-accent/10"
             >
               <div>
-                <div className="flex items-center justify-between mb-8 pb-4 border-b border-sunset-border/60">
-                  <span className="font-mono text-2xl font-bold text-sunset-pop/50 group-hover:text-sunset-pop transition-colors">
+                <div className="flex items-center justify-between mb-8 pb-4 border-b border-ast-border/60">
+                  <span className="font-mono text-2xl font-bold text-ast-accent/50 group-hover:text-ast-accent transition-colors">
                     {item.step}
                   </span>
-                  <span className="w-2 h-2 rounded-full bg-sunset-pop opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="w-2 h-2 rounded-full bg-ast-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
                 
-                <h3 className="text-xl font-bold tracking-tight text-sunset-text mb-3">
+                <h3 className="text-xl font-bold tracking-tight text-ast-text mb-3">
                   {item.phase}
                 </h3>
                 
-                <p className="text-xs font-mono font-semibold text-sunset-muted mb-4 leading-relaxed">
+                <p className="text-xs font-mono font-semibold text-ast-muted mb-4 leading-relaxed">
                   {item.objective}
                 </p>
 
-                <p className="text-sm text-sunset-muted leading-relaxed">
+                <p className="text-sm text-ast-muted leading-relaxed">
                   {item.details}
                 </p>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-sunset-border/40 text-[11px] font-mono text-sunset-muted uppercase tracking-wider">
+              <div className="mt-8 pt-4 border-t border-ast-border/40 text-[11px] font-mono text-ast-muted uppercase tracking-wider">
                 Phase {item.step} / 04
               </div>
             </div>

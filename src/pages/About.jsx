@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight, Globe, Zap, Shield, Users } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from 'framer-motion';
+import Button from '../components/Button';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,163 +88,218 @@ export default function About() {
   }, []);
 
   return (
-    <div className="bg-sunset-bg text-sunset-text min-h-screen">
-      <div className="relative pt-32 pb-16 px-6 sm:px-8 lg:px-12 border-b border-sunset-border overflow-hidden">
+    <div className="bg-transparent text-ast-text min-h-screen">
+      <div className="relative pt-32 pb-16 px-6 sm:px-8 lg:px-12 border-b border-ast-border overflow-hidden section-gradient-bg">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute -bottom-20 -right-10 text-[20vw] font-black tracking-tighter text-sunset-text opacity-[0.04] select-none">
+          <span className="absolute -bottom-20 -right-10 text-[20vw] font-black tracking-tighter text-ast-text opacity-[0.04] select-none">
             AST
           </span>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sunset-border bg-sunset-surface/50 text-xs font-mono uppercase tracking-wider text-sunset-muted mb-6">
-            <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-ast-border bg-ast-surface/50 text-xs font-mono uppercase tracking-wider text-ast-accent mb-6"
+          >
+            <span className="w-2 h-2 rounded-full bg-ast-accent" />
             About Us
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-4">
+          </motion.div>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-4"
+          >
             Who We Are
-          </h1>
-          <p className="text-lg text-sunset-muted max-w-3xl leading-relaxed">
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-lg text-ast-muted max-w-3xl leading-relaxed"
+          >
             Aither Stack Technologies is a digital solutions agency that builds web platforms, AI systems, and business software for forward-thinking enterprises worldwide.
-          </p>
+          </motion.p>
         </div>
       </div>
 
-      <section ref={sectionRef} className="py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border">
+      <section ref={sectionRef} className="py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-border section-gradient-bg-alt">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
             {stats.map((stat, index) => (
-              <div
+              <motion.div
                 key={stat.label}
                 ref={(el) => (statsRef.current[index] = el)}
-                className="text-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center group"
               >
-                <div className="text-4xl lg:text-5xl font-black tracking-tight text-sunset-pop mb-2">
+                <motion.div
+                  className="text-4xl lg:text-5xl font-black tracking-tight mb-2 text-gradient-luxury"
+                  whileHover={{ scale: 1.05 }}
+                >
                   {stat.number}
-                </div>
-                <div className="text-sm text-sunset-muted font-mono uppercase tracking-wider">
+                </motion.div>
+                <div className="text-sm text-ast-muted font-mono uppercase tracking-wider">
                   {stat.label}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border">
+      <section className="py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-border section-gradient-bg">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.6 }}
+            >
               <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-6">
                 Built for Business Growth
               </h2>
-              <p className="text-sunset-muted leading-relaxed mb-6">
+              <p className="text-ast-muted leading-relaxed mb-6">
                 We're not just developers — we're business partners focused on your success. Our team combines technical expertise with strategic thinking to deliver solutions that drive real results.
               </p>
-              <p className="text-sunset-muted leading-relaxed mb-8">
+              <p className="text-ast-muted leading-relaxed mb-8">
                 From startups to established enterprises, we work with ambitious businesses ready to transform their digital presence. Every project is custom-built to meet your specific needs, goals, and timeline.
               </p>
               <div className="flex flex-wrap gap-3">
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sunset-surface border border-sunset-border text-sm">
-                  <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ast-surface border border-ast-border text-sm text-ast-text">
+                  <span className="w-2 h-2 rounded-full bg-ast-accent" />
                   React & TypeScript
-                </div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sunset-surface border border-sunset-border text-sm">
-                  <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+                </span>
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ast-surface border border-ast-border text-sm text-ast-text">
+                  <span className="w-2 h-2 rounded-full bg-ast-accent" />
                   AI & Automation
-                </div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-sunset-surface border border-sunset-border text-sm">
-                  <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+                </span>
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ast-surface border border-ast-border text-sm text-ast-text">
+                  <span className="w-2 h-2 rounded-full bg-ast-accent" />
                   Cloud & API
-                </div>
+                </span>
               </div>
-            </div>
-            <div className="relative">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative"
+            >
               <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-2xl">
-                <span className="absolute -bottom-10 -right-10 text-[15vw] font-black tracking-tighter text-sunset-text opacity-[0.04] select-none">
+                <span className="absolute -bottom-10 -right-10 text-[15vw] font-black tracking-tighter text-ast-text opacity-[0.04] select-none">
                   AST
                 </span>
               </div>
-              <div className="bg-sunset-surface border border-sunset-border rounded-2xl p-8">
-                <h3 className="text-xl font-bold mb-6">Why Choose Us?</h3>
+              <div className="glassmorphic-luxury rounded-2xl p-8 glow-luxury">
+                <h3 className="text-xl font-bold mb-6 text-gradient-luxury">Why Choose Us?</h3>
                 <ul className="space-y-4">
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
-                    <span className="text-sunset-muted">Dedicated team focused on your success</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-ast-accent mt-2 flex-shrink-0" />
+                    <span className="text-ast-muted">Dedicated team focused on your success</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
-                    <span className="text-sunset-muted">Transparent communication throughout</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-ast-accent mt-2 flex-shrink-0" />
+                    <span className="text-ast-muted">Transparent communication throughout</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
-                    <span className="text-sunset-muted">Clean, maintainable code quality</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-ast-accent mt-2 flex-shrink-0" />
+                    <span className="text-ast-muted">Clean, maintainable code quality</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
-                    <span className="text-sunset-muted">Post-launch support and maintenance</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-ast-accent mt-2 flex-shrink-0" />
+                    <span className="text-ast-muted">Post-launch support and maintenance</span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <span className="w-1.5 h-1.5 rounded-full bg-sunset-pop mt-2 flex-shrink-0" />
-                    <span className="text-sunset-muted">Scalable solutions for future growth</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-ast-accent mt-2 flex-shrink-0" />
+                    <span className="text-ast-muted">Scalable solutions for future growth</span>
                   </li>
                 </ul>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border">
+      <section className="py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-border section-gradient-bg-alt">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
               Our Values
             </h2>
-            <p className="text-sunset-muted max-w-2xl mx-auto">
+            <p className="text-ast-muted max-w-2xl mx-auto">
               The principles that guide everything we do at Aither Stack Technologies.
             </p>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
-              <div
+              <motion.div
                 key={value.title}
                 ref={(el) => (valuesRef.current[index] = el)}
-                className="text-center"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="text-center group"
               >
-                <div className="w-16 h-16 rounded-2xl bg-sunset-surface border border-sunset-border flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="w-8 h-8 text-sunset-pop" />
-                </div>
-                <h3 className="text-lg font-bold mb-3">{value.title}</h3>
-                <p className="text-sm text-sunset-muted leading-relaxed">{value.description}</p>
-              </div>
+                <motion.div
+                  className="w-16 h-16 rounded-2xl glassmorphic-card border border-ast-border flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:border-ast-accent/40 group-hover:shadow-[0_0_30px_rgba(255,107,26,0.2)]"
+                  whileHover={{ scale: 1.05, rotate: 3 }}
+                >
+                  <value.icon className="w-8 h-8 text-ast-accent" />
+                </motion.div>
+                <h3 className="text-lg font-bold mb-3 text-ast-text">{value.title}</h3>
+                <p className="text-sm text-ast-muted leading-relaxed">{value.description}</p>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24 px-6 sm:px-8 lg:px-12 bg-sunset-surface">
+      <section className="py-24 px-6 sm:px-8 lg:px-12 section-gradient-bg">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
-            Ready to Work Together?
-          </h2>
-          <p className="text-sunset-muted max-w-xl mx-auto mb-8">
-            Let's discuss your project and create something amazing together.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 bg-sunset-pop text-sunset-bg px-8 py-4 rounded-full font-bold text-base transition-all hover:bg-sunset-pop/90"
-            >
-              <span>Start a Project</span>
-              <ArrowUpRight className="w-5 h-5" />
-            </Link>
-            <Link
-              to="/team"
-              className="inline-flex items-center gap-2 text-sunset-text px-8 py-4 rounded-full font-semibold text-base border border-sunset-border transition-all hover:border-sunset-muted"
-            >
-              Meet the Team
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+              Ready to Work Together?
+            </h2>
+            <p className="text-ast-muted max-w-xl mx-auto mb-8">
+              Let's discuss your project and create something amazing together.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <Button
+                as="a"
+                href="/contact"
+                variant="primary"
+                size="lg"
+                showArrow
+              >
+                Start a Project
+              </Button>
+              <Button
+                as="a"
+                href="/team"
+                variant="ghost"
+                size="lg"
+              >
+                Meet the Team
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

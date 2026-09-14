@@ -70,19 +70,19 @@ export default function WhyChooseUs() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-sunset-bg text-sunset-text py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border overflow-hidden"
+      className="relative bg-ast-bg text-ast-text py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-border overflow-hidden"
     >
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-sunset-pop mb-3">
-            <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+          <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-ast-accent mb-3">
+            <span className="w-2 h-2 rounded-full bg-ast-accent" />
             Why Work With Us
           </div>
           <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight uppercase">
             Built to Make Your <br />
             Business Better.
           </h2>
-          <p className="text-base text-sunset-muted leading-relaxed mt-6 max-w-2xl">
+          <p className="text-base text-ast-muted leading-relaxed mt-6 max-w-2xl">
             We don't just deliver digital solutions — we build reliable, high-quality systems designed around your business, your customers, and your long-term goals.
           </p>
         </div>
@@ -92,16 +92,16 @@ export default function WhyChooseUs() {
             <div
               key={reason.number}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="group p-8 bg-sunset-surface border border-sunset-border rounded-lg hover:border-sunset-pop transition-all duration-300"
+              className="group p-8 bg-ast-surface border border-ast-border rounded-lg hover:border-ast-accent transition-all duration-300"
             >
               <div className="flex items-center gap-3 mb-5">
-                <span className="font-mono text-sm font-bold text-sunset-pop">{reason.number}</span>
-                <div className="w-8 h-[1px] bg-sunset-border group-hover:w-12 group-hover:bg-sunset-pop transition-all duration-300" />
+                <span className="font-mono text-sm font-bold text-ast-accent">{reason.number}</span>
+                <div className="w-8 h-[1px] bg-ast-border group-hover:w-12 group-hover:bg-ast-accent transition-all duration-300" />
               </div>
-              <h3 className="text-lg font-bold tracking-tight text-sunset-text mb-3">
+              <h3 className="text-lg font-bold tracking-tight text-ast-text mb-3">
                 {reason.title}
               </h3>
-              <p className="text-sm text-sunset-muted leading-relaxed">
+              <p className="text-sm text-ast-muted leading-relaxed">
                 {reason.description}
               </p>
             </div>

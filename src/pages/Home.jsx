@@ -5,7 +5,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Bot,
-  Code2,
   Gauge,
   Palette,
   ShieldCheck,
@@ -13,7 +12,8 @@ import {
   Wand2,
   Workflow,
 } from 'lucide-react';
-import heroImage from '../assets/hero.png';
+import Button from '../components/Button';
+import Hero from '../components/Hero';
 
 const serviceCards = [
   {
@@ -69,25 +69,6 @@ const whyChooseUs = [
   },
 ];
 
-const featuredProjects = [
-  {
-    id: '01',
-    title: 'Nexus Commerce',
-    category: 'Luxury eCommerce system',
-    description: 'A conversion-first storefront engineered for premium products and high-intent buyers.',
-    tech: ['React', 'Supabase', 'AI Voice'],
-    image: heroImage,
-  },
-  {
-    id: '02',
-    title: 'Aether Growth OS',
-    category: 'Bespoke lead generation platform',
-    description: 'An AI-powered conversion engine combining UX precision, CRM automation, and lifecycle customer journeys.',
-    tech: ['React', 'Vapi', 'LLM'],
-    image: heroImage,
-  },
-];
-
 const marqueeItems = [
   'Luxury E-Commerce Stores',
   'High-Converting Landing Pages',
@@ -96,155 +77,281 @@ const marqueeItems = [
   'Ultra-Fast Performance',
 ];
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0 },
-};
+const techCategories = [
+  {
+    title: 'Frontend & Motion',
+    icon: Wand2,
+    description: 'React 18, Next.js 14, TypeScript, Framer Motion, GSAP, Tailwind CSS — performant, animated, accessible.',
+    tech: ['React 18', 'Next.js 14', 'TypeScript', 'Framer Motion', 'GSAP', 'Tailwind CSS'],
+  },
+  {
+    title: 'Backend & Data',
+    icon: Workflow,
+    description: 'Node.js, Go, PostgreSQL, Supabase, Redis, Prisma — scalable APIs, real-time, edge-ready.',
+    tech: ['Node.js', 'Go', 'PostgreSQL', 'Supabase', 'Redis', 'Prisma'],
+  },
+  {
+    title: 'AI & Voice',
+    icon: Bot,
+    description: 'Vapi, Retell, OpenAI, Anthropic, LangChain, Pinecone — agents that converse, reason, and act.',
+    tech: ['Vapi', 'Retell', 'OpenAI', 'Anthropic', 'LangChain', 'Pinecone'],
+  },
+  {
+    title: 'Automation & Integration',
+    icon: Sparkles,
+    description: 'n8n, Make, Zapier, webhooks, custom middleware — connect anything to anything, reliably.',
+    tech: ['n8n', 'Make', 'Zapier', 'Webhooks', 'Custom Middleware'],
+  },
+];
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-[#08080A] text-white">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text">
       <main className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,85,0,0.18),transparent_28%),radial-gradient(circle_at_bottom_right,rgba(255,85,0,0.1),transparent_30%)]" />
+        <Hero
+          eyebrow="Engineering Digital Excellence"
+          title={
+            <>
+              Premium Digital Experiences,
+              <span className="mt-2 block bg-gradient-to-r from-ast-text via-ast-accent to-ast-text bg-clip-text text-transparent">
+                Engineered Without Compromise
+              </span>
+            </>
+          }
+          align="center"
+          subtitle="We design and build websites, AI systems, and digital products for brands that demand more than ordinary — precision, performance, and presence."
+          actions={
+            <>
+              <Button as="a" href="/booking" variant="primary" size="lg" showArrow className="min-w-[200px]">
+                Start a Project
+              </Button>
+              <Button as="a" href="/services" variant="ghost" size="lg" showArrow arrowIcon={ArrowRight} className="min-w-[200px]">
+                Explore Services
+              </Button>
+            </>
+          }
+        />
 
-        <section className="relative isolate overflow-hidden px-4 pb-10 pt-20 sm:px-6 lg:px-8 lg:pt-28 xl:px-12">
-          <div className="mobile-motion-lite pointer-events-none absolute left-1/2 top-1/2 -z-10 h-87.5 w-150 -translate-x-1/2 -translate-y-1/2 transform-gpu rounded-full will-change-transform sm:h-112.5 sm:w-200"
-            style={{
-              background: 'radial-gradient(circle, rgba(255, 85, 0, 0.28) 0%, rgba(120, 40, 200, 0.15) 45%, rgba(8, 8, 10, 0) 70%)',
-              filter: 'blur(80px)'
-            }}
-          />
-
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            className="mx-auto flex max-w-4xl transform-gpu flex-col items-center justify-center text-center will-change-transform"
-          >
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl">
-              <span className="block text-[#FF5500]">WE BUILD</span>
-              <span className="block text-white">DIGITAL SYSTEMS</span>
-            </h1>
-
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-neutral-300 sm:text-lg">
-              We transform ordinary web presences into high-converting, ultra-fast digital platforms. From bespoke luxury e-commerce stores to custom AI workflows, we engineer scalable systems that command authority and drive revenue.
-            </p>
-
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                to="/booking"
-                className="group inline-flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#FF5500] text-white border border-[#FF5500] px-7 py-3.5 text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-white hover:text-[#FF5500] hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] hover:-translate-y-0.5"
-              >
-                <span>Book a Call</span>
-                <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-              </Link>
-
-              <Link
-                to="/services"
-                className="inline-flex items-center justify-center gap-3 rounded-full bg-white/5 text-white border border-white/10 px-7 py-3.5 text-sm font-semibold transition-all duration-300 hover:bg-white/10 hover:border-[#FF5500]/50 hover:text-[#FF5500]"
-              >
-                <span>See Services</span>
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </motion.div>
-        </section>
-
-        <section className="relative pb-8">
+        {/* Marquee */}
+        <section className="relative py-6 border-y border-ast-border bg-ast-surface/30">
           <div className="mx-auto max-w-[1700px] px-2">
-            <div className="-rotate-2 overflow-hidden border-y border-orange-500/20 bg-[#0E0E12] py-4">
-              <div className="marquee-track flex min-w-max animate-marquee transform-gpu items-center gap-6 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.36em] text-orange-400 sm:text-xs">
+            <div className="overflow-hidden py-4">
+              <div className="marquee-track flex min-w-max animate-marquee transform-gpu items-center gap-6 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.36em] text-ast-muted sm:text-xs">
                 {[...marqueeItems, ...marqueeItems].map((item, index) => (
-                  <React.Fragment key={`${item}-${index}`}>
+                  <span className="marquee-label" key={`${item}-${index}`}>
                     <span>{item}</span>
-                    <span className="text-orange-400">✦</span>
-                  </React.Fragment>
+                    <span className="text-ast-accent/50">◆</span>
+                  </span>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="px-4 py-24 sm:px-6 lg:px-8 xl:px-12">
+        {/* Tech Stack & Approach Section */}
+        <section className="relative py-20 px-4 sm:px-6 lg:px-8 xl:px-12 section-gradient-bg">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-12 text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.32em] text-[#FF5500]">// Our Services</p>
-              <h2 className="mt-5 text-4xl font-black uppercase tracking-[-0.05em] text-white sm:text-5xl">
-                Signature solutions for <span className="text-[#FF5500]">ambitious brands</span>
-              </h2>
+            <div className="mb-16 text-center">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
+              >
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+                Our Stack & Approach
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.1 }}
+                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-5xl lg:text-6xl font-display"
+              >
+                Why We Choose <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">The Right Tool</span>{' '}
+                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">Every Time</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.2 }}
+                className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-ast-muted"
+              >
+                No dogma. No legacy baggage. We pick the technology that serves the product — not our resume.
+              </motion.p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {techCategories.map((category, index) => (
+                <motion.article
+                  key={category.title}
+                  initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative z-10">
+                    <div className="mb-7 flex items-center justify-between">
+                      <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
+                        <category.icon className="h-6 w-6" />
+                      </div>
+                      <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
+                    </div>
+
+                    <h3 className="text-2xl font-semibold text-ast-text">{category.title}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-ast-muted">{category.description}</p>
+
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {category.tech.map((t, i) => (
+                        <span
+                          key={t}
+                          className="text-[11px] font-mono text-ast-muted border border-ast-border px-3 py-1.5 rounded-full bg-ast-surface/50 hover:bg-ast-accent/10 hover:text-ast-accent hover:border-ast-accent/30 transition-all duration-200"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Services Preview */}
+        <section className="px-4 py-24 sm:px-6 lg:px-8 xl:px-12 section-gradient-bg-alt">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-16 text-center">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
+              >
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+                Core Capabilities
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.1 }}
+                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-5xl lg:text-6xl font-display"
+              >
+                Signature Solutions for{' '}
+                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
+                  Ambitious Brands
+                </span>
+              </motion.h2>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {serviceCards.map((card, index) => {
                 const Icon = card.icon;
-
                 return (
-                  <motion.div
+                  <motion.article
                     key={card.title}
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 0.5, delay: index * 0.08 }}
-                    className="group relative transform-gpu overflow-hidden rounded-[28px] border border-white/10 bg-[#0D0D10]/80 p-6 transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-[#FF5500]/40 hover:shadow-[0_25px_60px_rgba(255,85,0,0.14)]"
+                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
                   >
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,85,0,0.12),transparent_35%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     <div className="relative z-10">
                       <div className="mb-7 flex items-center justify-between">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[#FF5500]/25 bg-[#FF5500]/8 text-[#FF5500]">
-                          <Icon className="h-5 w-5" />
+                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
+                          <Icon className="h-6 w-6" />
                         </div>
-                        <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-white/35">0{index + 1}</span>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
                       </div>
 
-                      <h3 className="text-2xl font-semibold text-white">{card.title}</h3>
-                      <p className="mt-4 text-sm leading-relaxed text-white/60">{card.description}</p>
+                      <h3 className="text-2xl font-semibold text-ast-text">{card.title}</h3>
+                      <p className="mt-4 text-sm leading-relaxed text-ast-muted">{card.description}</p>
 
                       <Link
                         to={card.link}
-                        className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-[#FF5500] transition-transform duration-300 hover:translate-x-1"
+                        className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ast-accent transition-transform duration-300 hover:translate-x-1"
                       >
                         <span>Learn more</span>
                         <ArrowRight className="h-4 w-4" />
                       </Link>
                     </div>
-                  </motion.div>
+                  </motion.article>
                 );
               })}
             </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: 0.4 }}
+              className="mt-16 text-center"
+            >
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-3 rounded-full border border-ast-accent/40 bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-ast-accent transition-all duration-300 hover:bg-ast-accent hover:text-ast-bg hover:shadow-[0_0_24px_rgba(0,212,255,0.35)]"
+              >
+                View All Services
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
           </div>
         </section>
 
-        <section className="px-4 py-12 sm:px-6 lg:px-8 xl:px-12">
+        {/* Why Choose Us */}
+        <section className="px-4 py-16 sm:px-6 lg:px-8 xl:px-12 section-gradient-bg border-y border-ast-border">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-12 text-center">
-              <p className="text-xs font-medium uppercase tracking-[0.32em] text-[#FF5500]">// Why Aither Stack</p>
-              <h2 className="mt-5 text-4xl font-black uppercase tracking-[-0.05em] text-white sm:text-5xl">
-                Built for Scale. <span className="text-[#FF5500]">Engineered for Luxury.</span>
-              </h2>
+            <div className="mb-16 text-center">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
+              >
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+                Our Philosophy
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.1 }}
+                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-5xl lg:text-6xl font-display"
+              >
+                Built for Scale.{' '}
+                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
+                  Engineered for Prestige.
+                </span>
+              </motion.h2>
             </div>
 
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
               {whyChooseUs.map((item, index) => {
                 const Icon = item.icon;
-
                 return (
                   <motion.article
                     key={item.title}
-                    initial={{ opacity: 0, y: 24 }}
+                    initial={{ opacity: 0, y: 28 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 0.5, delay: index * 0.08 }}
-                    className="group relative transform-gpu overflow-hidden rounded-[26px] border border-white/10 bg-[#0C0C10]/80 p-6 transition-all duration-300 will-change-transform hover:-translate-y-1 hover:border-[#FF5500]/35 hover:shadow-[0_25px_60px_rgba(255,85,0,0.12)]"
+                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
                   >
-                    <div className="mb-5 flex items-center justify-between">
-                      <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#FF5500]">{item.number}</span>
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#FF5500]/25 bg-[#FF5500]/8 text-[#FF5500]">
-                        <Icon className="h-4 w-4" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="mb-6 flex items-center justify-between">
+                      <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-ast-accent">{item.number}</span>
+                      <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
+                        <Icon className="h-5 w-5" />
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-white/60">{item.description}</p>
+                    <h3 className="text-xl font-semibold text-ast-text">{item.title}</h3>
+                    <p className="mt-4 text-sm leading-relaxed text-ast-muted">{item.description}</p>
                   </motion.article>
                 );
               })}
@@ -252,43 +359,53 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, amount: 0.1 }} 
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-            }}
-            className="relative transform-gpu overflow-hidden rounded-3xl border border-orange-500/30 bg-[#0B0B0E] p-8 text-center shadow-[0_0_50px_rgba(255,85,0,0.08)] will-change-transform sm:p-16"
+        {/* Final CTA */}
+        <section className="relative py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg p-8 sm:p-12 lg:p-16 text-center shadow-[0_0_80px_rgba(0,212,255,0.06)]"
           >
-            {/* Top Ambient Radial Glow */}
-            <div className="absolute top-0 left-0 w-full h-full bg-linear-to-b from-[#FF5500]/10 via-transparent to-transparent pointer-events-none" />
-            
+            <div className="absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative z-10">
-              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-[#FF5500] mb-6">// READY TO BUILD</span>
-              <h2 className="text-4xl font-black uppercase tracking-tight text-white sm:text-6xl leading-[0.95] mb-8">
-                LET’S TURN YOUR NEXT OFFER <br />
-                INTO A <span className="text-[#FF5500]">PREMIUM REVENUE ENGINE.</span>
+              <span className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm mb-6">
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+                Ready to Begin
+              </span>
+              <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-6xl lg:text-7xl font-display leading-[0.92] mb-8">
+                LET'S BUILD YOUR NEXT{' '}
+                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
+                  DIGITAL MASTERPIECE
+                </span>
               </h2>
-              <p className="text-gray-400 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
-                Strategic design, custom development, and AI automation that make your business feel as premium as the value you sell.
+              <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
+                Strategic design, custom development, and AI automation that make your business
+                feel as premium as the value you deliver.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                <Link 
-                  to="/booking" 
-                  className="inline-flex items-center gap-3 rounded-full bg-[#FF5500] text-white border border-[#FF5500] px-8 py-4 text-sm font-semibold tracking-wide transition-all duration-300 hover:bg-white hover:text-[#FF5500] hover:border-white hover:shadow-[0_0_25px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 active:scale-95"
+                <Button
+                  as="a"
+                  href="/booking"
+                  variant="primary"
+                  size="lg"
+                  showArrow
+                  className="min-w-[220px]"
                 >
-                  Book a Free Call <ArrowUpRight size={18} />
-                </Link>
-                <Link 
-                  to="/portfolio" 
-                  className="inline-flex items-center gap-3 rounded-full bg-white/5 text-white border border-white/10 px-8 py-4 text-sm font-semibold transition-all duration-300 hover:bg-white/10 hover:border-[#FF5500]/50 hover:text-[#FF5500] active:scale-95"
+                  Book a Strategy Call
+                </Button>
+                <Button
+                  as="a"
+                  href="/portfolio"
+                  variant="ghost"
+                  size="lg"
+                  showArrow
+                  className="min-w-[220px]"
+                  arrowIcon={ArrowUpRight}
                 >
-                  View Portfolio <ArrowUpRight size={18} />
-                </Link>
+                  View Our Work
+                </Button>
               </div>
             </div>
           </motion.div>

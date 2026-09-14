@@ -6,6 +6,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnimationProvider from './components/AnimationProvider';
 import RouteProgressBar from './components/RouteProgressBar';
+import ThreeBackground from './components/ThreeBackground';
+
+
 
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
@@ -43,10 +46,11 @@ function AnimatedRoutes() {
 
 function AppContent() {
   return (
-    <div className="flex flex-col min-h-screen bg-ast-bg text-ast-text font-sans antialiased overflow-x-hidden w-full page-gradient">
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent text-ast-text font-sans antialiased w-full page-gradient">
+      <ThreeBackground />
       <Navbar />
       <RouteProgressBar />
-      <main className="min-w-0 flex-grow overflow-x-hidden">
+      <main className="relative z-10 min-w-0 flex-grow overflow-x-hidden">
         <AnimatedRoutes />
       </main>
       <Footer />

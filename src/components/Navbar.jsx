@@ -1,140 +1,132 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ArrowUpRight, X } from 'lucide-react';
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { ArrowUpRight, X, Menu } from 'lucide-react';
+import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll } from 'framer-motion';
 import logoAsset from '../assets/logo.png';
+import Button from './Button';
+
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'Services', path: '/services' },
+  { name: 'Process', path: '/process' },
+  { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Team', path: '/team' },
+  { name: 'Contact', path: '/contact' },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
-  const navRef = useRef(null);
-  const scrollFrame = useRef(null);
   const { scrollY } = useScroll();
-
-  useEffect(() => {
-    return () => {
-      if (scrollFrame.current) cancelAnimationFrame(scrollFrame.current);
-    };
-  }, []);
+  const prefersReducedMotion = useReducedMotion();
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    const previous = scrollY.getPrevious() ?? latest;
-    if (scrollFrame.current) return;
-    scrollFrame.current = requestAnimationFrame(() => {
-      setHidden(latest > previous && latest > 80);
-      scrollFrame.current = null;
-    });
+    setScrolled(latest > 24);
   });
 
   useEffect(() => {
-    const frame = requestAnimationFrame(() => setIsOpen(false));
-    return () => cancelAnimationFrame(frame);
-  }, [location]);
+    setIsOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+    return () => {
       document.body.style.overflow = 'unset';
-    }
-    return () => { document.body.style.overflow = 'unset'; };
+    };
   }, [isOpen]);
 
-  const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'Services', path: '/services' },
-    { name: 'Process', path: '/process' },
-    { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Team', path: '/team' },
-    { name: 'Contact', path: '/contact' },
-  ];
-
-  const isActive = (path) => location.pathname === path;
+  const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.28, ease: 'easeOut' };
 
   return (
     <>
       <motion.header
         initial={false}
-        animate={{ y: hidden ? -110 : 0 }}
-        transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="fixed top-4 left-0 right-0 z-50 flex transform-gpu will-change-transform justify-center px-3 sm:px-4"
+        animate={{ y: scrolled ? 0 : -72 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.32, ease: 'easeInOut' }}
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-ast-bg/90 backdrop-blur-xl border-b border-ast-border/50 shadow-[0_4px_24px_rgba(0,0,0,0.3)]'
+            : 'bg-transparent border-transparent'
+        }`}
       >
-        <div className="mx-auto flex w-full max-w-6xl items-center justify-between rounded-full border border-white/10 bg-[#0B0B0D]/70 px-3 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.22)] backdrop-blur-xl sm:px-4">
-          <Link to="/" className="flex items-center gap-3 group shrink-0">
-            <div className="h-8 w-8 sm:h-10 sm:w-10">
-              <img
-                src={logoAsset}
-                alt="AST"
-                width="40"
-                height="40"
-                className="h-full w-full object-contain"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
-            </div>
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
+          {/* Left: Logo */}
+          <Link to="/" className="group flex items-center gap-2 sm:gap-3" aria-label="Aither Stack home">
+            <span className="relative flex h-9 w-9 items-center justify-center rounded-full border border-ast-border bg-ast-surface/50 transition-all duration-300 group-hover:border-ast-accent/40 group-hover:bg-ast-surface group-hover:shadow-[0_0_16px_rgba(255,107,26,0.15)]">
+              <img src={logoAsset} alt="AST" width="36" height="36" className="h-full w-full object-contain" style={{ filter: 'brightness(0) invert(1)' }} />
+            </span>
+            <span className="hidden sm:block text-sm font-medium uppercase tracking-[0.22em] text-ast-text">AST</span>
           </Link>
 
-          <nav ref={navRef} className="hidden items-center gap-1 md:flex" aria-label="Main Navigation">
-            {navLinks.map((link, i) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className={`nav-spotlight relative rounded-full px-3 py-2 text-xs font-medium tracking-[0.16em] uppercase transition-all duration-200 ${
-                  isActive(link.path) ? 'text-white' : 'text-gray-300 hover:text-white'
-                }`}
-              >
-                <motion.span
-                  layoutId="navbar-pill"
-                  className={`absolute inset-0 rounded-full ${isActive(link.path) ? 'bg-[#FF5500]/15 border border-[#FF5500]/30' : 'bg-white/3'}`}
-                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                />
-                {hoveredIndex === i && !isActive(link.path) && (
-                  <motion.span
-                    layoutId="nav-hover-pill"
-                    className="absolute inset-0 rounded-full border border-white/10 bg-white/5"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                  />
-                )}
-                <span className="relative z-10">{link.name}</span>
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center gap-1 mx-8 flex-1 justify-center" aria-label="Main navigation">
+            <div className="relative flex items-center gap-1 bg-ast-surface/50 border border-ast-border rounded-full px-4 py-1.5 w-full max-w-5xl min-w-0">
+              <div className="flex items-center gap-1 flex-1 justify-center min-w-0 overflow-hidden">
+                {navLinks.map((link) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={`group relative px-3 py-1.5 text-xs font-medium uppercase tracking-[0.16em] transition-colors duration-300 rounded-full whitespace-nowrap ${
+                        isActive ? 'bg-ast-accent text-ast-bg shadow-[0_0_16px_rgba(255,107,26,0.3)]' : 'text-ast-muted hover:text-ast-text hover:bg-ast-bg/50'
+                      }`}
+                    >
+                      <span className="relative z-10">{link.name}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
           </nav>
 
+          {/* Right: CTA + Hamburger */}
           <div className="flex items-center gap-2 sm:gap-3">
-            <Link
-              to="/booking"
-              className="hidden rounded-full bg-[#FF5500] text-white border border-[#FF5500] px-5 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all duration-300 hover:bg-white hover:text-[#FF5500] hover:border-white hover:shadow-[0_0_15px_rgba(255,255,255,0.4)] md:inline-flex"
+            <Button
+              as="a"
+              href="/booking"
+              variant="primary"
+              size="sm"
+              showArrow
+              className="hidden md:inline-flex"
             >
               Book a Call
-            </Link>
+            </Button>
 
             <motion.button
               type="button"
               aria-label={isOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={isOpen}
               onClick={() => setIsOpen((prev) => !prev)}
-              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/3 md:hidden"
-              whileTap={{ scale: 0.96 }}
+              whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+              className="relative flex h-10 w-10 items-center justify-center rounded-full border border-ast-border bg-ast-surface/50 text-ast-text transition-all duration-300 hover:border-ast-accent/40 hover:bg-ast-surface hover:shadow-[0_0_16px_rgba(255,107,26,0.15)] md:hidden"
             >
-              <span className="relative block h-4 w-5">
-                <motion.span
-                  animate={isOpen ? { rotate: 45, y: 7, width: '100%' } : { rotate: 0, y: 0, width: '100%' }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                  className="absolute left-0 top-0 block h-0.5 w-full rounded-full bg-white"
-                />
-                <motion.span
-                  animate={isOpen ? { opacity: 0, x: -8 } : { opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-1.5 block h-0.5 w-full rounded-full bg-white"
-                />
-                <motion.span
-                  animate={isOpen ? { rotate: -45, y: -7, width: '100%' } : { rotate: 0, y: 0, width: '100%' }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
-                  className="absolute left-0 bottom-0 block h-0.5 w-full rounded-full bg-white"
-                />
-              </span>
+              <AnimatePresence initial={false} mode="wait">
+                {isOpen ? (
+                  <motion.span
+                    key="close"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={transition}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <X className="h-5 w-5" />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="menu"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={transition}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <Menu className="h-5 w-5" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </motion.button>
           </div>
         </div>
@@ -146,51 +138,65 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 transform-gpu bg-[#08080A]/95 pt-24 px-6 will-change-transform md:hidden"
+            transition={transition}
+            className="fixed inset-0 z-40 bg-ast-bg/98 backdrop-blur-2xl md:hidden"
+            style={{
+              background: 'radial-gradient(ellipse at top, rgba(255,107,26,0.08), transparent 60%), var(--ast-bg)',
+            }}
           >
             <motion.nav
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 24 }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-              className="flex h-full flex-col justify-center"
+              exit={{ opacity: 0, y: -18 }}
+              transition={{ duration: prefersReducedMotion ? 0 : 0.28, ease: 'easeOut' }}
+              className="mx-auto flex h-full max-w-7xl flex-col justify-center px-6"
+              aria-label="Mobile navigation"
             >
-              <div className="space-y-3">
-                {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.06, duration: 0.22 }}
-                  >
-                    <Link
-                      to={link.path}
-                      onClick={() => setIsOpen(false)}
-                      className={`flex items-center justify-between rounded-2xl border px-4 py-4 text-lg font-medium ${
-                        isActive(link.path) ? 'border-[#FF5500]/30 bg-[#FF5500]/10 text-[#FF5500]' : 'border-white/10 bg-white/3 text-white'
-                      }`}
+              <div className="space-y-2">
+                {navLinks.map((link, index) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <motion.div
+                      key={link.path}
+                      initial={{ opacity: 0, x: -14 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -14 }}
+                      transition={{ delay: prefersReducedMotion ? 0 : index * 0.035, duration: prefersReducedMotion ? 0 : 0.22, ease: 'easeOut' }}
                     >
-                      <span>{link.name}</span>
-                      <span aria-hidden="true">→</span>
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        to={link.path}
+                        onClick={() => setIsOpen(false)}
+                        aria-current={isActive ? 'page' : undefined}
+                        className={`group flex items-center justify-between rounded-2xl border px-4 py-4 text-base font-medium transition-all duration-300 ${
+                          isActive ? 'border-ast-accent/30 bg-ast-accent/10 text-ast-accent' : 'border-ast-border bg-ast-surface/50 text-ast-text hover:border-ast-accent/30 hover:bg-ast-surface'
+                        }`}
+                      >
+                        <span>{link.name}</span>
+                        <ArrowUpRight className="h-4 w-4 text-ast-muted transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
               </div>
 
               <motion.div
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.22, duration: 0.22 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ delay: prefersReducedMotion ? 0 : 0.18, duration: prefersReducedMotion ? 0 : 0.26, ease: 'easeOut' }}
                 className="mt-8"
               >
-                <Link
-                  to="/booking"
+                <Button
+                  as="a"
+                  href="/booking"
+                  variant="primary"
+                  size="md"
+                  fullWidth
+                  showArrow
                   onClick={() => setIsOpen(false)}
-                  className="flex w-full items-center justify-center gap-3 rounded-full bg-[#FF5500] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white"
                 >
-                  <span>Book a Call</span>
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
+                  Book a Call
+                </Button>
               </motion.div>
             </motion.nav>
           </motion.div>

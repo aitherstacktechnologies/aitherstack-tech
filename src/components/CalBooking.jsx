@@ -8,7 +8,7 @@ export default function CalBooking() {
       cal("ui", {
         theme: "dark",
         styles: {
-          branding: { brandColor: "#FF5500" }
+          branding: { brandColor: "#C8A66A" }
         },
         hideEventTypeDetails: false,
         layout: "month_view"

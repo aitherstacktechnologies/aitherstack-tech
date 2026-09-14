@@ -1,20 +1,21 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import Lenis from 'lenis';
+import Lenis from '@studio-freight/lenis';
 
 export function AnimationProvider({ children }) {
   const lenisRef = useRef(null);
 
   useEffect(() => {
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: prefersReducedMotion ? 0 : 1.35,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      syncTouch: !isTouchDevice,
+      smoothWheel: !prefersReducedMotion,
+      wheelMultiplier: prefersReducedMotion ? 0 : 1,
+      syncTouch: !prefersReducedMotion && !isTouchDevice,
       touchMultiplier: 1,
     });
 
@@ -23,36 +24,40 @@ export function AnimationProvider({ children }) {
     let scrollTrigger;
     let idleId;
     let isActive = true;
-    const animate = (time) => {
-      lenis.raf(time);
+    if (!prefersReducedMotion) {
+      const animate = (time) => {
+        lenis.raf(time);
+        frameId = requestAnimationFrame(animate);
+      };
       frameId = requestAnimationFrame(animate);
-    };
-    frameId = requestAnimationFrame(animate);
 
-    const loadScrollTrigger = async () => {
-      const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
-        import('gsap'),
-        import('gsap/ScrollTrigger'),
-      ]);
-      if (!isActive) return;
-      gsap.registerPlugin(ScrollTrigger);
-      scrollTrigger = ScrollTrigger;
-      lenis.on('scroll', ScrollTrigger.update);
-    };
+      const loadScrollTrigger = async () => {
+        const [{ default: gsap }, { ScrollTrigger }] = await Promise.all([
+          import('gsap'),
+          import('gsap/ScrollTrigger'),
+        ]);
+        if (!isActive) return;
+        gsap.registerPlugin(ScrollTrigger);
+        scrollTrigger = ScrollTrigger;
+        lenis.on('scroll', ScrollTrigger.update);
+      };
 
-    if ('requestIdleCallback' in window) {
-      idleId = window.requestIdleCallback(loadScrollTrigger, { timeout: 2000 });
-    } else {
-      idleId = window.setTimeout(loadScrollTrigger, 1000);
+      if ('requestIdleCallback' in window) {
+        idleId = window.requestIdleCallback(loadScrollTrigger, { timeout: 2000 });
+      } else {
+        idleId = window.setTimeout(loadScrollTrigger, 1000);
+      }
     }
 
     return () => {
       isActive = false;
-      cancelAnimationFrame(frameId);
-      if ('cancelIdleCallback' in window) {
-        window.cancelIdleCallback(idleId);
-      } else {
-        window.clearTimeout(idleId);
+      if (frameId) cancelAnimationFrame(frameId);
+      if (idleId) {
+        if ('cancelIdleCallback' in window) {
+          window.cancelIdleCallback(idleId);
+        } else {
+          window.clearTimeout(idleId);
+        }
       }
       if (scrollTrigger) {
         lenis.off('scroll', scrollTrigger.update);

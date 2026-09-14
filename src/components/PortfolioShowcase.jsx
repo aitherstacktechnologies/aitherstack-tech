@@ -67,7 +67,7 @@ export default function PortfolioShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-sunset-bg text-sunset-text py-24 px-6 sm:px-8 lg:px-12 border-b border-sunset-border overflow-hidden"
+      className="relative bg-ast-bg text-ast-text py-24 px-6 sm:px-8 lg:px-12 border-b border-ast-border overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <span className="absolute top-10 right-0 pointer-events-none select-none text-watermark z-0 opacity-[0.04]">
@@ -76,10 +76,10 @@ export default function PortfolioShowcase() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-sunset-border gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-ast-border gap-6">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-sunset-pop mb-3">
-              <span className="w-2 h-2 rounded-full bg-sunset-pop" />
+            <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-ast-accent mb-3">
+              <span className="w-2 h-2 rounded-full bg-ast-accent" />
               Selected Work
             </div>
             <h2 className="text-4xl sm:text-5xl font-black tracking-tight leading-tight uppercase">
@@ -90,7 +90,7 @@ export default function PortfolioShowcase() {
 
           <button
             onClick={() => document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' })}
-            className="inline-flex items-center gap-2 font-bold text-sm uppercase tracking-wider text-sunset-text hover:text-sunset-pop transition-colors group"
+            className="inline-flex items-center gap-2 font-bold text-sm uppercase tracking-wider text-ast-text hover:text-ast-accent transition-colors group"
           >
             <span>Explore All Projects</span>
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -102,29 +102,29 @@ export default function PortfolioShowcase() {
             <article
               key={project.id}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="group relative bg-sunset-surface border border-sunset-border rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-500 hover:border-sunset-pop hover:shadow-lg hover:shadow-sunset-pop/10"
+              className="group relative bg-ast-surface border border-ast-border rounded-lg overflow-hidden flex flex-col justify-between transition-all duration-500 hover:border-ast-accent hover:shadow-lg hover:shadow-ast-accent/10"
             >
-              <div className="relative aspect-[16/10] overflow-hidden bg-sunset-border/20 border-b border-sunset-border">
+              <div className="relative aspect-[16/10] overflow-hidden bg-ast-border/20 border-b border-ast-border">
                 <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute top-4 left-4 rounded border border-sunset-border bg-sunset-bg px-3 py-1 text-xs font-mono font-bold text-sunset-text">
+                <div className="absolute top-4 left-4 rounded border border-ast-border bg-ast-bg px-3 py-1 text-xs font-mono font-bold text-ast-text">
                   {project.id}
                 </div>
               </div>
 
               <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
                 <div>
-                  <div className="text-xs font-mono uppercase tracking-wider text-sunset-muted mb-2">
+                  <div className="text-xs font-mono uppercase tracking-wider text-ast-muted mb-2">
                     {project.category}
                   </div>
-                  <h3 className="text-2xl font-bold tracking-tight text-sunset-text mb-3 group-hover:text-sunset-pop transition-colors">
+                  <h3 className="text-2xl font-bold tracking-tight text-ast-text mb-3 group-hover:text-ast-accent transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-sunset-muted leading-relaxed mb-6">
+                  <p className="text-sm text-ast-muted leading-relaxed mb-6">
                     {project.description}
                   </p>
                 </div>
@@ -134,7 +134,7 @@ export default function PortfolioShowcase() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-[11px] font-mono px-2.5 py-1 rounded border border-sunset-border bg-sunset-bg text-sunset-muted"
+                        className="text-[11px] font-mono px-2.5 py-1 rounded border border-ast-border bg-ast-bg text-ast-muted"
                       >
                         {tag}
                       </span>
@@ -143,10 +143,10 @@ export default function PortfolioShowcase() {
 
                   <a
                     href={project.link}
-                    className="inline-flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-sunset-text group-hover:text-sunset-pop transition-colors"
+                    className="inline-flex items-center gap-2 font-bold text-xs uppercase tracking-wider text-ast-text group-hover:text-ast-accent transition-colors"
                   >
                     <span>View Project</span>
-                    <div className="w-7 h-7 rounded-full bg-sunset-bg border border-sunset-border flex items-center justify-center transition-colors group-hover:bg-sunset-pop group-hover:border-sunset-pop">
+                    <div className="w-7 h-7 rounded-full bg-ast-bg border border-ast-border flex items-center justify-center transition-colors group-hover:bg-ast-accent group-hover:border-ast-accent">
                       <ArrowUpRight className="w-3.5 h-3.5" />
                     </div>
                   </a>
