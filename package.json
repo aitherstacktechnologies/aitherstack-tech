@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview"
   },
-"dependencies": {
+  "dependencies": {
     "@calcom/embed-react": "^1.5.3",
     "@gsap/react": "^2.1.2",
     "@vapi-ai/web": "^2.6.3",
@@ -22,6 +22,7 @@
     "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
