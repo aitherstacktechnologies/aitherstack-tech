@@ -336,8 +336,7 @@ export default function Portfolio() {
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Button
-                  as="a"
-                  href="/booking"
+                  to="/booking"
                   variant="primary"
                   size="lg"
                   showArrow

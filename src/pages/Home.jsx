@@ -112,10 +112,10 @@ export default function Home() {
           subtitle="We design and build websites, AI systems, and digital products for brands that demand more than ordinary — precision, performance, and presence."
           actions={
             <>
-              <Button as="a" href="/booking" variant="primary" size="lg" showArrow className="min-w-[200px]">
+              <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[200px]">
                 Start a Project
               </Button>
-              <Button as="a" href="/services" variant="ghost" size="lg" showArrow arrowIcon={ArrowRight} className="min-w-[200px]">
+              <Button to="/services" variant="ghost" size="lg" showArrow arrowIcon={ArrowRight} className="min-w-[200px]">
                 Explore Services
               </Button>
             </>
@@ -360,8 +360,7 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Button
-                  as="a"
-                  href="/booking"
+                  to="/booking"
                   variant="primary"
                   size="lg"
                   showArrow
@@ -370,8 +369,7 @@ export default function Home() {
                   Book a Strategy Call
                 </Button>
                 <Button
-                  as="a"
-                  href="/portfolio"
+                  to="/portfolio"
                   variant="ghost"
                   size="lg"
                   showArrow

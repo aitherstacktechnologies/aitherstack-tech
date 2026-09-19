@@ -1,6 +1,9 @@
 import { forwardRef } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
+
+const MotionLink = motion(Link);
 
 const Button = forwardRef(
   ({
@@ -8,6 +11,7 @@ const Button = forwardRef(
     variant = 'primary',
     size = 'md',
     href,
+    to,
     external = false,
     className = '',
     disabled = false,
@@ -70,6 +74,22 @@ const Button = forwardRef(
       style: { willChange: 'transform' },
       ...props,
     };
+
+    if (to) {
+      return (
+        <MotionLink
+          {...commonProps}
+          to={to}
+        >
+          <span>{children}</span>
+          {showArrow && (
+            <span className="flex-shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+              <ArrowIcon className="h-4 w-4" />
+            </span>
+          )}
+        </MotionLink>
+      );
+    }
 
     if (href) {
       return (

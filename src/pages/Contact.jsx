@@ -126,7 +126,7 @@ export default function Contact() {
         }
         subtitle="Tell us what you are building and our engineering team will respond within 24 hours."
         align="left"
-        actions={<Button as="a" href="/booking" variant="primary" size="lg" showArrow>Book a Call</Button>}
+        actions={<Button to="/booking" variant="primary" size="lg" showArrow>Book a Call</Button>}
       />
 
         <motion.div
@@ -313,10 +313,10 @@ export default function Contact() {
               feel as premium as the value you deliver.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button as="a" href="/booking" variant="primary" size="lg" showArrow className="min-w-[220px]">
+              <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[220px]">
                 Book a Strategy Call
               </Button>
-              <Button as="a" href="/portfolio" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px]">
+              <Button to="/portfolio" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px]">
                 View Our Work
               </Button>
             </div>

@@ -161,8 +161,7 @@ function ServiceCard({ service, isRetainer }) {
         </ul>
       </div>
       <Button
-        as="a"
-        href="/booking"
+        to="/booking"
         variant={service.featured ? 'primary' : 'outline'}
         size="md"
         fullWidth
@@ -236,8 +235,8 @@ export default function Services() {
         subtitle="Web experiences, AI systems, and automation engineered around how your business actually works."
         actions={(
           <>
-            <Button as="a" href="/booking" variant="primary" size="lg" showArrow>Book a Strategy Call</Button>
-            <Button as="a" href="/services" variant="ghost" size="lg">View Packages</Button>
+            <Button to="/booking" variant="primary" size="lg" showArrow>Book a Strategy Call</Button>
+            <Button to="/services" variant="ghost" size="lg">View Packages</Button>
           </>
         )}
       />
@@ -373,8 +372,7 @@ export default function Services() {
                   LET'S BUILD SOMETHING EXTRAORDINARY.
                 </h2>
                 <Button
-                  as="a"
-                  href="/booking"
+                  to="/booking"
                   variant="primary"
                   size="lg"
                   showArrow

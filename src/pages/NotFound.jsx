@@ -15,10 +15,10 @@ export default function NotFound() {
         showScroll={false}
         actions={
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button as="a" href="/" variant="primary" size="lg" showArrow arrowIcon={ArrowLeft} className="min-w-[200px]">
+            <Button to="/" variant="primary" size="lg" showArrow arrowIcon={ArrowLeft} className="min-w-[200px]">
               Back to Home
             </Button>
-            <Button as="a" href="/contact" variant="ghost" size="lg" showArrow className="min-w-[200px]">
+            <Button to="/contact" variant="ghost" size="lg" showArrow className="min-w-[200px]">
               Contact Us
             </Button>
           </div>

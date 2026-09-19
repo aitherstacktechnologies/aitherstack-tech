@@ -292,10 +292,10 @@ export default function About() {
               Tell us what you're trying to solve. We'll explore the technology needed to turn it into a working product.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button as="a" href="/contact" variant="primary" size="lg" showArrow className="min-w-[220px]">
+              <Button to="/contact" variant="primary" size="lg" showArrow className="min-w-[220px]">
                 START A PROJECT
               </Button>
-              <Button as="a" href="/team" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px]">
+              <Button to="/team" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px]">
                 MEET THE TEAM
               </Button>
             </div>

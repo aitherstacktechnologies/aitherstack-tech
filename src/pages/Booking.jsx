@@ -102,7 +102,7 @@ export default function Booking() {
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
               Tell us what you're building, what you need, and where you want to go. Our team will review your requirements and get back to you within 24 hours.
             </p>
-            <Button as="a" href="/contact" variant="primary" size="lg" showArrow className="mt-10">
+            <Button to="/contact" variant="primary" size="lg" showArrow className="mt-10">
               Send a Project Inquiry
             </Button>
           </div>

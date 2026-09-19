@@ -65,8 +65,7 @@ export default function Footer() {
             </div>
             <div className="mt-8 w-full max-w-xs">
               <Button
-                as="a"
-                href="/booking"
+                to="/booking"
                 variant="primary"
                 size="md"
                 fullWidth

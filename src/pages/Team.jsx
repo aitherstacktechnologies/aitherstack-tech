@@ -137,7 +137,7 @@ you sleep.
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
               We're a small team that ships real systems fast.
             </p>
-            <Button as="a" href="/booking" variant="primary" size="lg" showArrow className="mt-10">
+            <Button to="/booking" variant="primary" size="lg" showArrow className="mt-10">
               Book a Call
             </Button>
           </div>

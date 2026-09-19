@@ -133,7 +133,7 @@ export default function FAQ() {
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
               We're happy to answer any questions about our projects, retainers, or technology.
             </p>
-            <Button as="a" href="/booking" variant="primary" size="lg" showArrow className="mt-10">
+            <Button to="/booking" variant="primary" size="lg" showArrow className="mt-10">
               Book a Call
             </Button>
           </div>
