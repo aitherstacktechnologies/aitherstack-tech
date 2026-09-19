@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import AnimationProvider from './components/AnimationProvider';
 import RouteProgressBar from './components/RouteProgressBar';
 import LiquidBackground from './components/LiquidBackground';
+import { SEOHead } from './lib/usePageMeta';
 
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
@@ -66,6 +67,8 @@ function AppContent() {
       <Navbar />
 
       <RouteProgressBar />
+
+      <SEOHead />
 
       <main className="relative z-10 min-w-0 flex-grow overflow-x-hidden">
         <AnimatedRoutes />
