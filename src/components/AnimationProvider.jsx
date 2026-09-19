@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import Lenis from '@studio-freight/lenis';
+import Lenis from 'lenis';
 
 export function AnimationProvider({ children }) {
   const lenisRef = useRef(null);
@@ -9,7 +9,7 @@ export function AnimationProvider({ children }) {
     const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const lenis = new Lenis({
-      duration: prefersReducedMotion ? 0 : 1.35,
+      duration: prefersReducedMotion ? 0 : 1.1,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',

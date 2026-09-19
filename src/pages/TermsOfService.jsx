@@ -38,16 +38,15 @@ export default function TermsOfService() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text pt-16">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-ivory pt-16">
       <Hero
         eyebrow="// LEGAL"
         title="Terms of Service."
         subtitle="The straightforward rules for working with Aither Stack."
         align="left"
         compact
-        showScroll={false}
       >
-        <Link to="/" className="mb-8 inline-flex items-center gap-2 text-ast-muted hover:text-ast-accent transition-colors">
+        <Link to="/" className="mb-8 inline-flex items-center gap-2 text-ast-muted hover:text-ast-peach transition-colors">
           <ArrowLeft className="w-4 w-4" />
           <span className="text-sm font-mono">Back to Home</span>
         </Link>
@@ -60,12 +59,12 @@ export default function TermsOfService() {
             <button
               type="button"
               onClick={() => setIsJumpMenuOpen((open) => !open)}
-              className="w-full flex items-center justify-between glassmorphic-card border border-ast-border px-4 py-3 text-left text-sm font-medium text-ast-text"
+              className="w-full flex items-center justify-between glassmorphic-card border border-ast-border px-4 py-3 text-left text-sm font-medium text-ast-ivory"
               aria-expanded={isJumpMenuOpen}
             >
               Jump to section
               <motion.div animate={{ rotate: isJumpMenuOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
-                <ChevronDown className="w-4 h-4 text-ast-accent" />
+                <ChevronDown className="w-4 h-4 text-ast-peach" />
               </motion.div>
             </button>
             {isJumpMenuOpen && (
@@ -81,7 +80,7 @@ export default function TermsOfService() {
                     onClick={() => jumpToSection(id)}
                     className={`block w-full px-4 py-3 text-left text-sm transition-colors ${
                       activeSection === id
-                        ? 'bg-ast-accent/10 text-ast-accent'
+                        ? 'bg-ast-peach/10 text-ast-peach'
                         : 'text-ast-muted hover:bg-ast-surface/50'
                     }`}
                   >
@@ -103,8 +102,8 @@ export default function TermsOfService() {
                       onClick={() => jumpToSection(id)}
                       className={`block w-full border-l-2 -ml-px px-3 py-2 text-left text-xs transition-colors duration-300 ${
                         activeSection === id
-                          ? 'border-ast-accent text-ast-accent'
-                          : 'border-transparent text-ast-muted hover:text-ast-text'
+                          ? 'border-ast-warm-orange text-ast-peach'
+                          : 'border-transparent text-ast-muted hover:text-ast-ivory'
                       }`}
                     >
                       {String(index + 1).padStart(2, '0')} <span className="ml-1">{title}</span>
@@ -125,12 +124,12 @@ export default function TermsOfService() {
                   className="scroll-mt-28 glassmorphic-card border border-ast-border rounded-xl p-6 sm:p-8"
                 >
                   <div className="flex items-start gap-4 mb-5">
-                    <span className="text-xs font-mono text-ast-accent pt-1">{String(index + 1).padStart(2, '0')}</span>
-                    <h2 className="text-xl sm:text-2xl font-bold text-ast-text">{title}</h2>
+                    <span className="text-xs font-mono text-ast-peach pt-1">{String(index + 1).padStart(2, '0')}</span>
+                    <h2 className="text-xl sm:text-2xl font-bold text-ast-ivory">{title}</h2>
                   </div>
-                  <div className="border-l-2 border-ast-accent bg-ast-accent/5 px-4 py-3 mb-6">
+                  <div className="border-l-2 border-ast-warm-orange bg-ast-peach/5 px-4 py-3 mb-6">
                     <p className="text-sm text-ast-muted leading-relaxed">
-                      <span className="font-semibold text-ast-accent">In short:</span> {summary}
+                      <span className="font-semibold text-ast-peach">In short:</span> {summary}
                     </p>
                   </div>
                   <p className="text-ast-muted leading-relaxed">{body}</p>

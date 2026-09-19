@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Hero from '../components/Hero';
+import Hero, { AccentText } from '../components/Hero';
+import Button from '../components/Button';
 
 const categories = [
   {
@@ -52,16 +53,20 @@ export default function FAQ() {
   const [openQuestion, setOpenQuestion] = useState(null);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text pt-16">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-ivory pt-12">
       <Hero
         eyebrow="// FREQUENTLY ASKED QUESTIONS"
-        title="Frequently Asked Questions."
+        title={
+          <>
+            Frequently Asked<br />
+            <AccentText>Questions.</AccentText>
+          </>
+        }
         subtitle="The practical answers about our projects, retainers, technology, and policies."
         align="left"
         compact
-        showScroll={false}
       />
-      <section className="py-16 px-6 sm:px-8 lg:px-12 section-gradient-bg-alt">
+      <section className="py-12 px-6 sm:px-8 lg:px-12">
         <div className="max-w-4xl mx-auto space-y-12">
           {categories.map((category, catIndex) => (
             <motion.section
@@ -71,7 +76,7 @@ export default function FAQ() {
               viewport={{ once: true, amount: 0.1 }}
               transition={{ delay: catIndex * 0.1 }}
             >
-              <h2 className="text-xs font-mono uppercase tracking-widest text-ast-accent mb-4">{category.title}</h2>
+              <h2 className="text-xs font-mono uppercase tracking-widest text-ast-peach mb-4">{category.title}</h2>
               <div className="space-y-3">
                 {category.items.map(([question, answer], itemIndex) => {
                   const key = `${category.title}-${question}`;
@@ -82,20 +87,20 @@ export default function FAQ() {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: catIndex * 0.1 + itemIndex * 0.03 }}
-                      className="glassmorphic-card border border-ast-border rounded-xl overflow-hidden transition-all duration-200 hover:border-ast-accent/40"
+                      className="glassmorphic-card border border-ast-border rounded-xl overflow-hidden transition-all duration-200 hover:border-ast-warm-orange/40"
                     >
                       <button
                         type="button"
                         onClick={() => setOpenQuestion(isOpen ? null : key)}
                         aria-expanded={isOpen}
-                        className="w-full flex items-center justify-between gap-6 text-left px-5 py-5 text-ast-text font-semibold hover:text-ast-accent transition-colors"
+                        className="w-full flex items-center justify-between gap-6 text-left px-5 py-5 text-ast-ivory font-semibold hover:text-ast-peach transition-colors"
                       >
                         <span>{question}</span>
                         <motion.div
                           animate={{ rotate: isOpen ? 180 : 0 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <ChevronDown className="w-5 h-5 shrink-0 text-ast-accent" />
+                          <ChevronDown className="w-5 h-5 shrink-0 text-ast-peach" />
                         </motion.div>
                       </button>
                       <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
@@ -110,6 +115,29 @@ export default function FAQ() {
             </motion.section>
           ))}
         </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(243,107,63,0.06)] will-change-transform"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
+          <div className="relative z-10">
+            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.92] mb-8">
+              HAVE MORE QUESTIONS?
+            </h2>
+            <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
+              We're happy to answer any questions about our projects, retainers, or technology.
+            </p>
+            <Button as="a" href="/booking" variant="primary" size="lg" showArrow className="mt-10">
+              Book a Call
+            </Button>
+          </div>
+        </motion.div>
       </section>
     </div>
   );

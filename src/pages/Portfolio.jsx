@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink, Code, Sparkles, Zap, Layers } from 'lucide-react';
 import Button from '../components/Button';
-import Hero from '../components/Hero';
+import Hero, { AccentText } from '../components/Hero';
 
 const projects = [
   {
@@ -113,6 +113,7 @@ const categoryIcons = {
 export default function Portfolio() {
   const [expandedCard, setExpandedCard] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -124,6 +125,18 @@ export default function Portfolio() {
   const handleCardClick = (projectId) => {
     if (isMobile) {
       setExpandedCard(prev => prev === projectId ? null : projectId);
+    }
+  };
+
+  const handleMouseEnter = (projectId) => {
+    if (!isMobile) {
+      setHoveredCard(projectId);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (!isMobile) {
+      setHoveredCard(null);
     }
   };
 
@@ -141,21 +154,26 @@ export default function Portfolio() {
   };
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text">
-      <Hero
-        eyebrow="// PROVEN DEPLOYMENTS"
-        title="Digital Alpha."
-        subtitle="We engineer high-performance digital assets that dominate markets and scale effortlessly."
-        align="left"
-      />
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-ivory">
+<Hero
+          eyebrow="// PROVEN DEPLOYMENTS"
+          title={
+            <>
+              Digital Work,<br />
+              Built to Make <AccentText>an Impact.</AccentText>
+            </>
+          }
+          subtitle="A selection of websites, applications, AI systems, and digital experiences engineered by AST."
+          align="left"
+        />
 
       {/* PROJECTS GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
           {projects.map((project, index) => {
             const CategoryIcon = categoryIcons[project.category] || Code;
-            const isExpanded = expandedCard === project.id || !isMobile;
-            const isHovered = !isMobile;
+            const isHovered = hoveredCard === project.id;
+            const isExpanded = isMobile ? expandedCard === project.id : isHovered;
 
             return (
               <motion.div
@@ -166,6 +184,8 @@ export default function Portfolio() {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="group relative mx-auto w-full max-w-lg transform-gpu will-change-transform"
                 onClick={() => handleCardClick(project.id)}
+                onMouseEnter={() => handleMouseEnter(project.id)}
+                onMouseLeave={handleMouseLeave}
                 onKeyDown={(event) => {
                   if ((event.key === 'Enter' || event.key === ' ') && isMobile) {
                     event.preventDefault();
@@ -178,7 +198,7 @@ export default function Portfolio() {
                 style={{ perspective: '1000px' }}
               >
                 {/* Forklift-style Expandable Card */}
-                <div className="relative overflow-hidden rounded-3xl bg-ast-surface/50 border border-ast-border transition-all duration-300 ease-out group-hover:border-ast-accent/50 shadow-2xl group-hover:shadow-ast-accent/10 card-3d-enhanced">
+                <div className="relative overflow-hidden rounded-3xl bg-ast-surface/50 border border-ast-border transition-all duration-300 ease-out group-hover:border-ast-warm-orange/50 shadow-2xl group-hover:shadow-ast-accent/10 card-3d-enhanced">
                   
                   {/* Image Section - 70% of card */}
                   <div className="relative aspect-16/10 flex items-center justify-center p-6 sm:p-12 bg-transparent overflow-hidden">
@@ -194,7 +214,7 @@ export default function Portfolio() {
                     />
                     {/* Category badge on image */}
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ast-bg/90 backdrop-blur-sm border border-ast-border text-[10px] font-mono uppercase tracking-wider text-ast-accent">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ast-bg/90 backdrop-blur-sm border border-ast-border text-[10px] font-mono uppercase tracking-wider text-ast-peach">
                         <CategoryIcon className="h-3 w-3" />
                         {project.category.split(' & ')[0]}
                       </span>
@@ -214,29 +234,29 @@ export default function Portfolio() {
                     <div className="p-6 pt-0 pb-8 space-y-6 text-left">
                       {/* Project Title & Category */}
                       <div className="pt-4 border-t border-ast-border">
-                        <h3 className="text-2xl font-bold text-ast-text mb-1">{project.title}</h3>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-ast-accent/70">{project.category}</span>
+                        <h3 className="text-2xl font-bold text-ast-ivory mb-1">{project.title}</h3>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach/70">{project.category}</span>
                       </div>
 
                       {/* Problem → Built → Result */}
                       <div className="space-y-5">
                         <div className="relative pl-4 border-l-2 border-ast-accent/30">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-accent block mb-2">Problem</span>
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-2">Problem</span>
                           <p className="text-ast-muted text-base leading-relaxed">{project.problem}</p>
                         </div>
                         <div className="relative pl-4 border-l-2 border-ast-accent/30">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-accent block mb-2">Solution</span>
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-2">Solution</span>
                           <p className="text-ast-muted text-base leading-relaxed">{project.built}</p>
                         </div>
                         <div className="relative pl-4 border-l-2 border-ast-accent/30">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-accent block mb-2">Result</span>
-                          <p className="text-ast-text text-base leading-relaxed font-medium">{project.result}</p>
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-2">Result</span>
+                          <p className="text-ast-ivory text-base leading-relaxed font-medium">{project.result}</p>
                         </div>
                       </div>
 
                       {/* Tech Stack Pill Tags */}
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-ast-accent block mb-3">Engineering Stack</span>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-3">Engineering Stack</span>
                         <div className="flex flex-wrap gap-2">
                           {project.tech.map((t, i) => (
                             <motion.span
@@ -244,7 +264,7 @@ export default function Portfolio() {
                               initial={{ opacity: 0, scale: 0.9 }}
                               animate={{ opacity: 1, scale: 1 }}
                               transition={{ delay: 0.1 + i * 0.03 }}
-                              className="text-[11px] font-mono text-ast-muted border border-ast-border px-3 py-1.5 rounded-full bg-ast-surface/50 hover:bg-ast-accent/10 hover:text-ast-accent hover:border-ast-accent/30 transition-all duration-200 cursor-default"
+                              className="text-[11px] font-mono text-ast-muted border border-ast-border px-3 py-1.5 rounded-full bg-ast-surface/50 hover:bg-ast-warm-orange/10 hover:text-ast-peach hover:border-ast-warm-orange/30 transition-all duration-200 cursor-default"
                             >
                               {t}
                             </motion.span>
@@ -288,7 +308,7 @@ export default function Portfolio() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="relative px-6 py-24 text-center sm:py-32 mt-40">
+      <section className="relative px-6 py-16 text-center sm:py-20 mt-24">
         <div className="mx-auto max-w-5xl">
           <motion.div
             initial="hidden"
@@ -298,15 +318,15 @@ export default function Portfolio() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
             }}
-            className="relative transform-gpu overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg p-8 text-center shadow-[0_0_80px_rgba(255,107,26,0.06)] will-change-transform sm:p-16"
+            className="relative transform-gpu overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,100,31,0.06)] will-change-transform"
           >
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
             
             <div className="relative z-10">
-              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-ast-accent mb-6">// PROVEN RESULTS</span>
-              <h2 className="text-4xl font-black uppercase tracking-tight text-ast-text sm:text-6xl leading-[0.95] mb-8">
+              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-ast-peach mb-6">// PROVEN RESULTS</span>
+              <h2 className="text-4xl font-black uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.95] mb-8">
                 WANT TO BE OUR <br />
-                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                   NEXT CASE STUDY?
                 </span>
               </h2>

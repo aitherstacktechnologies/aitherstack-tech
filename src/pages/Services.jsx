@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Compass, Code2, Waypoints } from 'lucide-react';
 import Button from '../components/Button';
-import Hero from '../components/Hero';
+import Hero, { AccentText } from '../components/Hero';
 
 const monthlyRetainers = [
   {
@@ -129,7 +129,7 @@ function ServiceCard({ service, isRetainer }) {
       whileHover={{ y: -8 }}
       className={`group relative flex min-w-0 transform-gpu flex-col justify-between overflow-hidden rounded-3xl border p-6 transition-all duration-300 will-change-transform hover:border-ast-accent/40 sm:p-8 ${
         service.featured
-          ? 'border-ast-accent/40 bg-gradient-to-b from-ast-accent/10 via-ast-surface to-ast-surface shadow-[0_0_25px_rgba(0,212,255,0.12)]'
+          ? 'border-ast-accent/40 bg-gradient-to-b from-ast-accent/10 via-ast-surface to-ast-surface shadow-[0_0_25px_rgba(255,100,31,0.12)]'
           : 'border-ast-border bg-ast-surface/50'
       }`}
     >
@@ -181,7 +181,7 @@ function ExecutionStep({ step }) {
     <motion.article
       variants={reveal}
       whileHover={{ y: -6 }}
-      className="group relative transform-gpu overflow-hidden rounded-2xl bg-ast-surface/80 border border-ast-border p-8 transition-all duration-300 hover:border-ast-accent/40 hover:shadow-[0_10px_30px_rgba(0,212,255,0.1)] sm:p-10"
+      className="group relative transform-gpu overflow-hidden rounded-2xl bg-ast-surface/80 border border-ast-border p-8 transition-all duration-300 hover:border-ast-accent/40 hover:shadow-[0_10px_30px_rgba(255,100,31,0.1)] sm:p-10"
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <div className="relative flex items-center justify-between">
@@ -226,9 +226,14 @@ export default function Services() {
   return (
     <main className="min-h-screen min-w-0 max-w-full overflow-x-hidden bg-transparent text-ast-text">
       <Hero
-        eyebrow="// TRANSPARENT ARCHITECTURE"
-        title={<>Transparent<br />Architecture.</>}
-        subtitle="Clear scope, high-end execution, and no template bloat. Select a bespoke one-time build or an ongoing engineering retainer."
+        eyebrow="// DIGITAL SYSTEMS"
+        title={
+          <>
+            Digital Systems,<br />
+            Built to Move <AccentText>Business Forward.</AccentText>
+          </>
+        }
+        subtitle="Web experiences, AI systems, and automation engineered around how your business actually works."
         actions={(
           <>
             <Button as="a" href="/booking" variant="primary" size="lg" showArrow>Book a Strategy Call</Button>
@@ -237,7 +242,7 @@ export default function Services() {
         )}
       />
 
-      <section className="min-w-0 px-4 py-20 sm:px-6 sm:py-32">
+      <section className="min-w-0 px-4 py-16 sm:px-6 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="flex justify-center mb-16">
             <div className="flex w-full max-w-md flex-col rounded-2xl bg-ast-surface/80 p-1.5 backdrop-blur-xl sm:inline-flex sm:w-auto sm:max-w-none sm:flex-row sm:rounded-full">
@@ -245,7 +250,7 @@ export default function Services() {
                 onClick={() => setActiveTab('projects')}
                 className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${
                   activeTab === 'projects'
-                    ? 'bg-ast-accent text-ast-bg shadow-[0_0_20px_rgba(0,212,255,0.3)]'
+                    ? 'bg-ast-accent text-ast-bg shadow-[0_0_20px_rgba(255,100,31,0.3)]'
                     : 'text-ast-muted hover:text-ast-text'
                 }`}
               >
@@ -255,7 +260,7 @@ export default function Services() {
                 onClick={() => setActiveTab('retainers')}
                 className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${
                   activeTab === 'retainers'
-                    ? 'bg-ast-accent text-ast-bg shadow-[0_0_20px_rgba(0,212,255,0.3)]'
+                    ? 'bg-ast-accent text-ast-bg shadow-[0_0_20px_rgba(255,100,31,0.3)]'
                     : 'text-ast-muted hover:text-ast-text'
                 }`}
               >
@@ -303,7 +308,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="px-6 py-24 sm:py-32 section-gradient-bg">
+      <section className="px-6 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-2xl sm:mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
@@ -328,7 +333,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="border-t border-ast-border bg-ast-surface/30 px-6 py-24 sm:py-32 section-gradient-bg-alt">
+      <section className="border-t border-ast-border px-6 py-16 sm:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-2xl sm:mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
@@ -352,28 +357,35 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="bg-ast-bg px-6 py-24 text-center sm:py-32">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={reveal}
-          className="transform-gpu will-change-transform"
-        >
-          <h2 className="mx-auto max-w-3xl text-4xl font-black uppercase tracking-tight text-ast-text sm:text-6xl">
-            LET'S BUILD SOMETHING EXTRAORDINARY.
-          </h2>
-          <Button
-            as="a"
-            href="/booking"
-            variant="primary"
-            size="lg"
-            showArrow
-            className="mt-10"
+      <section className="px-6 py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={reveal}
+            className="transform-gpu will-change-transform"
           >
-            Book Strategy Call
-          </Button>
-        </motion.div>
+            <div className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-8 sm:p-10 lg:p-12 text-center">
+              <div className="absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
+              <div className="relative z-10">
+                <h2 className="mx-auto max-w-3xl text-4xl font-black uppercase tracking-tight text-ast-text sm:text-6xl">
+                  LET'S BUILD SOMETHING EXTRAORDINARY.
+                </h2>
+                <Button
+                  as="a"
+                  href="/booking"
+                  variant="primary"
+                  size="lg"
+                  showArrow
+                  className="mt-10"
+                >
+                  Book Strategy Call
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
     </main>
   );

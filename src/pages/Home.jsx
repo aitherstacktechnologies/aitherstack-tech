@@ -13,7 +13,7 @@ import {
   Workflow,
 } from 'lucide-react';
 import Button from '../components/Button';
-import Hero from '../components/Hero';
+import Hero, { AccentText } from '../components/Hero';
 
 const serviceCards = [
   {
@@ -69,14 +69,6 @@ const whyChooseUs = [
   },
 ];
 
-const marqueeItems = [
-  'Luxury E-Commerce Stores',
-  'High-Converting Landing Pages',
-  'Enterprise AI Agents',
-  'Bespoke Web Architecture',
-  'Ultra-Fast Performance',
-];
-
 const techCategories = [
   {
     title: 'Frontend & Motion',
@@ -109,13 +101,11 @@ export default function Home() {
     <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text">
       <main className="relative overflow-hidden">
         <Hero
-          eyebrow="Engineering Digital Excellence"
+          eyebrow="// PREMIUM ENGINEERING"
           title={
             <>
-              Premium Digital Experiences,
-              <span className="mt-2 block bg-gradient-to-r from-ast-text via-ast-accent to-ast-text bg-clip-text text-transparent">
-                Engineered Without Compromise
-              </span>
+              Premium Digital Experiences,<br />
+              <AccentText>Engineered Without Compromise</AccentText>
             </>
           }
           align="center"
@@ -132,26 +122,10 @@ export default function Home() {
           }
         />
 
-        {/* Marquee */}
-        <section className="relative py-6 border-y border-ast-border bg-ast-surface/30">
-          <div className="mx-auto max-w-[1700px] px-2">
-            <div className="overflow-hidden py-4">
-              <div className="marquee-track flex min-w-max animate-marquee transform-gpu items-center gap-6 whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.36em] text-ast-muted sm:text-xs">
-                {[...marqueeItems, ...marqueeItems].map((item, index) => (
-                  <span className="marquee-label" key={`${item}-${index}`}>
-                    <span>{item}</span>
-                    <span className="text-ast-accent/50">◆</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {/* Tech Stack & Approach Section */}
-        <section className="relative py-20 px-4 sm:px-6 lg:px-8 xl:px-12 section-gradient-bg">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-16 text-center">
+        <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+           <div className="mx-auto max-w-7xl">
+            <div className="mb-12 text-center">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +140,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-5xl lg:text-6xl font-display"
+                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-5xl lg:text-6xl font-display"
               >
                 Why We Choose <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">The Right Tool</span>{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">Every Time</span>
@@ -201,11 +175,11 @@ export default function Home() {
                       <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
                     </div>
 
-                    <h3 className="text-2xl font-semibold text-ast-text">{category.title}</h3>
+                    <h3 className="text-2xl font-semibold text-ast-ivory">{category.title}</h3>
                     <p className="mt-4 text-sm leading-relaxed text-ast-muted">{category.description}</p>
 
                     <div className="mt-6 flex flex-wrap gap-2">
-                      {category.tech.map((t, i) => (
+                      {category.tech.map((t) => (
                         <span
                           key={t}
                           className="text-[11px] font-mono text-ast-muted border border-ast-border px-3 py-1.5 rounded-full bg-ast-surface/50 hover:bg-ast-accent/10 hover:text-ast-accent hover:border-ast-accent/30 transition-all duration-200"
@@ -222,9 +196,9 @@ export default function Home() {
         </section>
 
         {/* Services Preview */}
-        <section className="px-4 py-24 sm:px-6 lg:px-8 xl:px-12 section-gradient-bg-alt">
+        <section className="px-4 py-16 sm:px-6 lg:px-8 xl:px-12">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-16 text-center">
+            <div className="mb-12 text-center">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -239,7 +213,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-5xl lg:text-6xl font-display"
+                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-5xl lg:text-6xl font-display"
               >
                 Signature Solutions for{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
@@ -269,7 +243,7 @@ export default function Home() {
                         <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
                       </div>
 
-                      <h3 className="text-2xl font-semibold text-ast-text">{card.title}</h3>
+                      <h3 className="text-2xl font-semibold text-ast-ivory">{card.title}</h3>
                       <p className="mt-4 text-sm leading-relaxed text-ast-muted">{card.description}</p>
 
                       <Link
@@ -304,9 +278,9 @@ export default function Home() {
         </section>
 
         {/* Why Choose Us */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 xl:px-12 section-gradient-bg border-y border-ast-border">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-16 text-center">
+        <section className="px-4 py-12 sm:px-6 lg:px-8 xl:px-12 border-y border-ast-border">
+           <div className="mx-auto max-w-7xl">
+            <div className="mb-12 text-center">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -321,7 +295,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-5xl lg:text-6xl font-display"
+                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-5xl lg:text-6xl font-display"
               >
                 Built for Scale.{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
@@ -350,7 +324,7 @@ export default function Home() {
                       </div>
                     </div>
 
-                    <h3 className="text-xl font-semibold text-ast-text">{item.title}</h3>
+                    <h3 className="text-xl font-semibold text-ast-ivory">{item.title}</h3>
                     <p className="mt-4 text-sm leading-relaxed text-ast-muted">{item.description}</p>
                   </motion.article>
                 );
@@ -360,22 +334,22 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+        <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg p-8 sm:p-12 lg:p-16 text-center shadow-[0_0_80px_rgba(0,212,255,0.06)]"
+            className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-8 sm:p-12 lg:p-16 text-center shadow-[0_0_80px_rgba(255,100,31,0.06)]"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative z-10">
-              <span className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm mb-6">
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm mb-6">
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
                 Ready to Begin
               </span>
-              <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-text sm:text-6xl lg:text-7xl font-display leading-[0.92] mb-8">
+              <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl lg:text-7xl font-display leading-[0.92] mb-8">
                 LET'S BUILD YOUR NEXT{' '}
-                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                   DIGITAL MASTERPIECE
                 </span>
               </h2>

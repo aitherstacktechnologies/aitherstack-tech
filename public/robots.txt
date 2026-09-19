@@ -1,0 +1,13 @@
+# Aither Stack Technologies - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aitherstack.com/sitemap.xml
+
+# Disallow private/admin paths
+Disallow: /api/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.pdf$

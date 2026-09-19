@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
@@ -6,11 +6,10 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnimationProvider from './components/AnimationProvider';
 import RouteProgressBar from './components/RouteProgressBar';
-import ThreeBackground from './components/ThreeBackground';
-
-
+import LiquidBackground from './components/LiquidBackground';
 
 const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
 const Process = lazy(() => import('./pages/Process'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
@@ -29,6 +28,7 @@ function AnimatedRoutes() {
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/process" element={<Process />} />
           <Route path="/portfolio" element={<Portfolio />} />
@@ -45,14 +45,32 @@ function AnimatedRoutes() {
 }
 
 function AppContent() {
+  const location = useLocation();
+
+  const isLegalPage =
+    location.pathname === '/privacy' ||
+    location.pathname === '/terms';
+
+  useEffect(() => {
+    if (isLegalPage) {
+      document.body.classList.add('legal-page');
+    } else {
+      document.body.classList.remove('legal-page');
+    }
+  }, [isLegalPage]);
+
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent text-ast-text font-sans antialiased w-full page-gradient">
-      <ThreeBackground />
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent text-ast-text font-sans antialiased w-full page-gradient isolation-isolate">
+      {!isLegalPage && <LiquidBackground />}
+
       <Navbar />
+
       <RouteProgressBar />
+
       <main className="relative z-10 min-w-0 flex-grow overflow-x-hidden">
         <AnimatedRoutes />
       </main>
+
       <Footer />
     </div>
   );
