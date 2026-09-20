@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0B0A"/>
+      <stop offset="100%" stop-color="#1A100C"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F36B3F"/>
+      <stop offset="100%" stop-color="#FF9A78"/>
+    </linearGradient>
+    <filter id="innerGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="90" cy="90" r="88" fill="url(#bgGrad)" stroke="url(#accentGrad)" stroke-width="2"/>
+  
+  <!-- AST text -->
+  <text x="90" y="112" font-family="Georgia, serif" font-size="64" font-weight="bold" fill="url(#accentGrad)" text-anchor="middle" filter="url(#innerGlow)">AST</text>
+  
+  <!-- Subtle accent ring -->
+  <circle cx="90" cy="90" r="82" fill="none" stroke="#FF9A78" stroke-width="1" opacity="0.3"/>
+</svg>
