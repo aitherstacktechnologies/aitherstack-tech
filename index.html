@@ -1,14 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="google-site-verification" content="4g9vP3mFYCipE9npsUGrubV4ebNqINwhZ3IxiHCTZOQ" />
-
-    <!-- Google Tag Manager -->
+    <!-- 1. Google Tag Manager (MUST BE FIRST IN HEAD) -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -16,7 +9,10 @@
     })(window,document,'script','dataLayer','GTM-NVZ6TXRF');</script>
     <!-- End Google Tag Manager -->
 
-    <!-- Google tag (gtag.js) -->
+    <!-- 2. Search Console Meta Verification -->
+    <meta name="google-site-verification" content="4g9vP3mFYCipE9npsUGrubV4ebNqINwhZ3IxiHCTZOQ" />
+
+    <!-- 3. Google Analytics (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J5S265B4H"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -25,6 +21,12 @@
 
     gtag('config', 'G-4J5S265B4H');
     </script>
+
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -68,11 +70,6 @@
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08080A" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#08080A" />
 
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVZ6TXRF"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -105,6 +102,11 @@
     </script>
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) (PLACED IMMEDIATELY AFTER BODY) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVZ6TXRF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
