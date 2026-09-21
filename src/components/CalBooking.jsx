@@ -20,8 +20,13 @@ const CalEmbed = lazy(() => import("@calcom/embed-react").then(module => {
       }, []);
       return (
         <div
-          className="w-full min-h-170 overflow-hidden rounded-3xl border border-white/10 bg-[#0D0D11]"
-          style={{ '--cal-bg': '#08080A', '--cal-surface': '#0D0D11' }}
+          className="w-full min-h-[680px] overflow-hidden rounded-3xl border border-white/10 bg-[#0D0D11]"
+          style={{ 
+            '--cal-bg': '#08080A', 
+            '--cal-surface': '#0D0D11',
+            aspectRatio: '16 / 9',
+            minHeight: '680px'
+          }}
         >
           <Cal 
             calLink="aitherstacktechnologies-official/aither-stack-appointments" 
@@ -42,7 +47,12 @@ const CalEmbed = lazy(() => import("@calcom/embed-react").then(module => {
 export default function CalBooking() {
   return (
     <Suspense fallback={
-      <div className="w-full min-h-170 overflow-hidden rounded-3xl border border-white/10 bg-[#0D0D11]" style={{ '--cal-bg': '#08080A', '--cal-surface': '#0D0D11' }}>
+      <div className="w-full min-h-[680px] overflow-hidden rounded-3xl border border-white/10 bg-[#0D0D11]" style={{ 
+        '--cal-bg': '#08080A', 
+        '--cal-surface': '#0D0D11',
+        aspectRatio: '16 / 9',
+        minHeight: '680px'
+      }}>
         <div className="flex items-center justify-center h-full text-ast-muted">Loading calendar...</div>
       </div>
     }>

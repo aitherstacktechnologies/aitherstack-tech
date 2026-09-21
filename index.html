@@ -1,39 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- 1. Google Tag Manager (MUST BE FIRST IN HEAD) -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NVZ6TXRF');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- 2. Search Console Meta Verification -->
-    <meta name="google-site-verification" content="4g9vP3mFYCipE9npsUGrubV4ebNqINwhZ3IxiHCTZOQ" />
-
-    <!-- 3. Google Analytics (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4J5S265B4H"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-4J5S265B4H');
-    </script>
-
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v15/co3DmWZ8kjZuErj9Ta3do6TcFk73.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" />
-    <link rel="preload" as="image" href="/hero.png" />
-    <link rel="preload" as="image" href="/logo.png" />
+    <link rel="preload" as="image" href="/hero.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/logo.webp" type="image/webp" />
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
     
@@ -69,7 +47,7 @@
     <meta name="theme-color" content="#08080A" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08080A" />
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#08080A" />
-
+    
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
@@ -109,5 +87,23 @@
 
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    
+    <!-- 1. Google Tag Manager (DEFERRED - loads after page content) -->
+    <script defer>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NVZ6TXRF');
+    </script>
+    
+    <!-- 2. Google Analytics (gtag.js) - DEFERRED -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-4J5S265B4H"></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4J5S265B4H');
+    </script>
   </body>
 </html>
