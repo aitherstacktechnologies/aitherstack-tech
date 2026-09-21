@@ -28,7 +28,7 @@ export default function Hero({
   const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.85, ease: [0.16, 1, 0.3, 1] };
 
   return (
-    <section className={`relative isolate overflow-hidden bg-transparent px-4 pb-8 pt-12 sm:px-6 sm:pb-12 sm:pt-20 lg:px-8 lg:pt-28 xl:px-12 ${compact ? 'min-h-[55vh]' : 'min-h-[70vh]'} flex flex-col justify-center ${className}`} style={{ aspectRatio: '16 / 9', minHeight: '55vh' }}>
+    <section className={`relative isolate overflow-hidden bg-transparent px-4 pb-8 pt-12 sm:px-6 sm:pb-12 sm:pt-20 lg:px-8 lg:pt-28 xl:px-12 ${compact ? 'min-h-[55vh]' : 'min-h-[70vh]'} flex flex-col justify-center ${className}`} style={{ aspectRatio: '16 / 9', minHeight: '55vh', contain: 'layout' }}>
       <div className="pointer-events-none absolute inset-0 hero-scene-grid" aria-hidden="true" />
       
       <motion.div
