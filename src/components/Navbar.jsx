@@ -73,44 +73,44 @@ export default function Navbar() {
             aria-label="Book a call"
           >
             Book a Call
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
           </Link>
 
           <div className="flex items-center gap-2 sm:gap-3">
-             <motion.button
-               type="button"
-               aria-label={isOpen ? 'Close menu' : 'Open menu'}
-               aria-expanded={isOpen}
-               onClick={() => setIsOpen((prev) => !prev)}
-               whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
-               className="relative flex h-11 w-11 items-center justify-center rounded-full border border-ast-border bg-ast-bg/55 text-ast-text shadow-[0_8px_24px_rgba(0,0,0,0.24)] backdrop-blur-xl transition-all duration-300 hover:border-ast-accent/40 hover:shadow-[0_0_16px_rgba(255,100,31,0.15)] md:hidden"
-             >
-              <AnimatePresence initial={false} mode="wait">
-                {isOpen ? (
-                  <motion.span
-                    key="close"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={transition}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <X className="h-5 w-5" />
-                  </motion.span>
-                ) : (
-                  <motion.span
-                    key="menu"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={transition}
-                    className="absolute inset-0 flex items-center justify-center"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </motion.button>
+<motion.button
+                type="button"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isOpen}
+                onClick={() => setIsOpen((prev) => !prev)}
+                whileTap={prefersReducedMotion ? undefined : { scale: 0.95 }}
+                className="relative flex h-11 w-11 items-center justify-center rounded-full border border-ast-border bg-ast-bg/55 text-ast-text shadow-[0_8px_24px_rgba(0,0,0,0.24)] backdrop-blur-xl transition-all duration-300 hover:border-ast-accent/40 hover:shadow-[0_0_16px_rgba(255,100,31,0.15)] md:hidden"
+              >
+               <AnimatePresence initial={false} mode="wait">
+                 {isOpen ? (
+                   <motion.span
+                     key="close"
+                     initial={{ rotate: -90, opacity: 0 }}
+                     animate={{ rotate: 0, opacity: 1 }}
+                     exit={{ rotate: 90, opacity: 0 }}
+                     transition={transition}
+                     className="absolute inset-0 flex items-center justify-center"
+                   >
+                     <X className="h-5 w-5" aria-hidden="true" />
+                   </motion.span>
+                 ) : (
+                   <motion.span
+                     key="menu"
+                     initial={{ rotate: 90, opacity: 0 }}
+                     animate={{ rotate: 0, opacity: 1 }}
+                     exit={{ rotate: -90, opacity: 0 }}
+                     transition={transition}
+                     className="absolute inset-0 flex items-center justify-center"
+                   >
+                     <Menu className="h-5 w-5" aria-hidden="true" />
+                   </motion.span>
+                 )}
+               </AnimatePresence>
+             </motion.button>
           </div>
         </div>
       </motion.header>
@@ -149,7 +149,7 @@ export default function Navbar() {
                   whileTap={prefersReducedMotion ? undefined : { scale: 0.9 }}
                   className="relative flex h-10 w-10 items-center justify-center rounded-full border border-ast-border bg-ast-bg/55 text-ast-text shadow-[0_8px_24px_rgba(0,0,0,0.24)] backdrop-blur-xl transition-all duration-300 hover:border-ast-accent/40 hover:shadow-[0_0_16px_rgba(255,100,31,0.15)]"
                 >
-                  <X className="h-5 w-5" />
+                  <X className="h-5 w-5" aria-hidden="true" />
                 </motion.button>
               </div>
 
@@ -190,9 +190,10 @@ export default function Navbar() {
                   to="/booking"
                   onClick={() => setIsOpen(false)}
                   className="group flex items-center justify-center gap-3 rounded-2xl border border-ast-accent bg-ast-accent/10 px-6 py-4 text-base font-medium uppercase tracking-[0.1em] text-ast-accent transition-all duration-300 hover:bg-ast-accent hover:text-ast-bg hover:shadow-[0_0_24px_rgba(255,107,26,0.4)]"
+                  aria-label="Book a call"
                 >
                   Book a Call
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" aria-hidden="true" />
                 </Link>
               </div>
 

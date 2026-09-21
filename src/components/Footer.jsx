@@ -58,8 +58,8 @@ export default function Footer() {
           <div className="lg:col-span-2 flex flex-col items-center text-center">
             <span className="font-mono text-xs uppercase tracking-wider text-ast-peach">// CONNECT</span>
             <div className="mt-6">
-              <a href="https://github.com/aitherstacktechnologies" target="_blank" rel="noreferrer" className="group inline-flex items-center gap-1.5 text-sm text-ast-ivory/80 transition-colors duration-200 hover:text-ast-peach">
-                <GitBranch className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" />
+              <a href="https://github.com/aitherstacktechnologies" target="_blank" rel="noreferrer noopener" aria-label="Follow us on GitHub" className="group inline-flex items-center gap-1.5 text-sm text-ast-ivory/80 transition-colors duration-200 hover:text-ast-peach">
+                <GitBranch className="h-5 w-5 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6" aria-hidden="true" />
                 <span>GitHub</span>
               </a>
             </div>
