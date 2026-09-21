@@ -43,6 +43,9 @@ export default function LiquidBackground() {
     let height = window.innerHeight;
     let animationFrameId;
     let time = 0;
+    let lastFrameTime = 0;
+    const targetFPS = width < 768 ? 30 : 60;
+    const frameInterval = 1000 / targetFPS;
 
     // Cursor/touch position with smoothing
     let targetX = width * 0.5;
@@ -50,39 +53,61 @@ export default function LiquidBackground() {
     let currentX = targetX;
     let currentY = targetY;
 
-    // Multiple fluid layers
-    const layers = [
+    // Reduce layers on mobile for performance
+    const isMobile = width < 768;
+    const layers = isMobile ? [
+      { 
+        baseX: 0.5, baseY: 0.25, 
+        amplitudeX: 0.2, amplitudeY: 0.15,
+        speed: 0.0008,
+        color1: [243, 107, 63],
+        color2: [255, 154, 120],
+        color3: [255, 180, 140],
+        opacity: 0.15
+      },
+      { 
+        baseX: 0.85, baseY: 0.3, 
+        amplitudeX: 0.15, amplitudeY: 0.2,
+        speed: 0.001,
+        color1: [220, 60, 25],
+        color2: [243, 107, 63],
+        color3: [200, 50, 20],
+        opacity: 0.1
+      }
+    ] : [
       { 
         baseX: 0.5, baseY: 0.25, 
         amplitudeX: 0.3, amplitudeY: 0.2,
         speed: 0.0008,
-        color1: [243, 107, 63],    // warm orange
-        color2: [255, 154, 120],   // peach
-        color3: [255, 180, 140],   // light peach
+        color1: [243, 107, 63],
+        color2: [255, 154, 120],
+        color3: [255, 180, 140],
         opacity: 0.18
       },
       { 
         baseX: 0.2, baseY: 0.65, 
         amplitudeX: 0.25, amplitudeY: 0.3,
         speed: 0.0006,
-        color1: [255, 180, 140],   // light peach
-        color2: [255, 200, 160],   // cream
-        color3: [255, 220, 180],   // warm cream
+        color1: [255, 180, 140],
+        color2: [255, 200, 160],
+        color3: [255, 220, 180],
         opacity: 0.12
       },
       { 
         baseX: 0.85, baseY: 0.3, 
         amplitudeX: 0.2, amplitudeY: 0.25,
         speed: 0.001,
-        color1: [220, 60, 25],     // deep red/orange
-        color2: [243, 107, 63],    // warm orange
-        color3: [200, 50, 20],     // dark red
+        color1: [220, 60, 25],
+        color2: [243, 107, 63],
+        color3: [200, 50, 20],
         opacity: 0.14
       }
     ];
 
-    // Mouse/touch followers with spring physics
-    const followers = [
+    // Mouse/touch followers with spring physics (reduce on mobile)
+    const followers = isMobile ? [
+      { x: targetX, y: targetY, vx: 0, vy: 0, stiffness: 0.01, damping: 0.8, radius: 0.3 }
+    ] : [
       { x: targetX, y: targetY, vx: 0, vy: 0, stiffness: 0.015, damping: 0.85, radius: 0.35 },
       { x: targetX, y: targetY, vx: 0, vy: 0, stiffness: 0.006, damping: 0.75, radius: 0.5 }
     ];
@@ -94,17 +119,21 @@ export default function LiquidBackground() {
       }
     };
 
+    // Debounced resize handler to avoid forced reflows
+    let resizeTimeout;
     const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
+      if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
+      resizeTimeout = requestAnimationFrame(() => {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        // Don't set canvas.style.width/height - causes forced reflow
+      });
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", resize, { passive: true });
     resize();
 
     // Draw fluid gradient background
@@ -114,9 +143,9 @@ export default function LiquidBackground() {
         width * 0.5, height * 0.5, 0,
         width * 0.5, height * 0.5, Math.max(width, height) * 0.7
       );
-      baseGrad.addColorStop(0, "#1A100C");    // dark brown
-      baseGrad.addColorStop(0.4, "#0D0B0A");  // deep background
-      baseGrad.addColorStop(1, "#060504");    // near black
+      baseGrad.addColorStop(0, "#1A100C");
+      baseGrad.addColorStop(0.4, "#0D0B0A");
+      baseGrad.addColorStop(1, "#060504");
       ctx.fillStyle = baseGrad;
       ctx.fillRect(0, 0, width, height);
 
@@ -124,7 +153,6 @@ export default function LiquidBackground() {
       layers.forEach((layer, layerIndex) => {
         const follower = followers[Math.min(layerIndex, followers.length - 1)];
         
-        // Calculate fluid position with wave motion
         const waveX = Math.sin(time * layer.speed * 100 + layerIndex) * layer.amplitudeX * width;
         const waveY = Math.cos(time * layer.speed * 80 + layerIndex * 2) * layer.amplitudeY * height;
         
@@ -176,7 +204,14 @@ export default function LiquidBackground() {
       ctx.fillRect(0, 0, width, height);
     };
 
-    const animate = () => {
+    const animate = (timestamp) => {
+      // Throttle frame rate on mobile
+      if (timestamp - lastFrameTime < frameInterval) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
+      lastFrameTime = timestamp;
+      
       time += 0.016;
 
       // Spring physics for followers
@@ -212,6 +247,7 @@ export default function LiquidBackground() {
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("resize", resize);
+      if (resizeTimeout) cancelAnimationFrame(resizeTimeout);
       if (animationFrameId) cancelAnimationFrame(animationFrameId);
     };
   }, [motionMode]);
@@ -223,7 +259,6 @@ export default function LiquidBackground() {
     const background = backgroundRef.current;
     if (!background) return;
 
-    // Set static positions for CSS gradients
     background.style.setProperty("--cursor-x", "50vw");
     background.style.setProperty("--cursor-y", "35vh");
   }, [motionMode]);
@@ -233,10 +268,18 @@ export default function LiquidBackground() {
       ref={backgroundRef}
       className="liquid-background"
       aria-hidden="true"
+      style={{ contain: 'strict' }}
     >
-      <canvas ref={canvasRef} className="liquid-canvas" />
-      <div className="liquid-grain" />
-      <div className="liquid-vignette" />
+      <canvas 
+        ref={canvasRef} 
+        className="liquid-canvas" 
+        style={{ 
+          contain: 'strict',
+          willChange: 'transform'
+        }} 
+      />
+      <div className="liquid-grain" style={{ contain: 'strict' }} />
+      <div className="liquid-vignette" style={{ contain: 'strict' }} />
     </div>
   );
 }

@@ -198,13 +198,16 @@ export default function Portfolio() {
                 style={{ perspective: '1000px' }}
               >
                 {/* Forklift-style Expandable Card */}
-                <div className="relative overflow-hidden rounded-3xl bg-ast-surface/50 border border-ast-border transition-all duration-300 ease-out group-hover:border-ast-warm-orange/50 shadow-2xl group-hover:shadow-ast-accent/10 card-3d-enhanced">
+                <div className="relative overflow-hidden rounded-3xl bg-ast-surface/50 border border-ast-border transition-all duration-300 ease-out group-hover:border-ast-warm-orange/50 shadow-2xl group-hover:shadow-ast-accent/10 card-3d-enhanced" style={{ contain: 'layout style paint' }}>
                   
                   {/* Image Section - 70% of card */}
                   <div className="relative aspect-16/10 flex items-center justify-center p-6 sm:p-12 bg-transparent overflow-hidden">
                     <motion.img 
                       src={project.image} 
                       alt={project.title}
+                      width={677}
+                      height={369}
+                      loading={index >= 2 ? 'lazy' : 'eager'}
                       className="w-full h-full object-cover transition-all duration-300 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-103"
                       style={{ 
                         transformOrigin: 'center center',
