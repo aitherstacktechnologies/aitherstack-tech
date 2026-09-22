@@ -21,16 +21,31 @@ export function AnimationProvider({ children }) {
 
     lenisRef.current = lenis;
     let frameId;
+    let lastFrameTime = 0;
+    const targetFPS = window.innerWidth < 768 ? 30 : 60;
+    const frameInterval = 1000 / targetFPS;
+
     if (!prefersReducedMotion) {
       const animate = (time) => {
+        // Throttle frame rate on mobile
+        if (time - lastFrameTime < frameInterval) {
+          frameId = requestAnimationFrame(animate);
+          return;
+        }
+        lastFrameTime = time;
         lenis.raf(time);
         frameId = requestAnimationFrame(animate);
       };
       frameId = requestAnimationFrame(animate);
     }
 
+    // Passive scroll listener for Lenis
+    const handleScroll = () => lenis.raf(performance.now());
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
+      window.removeEventListener('scroll', handleScroll);
       lenis.destroy();
     };
   }, []);
@@ -64,11 +79,13 @@ export function MagneticButton({ children, className = '' }) {
     if (window.matchMedia('(pointer: coarse), (max-width: 767px)').matches) return;
     let frameId;
     let pointer;
+    let rect;
+    const updateRect = () => { rect = element.getBoundingClientRect(); };
+    const handlePointerEnter = () => { updateRect(); };
     const handlePointerMove = (event) => {
       pointer = event;
-      if (!frameId) {
+      if (!frameId && rect) {
         frameId = requestAnimationFrame(() => {
-          const rect = element.getBoundingClientRect();
           if (rect && pointer) {
             const x = pointer.clientX - rect.left - rect.width / 2;
             const y = pointer.clientY - rect.top - rect.height / 2;
@@ -81,12 +98,17 @@ export function MagneticButton({ children, className = '' }) {
     const handleMouseLeave = () => {
       element.style.transform = '';
     };
+    element.addEventListener('pointerenter', handlePointerEnter);
     element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('resize', updateRect, { passive: true });
+    updateRect(); // Initial rect
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
+      element.removeEventListener('pointerenter', handlePointerEnter);
       element.removeEventListener('pointermove', handlePointerMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', updateRect);
     };
   }, []);
   return <div ref={ref} className={`transform-gpu will-change-transform ${className}`}>{children}</div>;
@@ -100,11 +122,13 @@ export function TiltCard({ children, className = '', intensity = 15 }) {
     if (window.matchMedia('(pointer: coarse), (max-width: 767px)').matches) return;
     let frameId;
     let pointer;
+    let rect;
+    const updateRect = () => { rect = element.getBoundingClientRect(); };
+    const handlePointerEnter = () => { updateRect(); };
     const handlePointerMove = (event) => {
       pointer = event;
-      if (!frameId) {
+      if (!frameId && rect) {
         frameId = requestAnimationFrame(() => {
-          const rect = element.getBoundingClientRect();
           if (rect && pointer) {
             const x = (pointer.clientX - rect.left) / rect.width - 0.5;
             const y = (pointer.clientY - rect.top) / rect.height - 0.5;
@@ -117,12 +141,17 @@ export function TiltCard({ children, className = '', intensity = 15 }) {
     const handleMouseLeave = () => {
       element.style.transform = '';
     };
+    element.addEventListener('pointerenter', handlePointerEnter);
     element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('mouseleave', handleMouseLeave);
+    window.addEventListener('resize', updateRect, { passive: true });
+    updateRect(); // Initial rect
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
+      element.removeEventListener('pointerenter', handlePointerEnter);
       element.removeEventListener('pointermove', handlePointerMove);
       element.removeEventListener('mouseleave', handleMouseLeave);
+      window.removeEventListener('resize', updateRect);
     };
   }, [intensity]);
   return (

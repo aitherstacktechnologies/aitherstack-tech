@@ -36,7 +36,7 @@ export default function LiquidBackground() {
     const background = backgroundRef.current;
     if (!canvas || !background) return;
 
-    const ctx = canvas.getContext("2d", { alpha: true });
+    const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
     if (!ctx) return;
 
     let width = Math.max(1, window.innerWidth);

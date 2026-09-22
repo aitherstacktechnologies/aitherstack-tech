@@ -2,70 +2,72 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo/favicon.svg" />
-    <link rel="apple-touch-icon" href="/logo/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/logo.png" />
+    <link rel="icon" type="image/webp" sizes="192x192" href="/logo.webp" />
+    <link rel="apple-touch-icon" href="/logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" />
-    </noscript>
-
-    <title>Aither Stack Technologies (AST) | Web Engineering & AI Automation</title>
-    <meta name="title" content="Aither Stack Technologies (AST) | Web Engineering & AI Automation" />
-    <meta
-      name="description"
-      content="Aither Stack Technologies builds high-performance websites, web applications, AI voice agents, and automation systems engineered for growth."
-    />
-    <meta name="keywords" content="web development, AI automation, AI voice agents, custom software, React development, business automation" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v15/co3DmWZ8kjZuErj9Ta3do6TcFk73.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" />
+    <link rel="preload" as="image" href="/hero.webp" type="image/webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/logo.webp" type="image/webp" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" /></noscript>
+    
+    <!-- Primary Meta Tags -->
+    <title>Aither Stack Technologies | Bespoke AI Agents & High-Performance Web Platforms</title>
+    <meta name="title" content="Aither Stack Technologies | Bespoke AI Agents & High-Performance Web Platforms" />
+    <meta name="description" content="Engineering high-impact web platforms, bespoke AI agents, autonomous LLM workflows, and custom enterprise software." />
+    <meta name="keywords" content="web development, AI automation, voice agents, custom software, React development, business automation, digital agency" />
     <meta name="author" content="Aither Stack Technologies" />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://aitherstack.com/" />
-
+    <link rel="canonical" href="https://aitherstack-tech.vercel.app/" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://aitherstack.com/" />
-    <meta property="og:title" content="Aither Stack Technologies (AST) | Web Engineering & AI Automation" />
-    <meta property="og:description" content="High-performance websites, web applications, AI voice agents, and automation systems engineered for growth." />
-    <meta property="og:image" content="https://aitherstack.com/og-image.svg" />
+    <meta property="og:url" content="https://aitherstack-tech.vercel.app/" />
+    <meta property="og:title" content="Aither Stack Technologies | Bespoke AI Agents & High-Performance Web Platforms" />
+    <meta property="og:description" content="Engineering high-impact web platforms, bespoke AI agents, autonomous LLM workflows, and custom enterprise software." />
+    <meta property="og:image" content="https://aitherstack-tech.vercel.app/og-image.svg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/svg+xml" />
     <meta property="og:site_name" content="Aither Stack Technologies" />
     <meta property="og:locale" content="en_US" />
-
+    
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://aitherstack.com/" />
-    <meta name="twitter:title" content="Aither Stack Technologies (AST) | Web Engineering & AI Automation" />
-    <meta name="twitter:description" content="High-performance websites, web applications, AI voice agents, and automation systems engineered for growth." />
-    <meta name="twitter:image" content="https://aitherstack.com/og-image.svg" />
-
+    <meta name="twitter:url" content="https://aitherstack-tech.vercel.app/" />
+    <meta name="twitter:title" content="Aither Stack Technologies | Bespoke AI Agents & High-Performance Web Platforms" />
+    <meta name="twitter:description" content="Engineering high-impact web platforms, bespoke AI agents, autonomous LLM workflows, and custom enterprise software." />
+    <meta name="twitter:image" content="https://aitherstack-tech.vercel.app/og-image.svg" />
+    
+    <!-- Theme Color -->
     <meta name="theme-color" content="#08080A" />
-
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#08080A" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#08080A" />
+    
+    <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "Aither Stack Technologies",
       "alternateName": ["AST", "Aither Stack"],
-      "url": "https://aitherstack.com/",
-      "description": "High-performance websites, web applications, AI voice agents, and automation systems engineered for growth."
+      "url": "https://aitherstack-tech.vercel.app/",
+      "description": "Engineering high-impact web platforms, bespoke AI agents, autonomous LLM workflows, and custom enterprise software."
     }
     </script>
-
+    
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "Aither Stack Technologies",
-      "url": "https://aitherstack.com/",
-      "logo": "https://aitherstack.com/logo/favicon.svg",
+      "url": "https://aitherstack-tech.vercel.app/",
+      "logo": "https://aitherstack-tech.vercel.app/astlogo.png",
       "sameAs": [
         "https://github.com/aitherstacktechnologies"
       ],
@@ -79,58 +81,28 @@
     </script>
   </head>
   <body>
-    <noscript>
-      <iframe
-        src="https://www.googletagmanager.com/ns.html?id=GTM-NVZ6TXRF"
-        height="0"
-        width="0"
-        style="display:none;visibility:hidden"
-        title="Google Tag Manager"
-      ></iframe>
-    </noscript>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVZ6TXRF"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-
-    <script>
-      window.addEventListener('load', function () {
-        var loadGtm = function () {
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
-          var j = document.createElement('script');
-          j.async = true;
-          j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-NVZ6TXRF';
-          document.head.appendChild(j);
-        };
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadGtm, { timeout: 2000 });
-        } else {
-          setTimeout(loadGtm, 1200);
-        }
-      }, { once: true });
+    
+    <!-- 1. Google Tag Manager (DEFERRED - loads after page content) -->
+    <script defer>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-NVZ6TXRF');
     </script>
-
-    <script>
-      window.addEventListener('load', function () {
-        var loadAnalytics = function () {
-          var script = document.createElement('script');
-          script.async = true;
-          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-4J5S265B4H';
-          script.onload = function () {
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){ window.dataLayer.push(arguments); }
-            window.gtag = gtag;
-            gtag('js', new Date());
-            gtag('config', 'G-4J5S265B4H');
-          };
-          document.head.appendChild(script);
-        };
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(loadAnalytics, { timeout: 2500 });
-        } else {
-          setTimeout(loadAnalytics, 1500);
-        }
-      }, { once: true });
+    
+    <!-- 2. Google Analytics (gtag.js) - DEFERRED -->
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-4J5S265B4H"></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4J5S265B4H');
     </script>
   </body>
 </html>
