@@ -2,12 +2,7 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://aitherstack-tech.vercel.app/sitemap.xml
+Sitemap: https://aitherstack.com/sitemap.xml
 
-# Disallow private/admin paths
 Disallow: /api/
 Disallow: /private/
-Disallow: /_next/
-Disallow: /*.json$
-Disallow: /*.xml$
