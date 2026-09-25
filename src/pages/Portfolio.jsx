@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, ExternalLink, Code, Sparkles, Zap, Layers } from 'lucide-react';
+import { ExternalLink, Code, Sparkles, Zap, Layers } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
 
@@ -101,6 +101,18 @@ const projects = [
     image: '/projects logo/Gemini_Generated_Image_abms9zabms9zabms.jpg',
     liveUrl: '#',
   },
+  {
+    id: 9,
+    title: 'AuraSEO',
+    category: 'AI Voice Assistant & Chatbots',
+    tech: ['React', 'Vite', 'Tailwind', 'Vapi AI', 'OpenAI', 'Supabase'],
+    description: 'AI-powered SEO automation platform that generates, optimizes, and publishes SEO-optimized content at scale.',
+    problem: 'Businesses needed automated SEO content creation that ranks without manual intervention.',
+    built: 'AI-powered content pipeline with Vapi AI for voice-driven content strategy, OpenAI for generation, Supabase for data, deployed on Vercel.',
+    result: 'Automated 500+ SEO articles/month, 3x organic traffic growth, 80% reduction in content costs.',
+    image: '/projects logo/Gemini_Generated_Image_11tm8411tm8411tm.jpg',
+    liveUrl: 'https://auraseo-eosin.vercel.app/',
+  },
 ];
 
 const categoryIcons = {
@@ -147,25 +159,22 @@ export default function Portfolio() {
     }
   };
 
-  const handleDetailClick = (e, project) => {
-    e.stopPropagation();
-    // Navigate to detail page or open modal
-    console.log('View details for:', project.title);
-  };
+  // Determine if a project is the last one (9th project) to center it
+  const isLastProject = (index) => index === projects.length - 1;
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-ivory">
-<Hero
-          eyebrow="// PROVEN DEPLOYMENTS"
-          title={
-            <>
-              Digital Work,<br />
-              Built to Make <AccentText>an Impact.</AccentText>
-            </>
-          }
-          subtitle="A selection of websites, applications, AI systems, and digital experiences engineered by AST."
-          align="left"
-        />
+      <Hero
+        eyebrow="// PROVEN DEPLOYMENTS"
+        title={
+          <>
+            Digital Work,<br />
+            Built to Make <AccentText>an Impact.</AccentText>
+          </>
+        }
+        subtitle="A selection of websites, applications, AI systems, and digital experiences engineered by AST."
+        align="left"
+      />
 
       {/* PROJECTS GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -174,6 +183,7 @@ export default function Portfolio() {
             const CategoryIcon = categoryIcons[project.category] || Code;
             const isHovered = hoveredCard === project.id;
             const isExpanded = isMobile ? expandedCard === project.id : isHovered;
+            const isLast = isLastProject(index);
 
             return (
               <motion.div
@@ -182,7 +192,7 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="group relative mx-auto w-full max-w-lg transform-gpu will-change-transform"
+                className={`group relative mx-auto w-full max-w-lg transform-gpu will-change-transform ${isLast ? 'md:col-span-2 md:max-w-2xl' : ''}`}
                 onClick={() => handleCardClick(project.id)}
                 onMouseEnter={() => handleMouseEnter(project.id)}
                 onMouseLeave={handleMouseLeave}
@@ -275,8 +285,8 @@ export default function Portfolio() {
                         </div>
                       </div>
 
-                      {/* Dual CTAs */}
-                      <div className="pt-4 border-t border-ast-border flex flex-col sm:flex-row gap-3">
+                      {/* Single CTA - Visit Project only */}
+                      <div className="pt-4 border-t border-ast-border flex flex-col sm:flex-row gap-3 justify-center">
                         <Button
                           as="a"
                           href={project.liveUrl}
@@ -289,16 +299,6 @@ export default function Portfolio() {
                           arrowIcon={ExternalLink}
                         >
                           Visit Project
-                        </Button>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          showArrow
-                          className="flex-1 sm:flex-none"
-                          onClick={(e) => handleDetailClick(e, project)}
-                          arrowIcon={ArrowUpRight}
-                        >
-                          View Details
                         </Button>
                       </div>
                     </div>

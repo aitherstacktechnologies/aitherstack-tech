@@ -111,10 +111,10 @@ export default function LiquidBackground() {
         ];
 
     const followers = isMobile
-      ? [{ x: targetX, y: targetY, vx: 0, vy: 0, stiffness: 0.01, damping: 0.8, radius: 0.3 }]
+      ? [{ x: width * 0.5, y: height * 0.35, vx: 0, vy: 0, stiffness: 0.01, damping: 0.8, radius: 0.3 }]
       : [
-          { x: targetX, y: targetY, vx: 0, vy: 0, stiffness: 0.015, damping: 0.85, radius: 0.35 },
-          { x: targetX, y: targetY, vx: 0, vy: 0, stiffness: 0.006, damping: 0.75, radius: 0.5 }
+          { x: width * 0.5, y: height * 0.35, vx: 0, vy: 0, stiffness: 0.015, damping: 0.85, radius: 0.35 },
+          { x: width * 0.5, y: height * 0.35, vx: 0, vy: 0, stiffness: 0.006, damping: 0.75, radius: 0.5 }
         ];
 
     const rebuildStaticGradients = () => {
@@ -139,13 +139,25 @@ export default function LiquidBackground() {
     };
 
     const handlePointerMove = (event) => {
-      targetX = event.clientX;
-      targetY = event.clientY;
+      if (event.clientX !== undefined && event.clientY !== undefined) {
+        targetX = event.clientX;
+        targetY = event.clientY;
+      }
+    };
+
+    const handleTouchMove = (event) => {
+      if (event.touches && event.touches.length > 0) {
+        const touch = event.touches[0];
+        targetX = touch.clientX;
+        targetY = touch.clientY;
+      }
     };
 
     const resize = () => {
       width = Math.max(1, window.innerWidth);
       height = Math.max(1, window.innerHeight);
+      canvas.width = width;
+      canvas.height = height;
       rebuildStaticGradients();
     };
 
@@ -222,6 +234,7 @@ export default function LiquidBackground() {
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
     window.addEventListener("resize", resize, { passive: true });
     document.addEventListener("visibilitychange", handleVisibility);
 
@@ -237,6 +250,7 @@ export default function LiquidBackground() {
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", handleVisibility);
       window.clearTimeout(startTimeout);
