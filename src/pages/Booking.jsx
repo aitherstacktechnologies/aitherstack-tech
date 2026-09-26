@@ -27,8 +27,8 @@ export default function Booking() {
         </Link>
       </Hero>
 
-      <section className="px-6 py-12 sm:px-8 lg:px-12 lg:py-16">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start lg:gap-14">
+      <section className="px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16 xl:px-12">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[minmax(0,1fr)_300px] lg:items-start lg:gap-14">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -37,7 +37,7 @@ export default function Booking() {
             <div className="mb-5 flex items-end justify-between gap-4">
               <div>
                 <p className="font-mono text-xs uppercase tracking-[0.2em] text-ast-muted">Select your slot</p>
-                <h2 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl text-ast-ivory">Let's make the first move.</h2>
+                <h2 className="mt-2 text-2xl sm:text-3xl font-bold tracking-tight text-ast-ivory">Let's make the first move.</h2>
               </div>
               <ArrowUpRight className="hidden h-6 w-6 text-ast-peach sm:block" />
             </div>
@@ -87,7 +87,7 @@ export default function Booking() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,7 +96,7 @@ export default function Booking() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.92] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory leading-[0.92] mb-8">
               Not Ready to Book Yet?<br />Start With the Brief.
             </h2>
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">

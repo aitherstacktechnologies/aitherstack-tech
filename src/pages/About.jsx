@@ -35,8 +35,8 @@ const values = [
 
 export default function About() {
   return (
-    <div className="bg-transparent text-ast-ivory min-h-screen">
-      <div className="relative pt-16 pb-12 px-6 sm:px-8 lg:px-12 border-b border-ast-border overflow-hidden">
+    <div className="bg-transparent text-ast-ivory min-h-screen overflow-x-hidden">
+      <div className="relative pt-16 pb-12 px-4 sm:px-6 lg:px-8 xl:px-12 border-b border-ast-border overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <span className="absolute -bottom-20 -right-10 text-[20vw] font-black tracking-tighter text-ast-ivory opacity-[0.04] select-none">
             AST
@@ -47,7 +47,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-4 leading-[1.1]"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-4 leading-[1.1]"
           >
             WE BUILD DIGITAL SYSTEMS
             FOR AMBITIOUS BUSINESSES.
@@ -56,7 +56,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg sm:text-xl text-ast-muted max-w-2xl leading-relaxed mt-6"
+            className="text-base sm:text-lg text-ast-muted max-w-2xl leading-relaxed mt-6"
           >
             AST builds modern websites, web applications, AI systems, automation workflows, and custom business software designed around real business needs.
           </motion.p>
@@ -64,7 +64,7 @@ export default function About() {
       </div>
 
       {/* CAPABILITIES */}
-      <section className="py-16 px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {capabilities.map((cap, index) => {
@@ -105,7 +105,7 @@ export default function About() {
       </section>
 
       {/* BUILT AROUND THE BUSINESS */}
-      <section className="py-14 px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-14 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -113,7 +113,7 @@ export default function About() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
               BUILT AROUND THE BUSINESS
             </h2>
             <p className="text-ast-muted leading-relaxed mb-6 max-w-3xl">
@@ -135,16 +135,16 @@ export default function About() {
       </section>
 
       {/* HOW WE WORK */}
-      <section className="py-16 px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
-            className="mb-16"
+            className="mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
               HOW WE WORK
             </h2>
           </motion.div>
@@ -186,15 +186,15 @@ export default function About() {
       </section>
 
       {/* WHY AST */}
-      <section className="py-16 px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
               WHY AST
             </h2>
             <p className="text-ast-muted max-w-2xl mx-auto">
@@ -231,15 +231,15 @@ export default function About() {
       </section>
 
       {/* OUR VALUES */}
-      <section className="py-16 px-6 sm:px-8 lg:px-12">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            className="text-center mb-16"
+            className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="text-3xl lg:text-4xl font-black tracking-tight uppercase mb-4">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
               OUR VALUES
             </h2>
             <p className="text-ast-muted max-w-2xl mx-auto">
@@ -276,7 +276,7 @@ export default function About() {
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -285,17 +285,17 @@ export default function About() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl lg:text-7xl font-display leading-[0.92] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-display leading-[0.92] mb-8">
               HAVE SOMETHING WORTH BUILDING?
             </h2>
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
               Tell us what you're trying to solve. We'll explore the technology needed to turn it into a working product.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button to="/contact" variant="primary" size="lg" showArrow className="min-w-[220px]">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <Button to="/contact" variant="primary" size="lg" showArrow className="min-w-[220px] w-full sm:w-auto">
                 START A PROJECT
               </Button>
-              <Button to="/team" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px]">
+              <Button to="/team" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px] w-full sm:w-auto">
                 MEET THE TEAM
               </Button>
             </div>

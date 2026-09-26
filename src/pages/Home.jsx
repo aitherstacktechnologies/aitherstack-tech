@@ -14,31 +14,40 @@ import {
 } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
+import AIPlayground from '../components/AIPlayground';
 
 const serviceCards = [
   {
     icon: Wand2,
-    title: 'Bespoke Experience Design',
-    description: 'Custom React interfaces and premium motion systems built for high-trust conversion.',
-    link: '/services#strategy',
+    title: 'High-Conversion Web Platforms by AST',
+    description:
+      'Engineered on modern Next.js architectures to deploy instantly at the edge and load in under 1 second. Maximize user retention and turn your web traffic into revenue with flawless digital infrastructure.',
+    badge: 'Blazing Fast Edge Tech',
+    link: '/services#web-platforms',
   },
   {
     icon: Bot,
-    title: 'AI Voice & Chat Agents',
-    description: '24/7 lead capture, qualification, and support flows tailored to your funnel.',
-    link: '/services#voice-chat',
+    title: 'AI-Powered Operations & Support',
+    description:
+      'Custom, bespoke LLM workflows and intelligent conversational agents engineered to manage 24/7 client intake, smart lead routing, and tier-1 support triage autonomously without expanding your team\'s payroll.',
+    badge: '24/7 Automated Triage',
+    link: '/services#ai-ops',
   },
   {
     icon: Workflow,
-    title: 'Automation Architecture',
-    description: 'Operational systems that eliminate repetitive tasks and connect your tools seamlessly.',
+    title: 'Intelligent Workflow Automation',
+    description:
+      'Eliminate repetitive copy-pasting and manual data bottlenecks. We seamlessly stitch your custom CRMs, internal APIs, and databases together with automated background tasks that scale natively.',
+    badge: 'Zero Manual Bottlenecks',
     link: '/services#automation',
   },
   {
     icon: Gauge,
     title: 'Performance & Growth',
-    description: 'Sub-second experiences, conversion refinement, and technical optimization under one roof.',
-    link: '/services#speed-tech',
+    description:
+      'Sub-second experiences, conversion refinement, and technical optimization under one roof.',
+    badge: 'Core Web Vitals Optimized',
+    link: '/services#performance',
   },
 ];
 
@@ -112,20 +121,145 @@ export default function Home() {
           subtitle="We design and build websites, AI systems, and digital products for brands that demand more than ordinary — precision, performance, and presence."
           actions={
             <>
-              <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[200px]">
+              <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[200px] sm:min-w-[220px]">
                 Start a Project
               </Button>
-              <Button to="/services" variant="ghost" size="lg" showArrow arrowIcon={ArrowRight} className="min-w-[200px]">
+              <Button to="/services" variant="ghost" size="lg" showArrow arrowIcon={ArrowRight} className="min-w-[200px] sm:min-w-[220px]">
                 Explore Services
               </Button>
             </>
           }
         />
 
+        {/* Value-First Service Cards */}
+        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 sm:mb-12 text-center">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
+              >
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+                Core Capabilities
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.1 }}
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
+              >
+                Signature Solutions for{' '}
+                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
+                  Ambitious Brands
+                </span>
+              </motion.h2>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {serviceCards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                  <motion.article
+                    key={card.title}
+                    initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="relative z-10 flex flex-col h-full">
+                      <div className="mb-6 flex items-start justify-between">
+                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
+                          <Icon className="h-6 w-6" />
+                        </div>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
+                      </div>
+
+                      <h3 className="text-xl sm:text-2xl font-semibold text-ast-ivory leading-snug mb-4">{card.title}</h3>
+                      <p className="text-sm leading-relaxed text-ast-muted mb-6 flex-1">{card.description}</p>
+
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-ast-accent/30 bg-ast-accent/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-ast-accent mb-6 self-start">
+                        {card.badge}
+                      </span>
+
+                      <Link
+                        to={card.link}
+                        className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-ast-accent transition-transform duration-300 hover:translate-x-1"
+                      >
+                        <span>Learn more</span>
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: 0.4 }}
+              className="mt-12 sm:mt-16 text-center"
+            >
+              <Link
+                to="/services"
+                className="inline-flex items-center gap-3 rounded-full border border-ast-accent/40 bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-ast-accent transition-all duration-300 hover:bg-ast-accent hover:text-ast-bg hover:shadow-[0_0_24px_rgba(0,212,255,0.35)]"
+              >
+                View All Services
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* AST Playground - Interactive AI Demo */}
+        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 sm:mb-12 text-center">
+              <motion.span
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm"
+              >
+                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
+                Interactive Demo
+              </motion.span>
+              <motion.h2
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.1 }}
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
+              >
+                Experience the <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">AST Playground</span>
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ delay: 0.2 }}
+                className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-ast-muted"
+              >
+                Select your industry and watch a custom AST agent simulate your workflow automation in real-time.
+              </motion.p>
+            </div>
+
+            <div className="mx-auto max-w-4xl">
+              <AIPlayground />
+            </div>
+          </div>
+        </section>
+
         {/* Tech Stack & Approach Section */}
-        <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
-           <div className="mx-auto max-w-7xl">
-            <div className="mb-12 text-center">
+        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 border-y border-ast-border">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 sm:mb-12 text-center">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +274,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-5xl lg:text-6xl font-display"
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
               >
                 Why We Choose <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">The Right Tool</span>{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">Every Time</span>
@@ -175,7 +309,7 @@ export default function Home() {
                       <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
                     </div>
 
-                    <h3 className="text-2xl font-semibold text-ast-ivory">{category.title}</h3>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-ast-ivory">{category.title}</h3>
                     <p className="mt-4 text-sm leading-relaxed text-ast-muted">{category.description}</p>
 
                     <div className="mt-6 flex flex-wrap gap-2">
@@ -195,92 +329,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Services Preview */}
-        <section className="px-4 py-16 sm:px-6 lg:px-8 xl:px-12">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-12 text-center">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
-              >
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
-                Core Capabilities
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.1 }}
-                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-5xl lg:text-6xl font-display"
-              >
-                Signature Solutions for{' '}
-                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
-                  Ambitious Brands
-                </span>
-              </motion.h2>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {serviceCards.map((card, index) => {
-                const Icon = card.icon;
-                return (
-                  <motion.article
-                    key={card.title}
-                    initial={{ opacity: 0, y: 28, scale: 0.98 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="relative z-10">
-                      <div className="mb-7 flex items-center justify-between">
-                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
-                          <Icon className="h-6 w-6" />
-                        </div>
-                        <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
-                      </div>
-
-                      <h3 className="text-2xl font-semibold text-ast-ivory">{card.title}</h3>
-                      <p className="mt-4 text-sm leading-relaxed text-ast-muted">{card.description}</p>
-
-                      <Link
-                        to={card.link}
-                        className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-ast-accent transition-transform duration-300 hover:translate-x-1"
-                      >
-                        <span>Learn more</span>
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
-                    </div>
-                  </motion.article>
-                );
-              })}
-            </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: 0.4 }}
-              className="mt-16 text-center"
-            >
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-3 rounded-full border border-ast-accent/40 bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-ast-accent transition-all duration-300 hover:bg-ast-accent hover:text-ast-bg hover:shadow-[0_0_24px_rgba(0,212,255,0.35)]"
-              >
-                View All Services
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </motion.div>
-          </div>
-        </section>
-
         {/* Why Choose Us */}
         <section className="px-4 py-12 sm:px-6 lg:px-8 xl:px-12 border-y border-ast-border">
-           <div className="mx-auto max-w-7xl">
-            <div className="mb-12 text-center">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 sm:mb-12 text-center">
               <motion.span
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -295,7 +347,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-5 text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-5xl lg:text-6xl font-display"
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
               >
                 Built for Scale.{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
@@ -334,7 +386,7 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -347,24 +399,24 @@ export default function Home() {
                 <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
                 Ready to Begin
               </span>
-              <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl lg:text-7xl font-display leading-[0.92] mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-display leading-[0.92] mb-8">
                 LET'S BUILD YOUR NEXT{' '}
                 <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                   DIGITAL MASTERPIECE
                 </span>
               </h2>
-              <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
+              <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed">
                 Strategic design, custom development, and AI automation that make your business
                 feel as premium as the value you deliver.
               </p>
 
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
                 <Button
                   to="/booking"
                   variant="primary"
                   size="lg"
                   showArrow
-                  className="min-w-[220px]"
+                  className="min-w-[220px] w-full sm:w-auto"
                 >
                   Book a Strategy Call
                 </Button>
@@ -373,7 +425,7 @@ export default function Home() {
                   variant="ghost"
                   size="lg"
                   showArrow
-                  className="min-w-[220px]"
+                  className="min-w-[220px] w-full sm:w-auto"
                   arrowIcon={ArrowUpRight}
                 >
                   View Our Work

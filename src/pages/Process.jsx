@@ -29,23 +29,23 @@ export default function Process() {
       />
 
       {/* PROCESS TIMELINE */}
-      <section className="px-6 py-16 sm:py-24">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="mx-auto max-w-6xl">
-          <motion.div 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, amount: 0.1 }} 
-            variants={gridReveal} 
-            className="grid gap-8 sm:gap-12 lg:grid-cols-3"
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={gridReveal}
+            className="grid gap-6 sm:gap-8 lg:grid-cols-3"
           >
             {steps.map((step) => {
               const Icon = step.icon;
               return (
-                <motion.article 
-                  key={step.num} 
-                  variants={reveal} 
-                  whileHover={{ y: -8 }} 
-                  className="group relative transform-gpu glassmorphic-card rounded-2xl p-8 transition-all duration-300 will-change-transform hover:border-ast-warm-orange/40 hover:shadow-[0_10px_30px_rgba(243,107,63,0.15)]"
+                <motion.article
+                  key={step.num}
+                  variants={reveal}
+                  whileHover={{ y: -8 }}
+                  className="group relative transform-gpu glassmorphic-card rounded-2xl p-6 sm:p-8 transition-all duration-300 will-change-transform hover:border-ast-warm-orange/40 hover:shadow-[0_10px_30px_rgba(243,107,63,0.15)]"
                 >
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                   <div className="relative z-10">
@@ -57,7 +57,7 @@ export default function Process() {
                         <Icon size={20} />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-ast-ivory mb-3">{step.title}</h3>
+                    <h3 className="text-xl sm:text-2xl font-bold text-ast-ivory mb-3">{step.title}</h3>
                     <div className="inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-ast-border bg-ast-surface/50 text-ast-muted mb-6">
                       {step.days}
                     </div>
@@ -85,11 +85,11 @@ export default function Process() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="relative py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <motion.div 
-          initial="hidden" 
-          whileInView="visible" 
-          viewport={{ once: true, amount: 0.1 }} 
+      <section className="relative py-12 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
@@ -97,17 +97,17 @@ export default function Process() {
           className="relative transform-gpu overflow-hidden rounded-3xl border border-ast-warm-orange/30 glassmorphic-luxury p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(243,107,63,0.06)] will-change-transform glow-luxury"
         >
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
-          
+
           <div className="relative z-10">
             <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-ast-peach mb-6">// DIRECT COLLABORATION</span>
-            <h2 className="text-4xl font-black uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.95] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ast-ivory leading-[0.95] mb-8">
               WANT TO WORK WITH US <br />
               <span className="text-gradient-luxury">DIRECTLY?</span>
             </h2>
-            <p className="text-ast-muted text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="text-ast-muted text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
               We're a small, agile technical team — we move fast and ship production-ready systems.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Button
                 to="/booking"

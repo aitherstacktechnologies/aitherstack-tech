@@ -51,9 +51,9 @@ export default function Team() {
         align="left"
       />
 
-       <section className="py-16 px-6 sm:px-8 lg:px-12">
-         <div className="max-w-6xl mx-auto">
-          <div className="founders-grid flex flex-wrap justify-center gap-8">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {teamMembers.map((member, i) => (
               <motion.div
                 key={member.name}
@@ -61,7 +61,7 @@ export default function Team() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-ast-warm-orange/40 hover:shadow-[0_0_30px_rgba(243,107,63,0.15)] w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-2rem)]"
+                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-ast-warm-orange/40 hover:shadow-[0_0_30px_rgba(243,107,63,0.15)]"
               >
                 {/* Photo */}
                 <div className="relative aspect-[4/5] overflow-hidden">
@@ -75,7 +75,7 @@ export default function Team() {
                     whileHover={{ scale: 1.05 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ast-surface via-transparent to-transparent" />
-                  
+
                   {/* Live Status Indicator */}
                   <div className="absolute top-4 right-4 z-10 glassmorphic-luxury border border-ast-border text-ast-ivory text-[10px] font-mono px-3 py-1 rounded-full flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-ast-accent animate-pulse" />
@@ -97,7 +97,6 @@ export default function Team() {
                   <p className="text-sm text-ast-muted leading-relaxed mb-6 transition-colors duration-300 group-hover:text-ast-ivory">
                     {member.bio}
                   </p>
-
                 </div>
               </motion.div>
             ))}
@@ -105,26 +104,26 @@ export default function Team() {
         </div>
       </section>
 
-       {/* SECTION 3: Why We Started */}
-       <section className="px-6 sm:px-8 lg:px-12 pb-12">
-         <div className="max-w-3xl mx-auto text-center">
-           <motion.p
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, amount: 0.1 }}
-             className="text-sm text-ast-muted leading-relaxed"
-           >
-             AST started from frustration — too many agencies deliver 
-             static sites with no automation behind them. We decided to build 
-             the opposite: a team that ships AI agents, automation pipelines, 
-             and high-converting sites that actually run your business while 
-you sleep.
-            </motion.p>
-          </div>
-        </section>
- 
-       {/* FINAL CTA */}
-      <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+      {/* SECTION 3: Why We Started */}
+      <section className="px-4 py-10 sm:px-6 sm:py-12 lg:px-8 xl:px-12 pb-12">
+        <div className="max-w-3xl mx-auto text-center">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.1 }}
+            className="text-sm text-ast-muted leading-relaxed"
+          >
+            AST started from frustration — too many agencies deliver
+            static sites with no automation behind them. We decided to build
+            the opposite: a team that ships AI agents, automation pipelines,
+            and high-converting sites that actually run your business while
+            you sleep.
+          </motion.p>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -133,7 +132,7 @@ you sleep.
         >
           <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.92] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory leading-[0.92] mb-8">
               WANT TO WORK WITH US?
             </h2>
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">

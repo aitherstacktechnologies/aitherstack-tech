@@ -178,7 +178,7 @@ export default function Portfolio() {
 
       {/* PROJECTS GRID */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-x-12 sm:gap-y-20">
           {projects.map((project, index) => {
             const CategoryIcon = categoryIcons[project.category] || Code;
             const isHovered = hoveredCard === project.id;
@@ -209,17 +209,17 @@ export default function Portfolio() {
               >
                 {/* Forklift-style Expandable Card */}
                 <div className="relative overflow-hidden rounded-3xl bg-ast-surface/50 border border-ast-border transition-all duration-300 ease-out group-hover:border-ast-warm-orange/50 shadow-2xl group-hover:shadow-ast-accent/10 card-3d-enhanced" style={{ contain: 'layout style paint' }}>
-                  
+
                   {/* Image Section - 70% of card */}
                   <div className="relative aspect-16/10 flex items-center justify-center p-6 sm:p-12 bg-transparent overflow-hidden">
-                    <motion.img 
-                      src={project.image} 
+                    <motion.img
+                      src={project.image}
                       alt={project.title}
                       width={677}
                       height={369}
                       loading={index >= 2 ? 'lazy' : 'eager'}
                       className="w-full h-full object-cover transition-all duration-300 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-103"
-                      style={{ 
+                      style={{
                         transformOrigin: 'center center',
                         willChange: 'transform',
                       }}
@@ -238,7 +238,7 @@ export default function Portfolio() {
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-                    transition={{ 
+                    transition={{
                       height: { duration: 0.3, ease: [0.33, 1, 0.68, 1] },
                       opacity: { duration: 0.2 }
                     }}
@@ -247,7 +247,7 @@ export default function Portfolio() {
                     <div className="p-6 pt-0 pb-8 space-y-6 text-left">
                       {/* Project Title & Category */}
                       <div className="pt-4 border-t border-ast-border">
-                        <h3 className="text-2xl font-bold text-ast-ivory mb-1">{project.title}</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold text-ast-ivory mb-1">{project.title}</h3>
                         <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach/70">{project.category}</span>
                       </div>
 
@@ -311,7 +311,7 @@ export default function Portfolio() {
       </section>
 
       {/* FINAL CTA SECTION */}
-      <section className="relative px-6 py-16 text-center sm:py-20 mt-24">
+      <section className="relative px-6 py-12 sm:py-16 text-center sm:py-20 mt-24">
         <div className="mx-auto max-w-5xl">
           <motion.div
             initial="hidden"
@@ -324,10 +324,10 @@ export default function Portfolio() {
             className="relative transform-gpu overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,100,31,0.06)] will-change-transform"
           >
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
-            
+
             <div className="relative z-10">
               <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-ast-peach mb-6">// PROVEN RESULTS</span>
-              <h2 className="text-4xl font-black uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.95] mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ast-ivory leading-[0.95] mb-8">
                 WANT TO BE OUR <br />
                 <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                   NEXT CASE STUDY?
@@ -336,7 +336,7 @@ export default function Portfolio() {
               <p className="text-ast-muted text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
                 Let's build a high-converting web platform or automated AI system worth showing off.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                 <Button
                   to="/booking"

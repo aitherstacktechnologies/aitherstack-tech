@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Compass, Code2, Waypoints } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
+import AIPlayground from '../components/AIPlayground';
 
 const monthlyRetainers = [
   {
@@ -58,11 +59,12 @@ const monthlyRetainers = [
 
 const oneTimeProjects = [
   {
-    category: 'E-Commerce & Web Apps',
-    title: 'Luxury E-Commerce & Web Apps',
+    category: 'High-Conversion Web Platforms',
+    title: 'High-Conversion Web Platforms by AST',
     price: 'Starting $1,499',
+    badge: 'Blazing Fast Edge Tech',
     features: [
-      'Fast frontend with smooth Framer Motion animation transitions',
+      'Engineered on modern Next.js architectures to deploy instantly at the edge and load in under 1 second',
       'Custom checkout infrastructure & database integration (Supabase/Postgres)',
       'Dark mode native UI support & interactive product showcases',
       'Sub-second performance optimization & SEO readiness',
@@ -72,6 +74,7 @@ const oneTimeProjects = [
     category: 'Conversion Systems',
     title: 'High-Converting Landing Pages',
     price: 'Starting $499',
+    badge: 'Core Web Vitals Optimized',
     features: [
       'Ultra-responsive UI with conversion-focused micro-interactions',
       'Enterprise security, anti-spam & reCAPTCHA protection',
@@ -83,6 +86,7 @@ const oneTimeProjects = [
     category: 'AI & Automation',
     title: 'AI Voice Assistant & Chatbot Setup',
     price: 'Starting $899',
+    badge: '24/7 Automated Triage',
     features: [
       'Custom Vapi AI voice agent & LLM knowledge base configuration',
       'Real-time Cal.com / Calendly automated booking integration',
@@ -94,6 +98,7 @@ const oneTimeProjects = [
     category: 'Design Systems',
     title: 'UI/UX Design & Brand System',
     price: 'Starting $599',
+    badge: 'Production-Ready Figma',
     features: [
       'Production-ready Figma design system, auto-layout kits & wireframes',
       'Pixel-perfect design-to-code implementation guidelines',
@@ -134,14 +139,14 @@ function ServiceCard({ service, isRetainer }) {
       }`}
     >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col h-full">
         <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <span className="rounded-full border border-ast-accent/20 bg-ast-accent/10 px-3 py-1 font-mono text-[11px] uppercase text-ast-accent">
             {service.category}
           </span>
           <span className="font-mono text-2xl font-bold text-ast-text">{service.price}</span>
         </div>
-        <div className="mt-7 flex items-center justify-between gap-4">
+        <div className="mt-7 flex items-start justify-between gap-4">
           <h3 className="wrap-break-word text-[clamp(1.25rem,5vw,1.5rem)] font-bold text-ast-text transition-colors group-hover:text-ast-accent">
             {service.title}
           </h3>
@@ -151,7 +156,12 @@ function ServiceCard({ service, isRetainer }) {
             </span>
           )}
         </div>
-        <ul className="mb-8 mt-6 space-y-3">
+        {service.badge && (
+          <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-ast-accent/30 bg-ast-accent/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-ast-accent self-start">
+            {service.badge}
+          </span>
+        )}
+        <ul className="mb-8 mt-6 space-y-3 flex-1">
           {service.features.map((feature) => (
             <li key={feature} className="flex items-start gap-3 text-sm text-ast-muted">
               <Check size={16} className="mt-0.5 shrink-0 font-bold text-ast-accent" />
@@ -241,9 +251,9 @@ export default function Services() {
         )}
       />
 
-      <section className="min-w-0 px-4 py-16 sm:px-6 sm:py-24">
+      <section className="min-w-0 px-4 py-12 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-6xl">
-          <div className="flex justify-center mb-16">
+          <div className="flex justify-center mb-12 sm:mb-16">
             <div className="flex w-full max-w-md flex-col rounded-2xl bg-ast-surface/80 p-1.5 backdrop-blur-xl sm:inline-flex sm:w-auto sm:max-w-none sm:flex-row sm:rounded-full">
               <button
                 onClick={() => setActiveTab('projects')}
@@ -307,7 +317,46 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="px-6 py-16 sm:py-24">
+      {/* AST Playground on Services Page */}
+      <section className="px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 sm:mb-12 text-center">
+            <motion.span
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm"
+            >
+              <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
+              Interactive Demo
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: 0.1 }}
+              className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
+            >
+              Experience the <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">AST Playground</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: 0.2 }}
+              className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-ast-muted"
+            >
+              Select your industry and watch a custom AST agent simulate your workflow automation in real-time.
+            </motion.p>
+          </div>
+
+          <div className="mx-auto max-w-4xl">
+            <AIPlayground />
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-2xl sm:mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
@@ -332,7 +381,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="border-t border-ast-border px-6 py-16 sm:py-24">
+      <section className="border-t border-ast-border px-6 py-12 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <div className="mb-12 max-w-2xl sm:mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
@@ -368,7 +417,7 @@ export default function Services() {
             <div className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-8 sm:p-10 lg:p-12 text-center">
               <div className="absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
               <div className="relative z-10">
-                <h2 className="mx-auto max-w-3xl text-4xl font-black uppercase tracking-tight text-ast-text sm:text-6xl">
+                <h2 className="mx-auto max-w-3xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ast-text">
                   LET'S BUILD SOMETHING EXTRAORDINARY.
                 </h2>
                 <Button

@@ -28,9 +28,12 @@ export default function Hero({
   const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.85, ease: [0.16, 1, 0.3, 1] };
 
   return (
-    <section className={`relative isolate overflow-hidden bg-transparent px-4 pb-8 pt-12 sm:px-6 sm:pb-12 sm:pt-20 lg:px-8 lg:pt-28 xl:px-12 ${compact ? 'min-h-[55vh]' : 'min-h-[70vh]'} flex flex-col justify-center ${className}`} style={{ aspectRatio: '16 / 9', minHeight: '55vh', contain: 'layout style' }}>
+    <section
+      className={`relative isolate overflow-hidden bg-transparent px-4 sm:px-6 lg:px-8 xl:px-12 ${compact ? 'min-h-[55vh]' : 'min-h-[70vh]'} flex flex-col justify-center ${className}`}
+      style={{ aspectRatio: '16 / 9', minHeight: '55vh', contain: 'layout style' }}
+    >
       <div className="pointer-events-none absolute inset-0 hero-scene-grid" aria-hidden="true" />
-      
+
       <motion.div
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
@@ -53,7 +56,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 26, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ ...transition, delay: 0.22 }}
-          className="font-display text-[clamp(2.85rem,7.2vw,7.25rem)] font-semibold leading-[0.94] tracking-[-0.045em] text-ast-ivory"
+          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[0.94] tracking-[-0.045em] text-ast-ivory"
         >
           {title}
         </motion.h1>
@@ -62,7 +65,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transition, delay: 0.38 }}
-          className={`mt-7 max-w-2xl text-base leading-relaxed text-ast-muted sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
+          className={`mt-6 max-w-2xl text-base leading-relaxed text-ast-muted sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
         >
           {subtitle}
         </motion.p>
@@ -72,7 +75,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...transition, delay: 0.52 }}
-            className={`mt-10 flex flex-col items-center gap-3 sm:flex-row ${align === 'center' ? 'mx-auto' : ''}`}
+            className={`mt-8 flex flex-col sm:flex-row items-center gap-3 ${align === 'center' ? 'mx-auto' : ''} flex-wrap`}
           >
             {actions}
           </motion.div>

@@ -107,7 +107,7 @@ export default function Contact() {
       setFormData(initialFormData);
     } catch (error) {
       console.error('Submission Error:', error);
-      const errorMessage = error.message.includes('HTTP') || error.message.includes('Server error') 
+      const errorMessage = error.message.includes('HTTP') || error.message.includes('Server error')
         ? 'Server configuration error. Please try again later.'
         : 'Something went wrong while sending your message. Please try again.';
       setStatus({ loading: false, success: false, error: errorMessage });
@@ -115,7 +115,7 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-transparent px-6 pb-16 pt-20 text-ast-ivory sm:px-8 lg:px-12">
+    <main className="min-h-screen overflow-x-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12 text-ast-ivory">
       <Hero
         eyebrow="// INQUIRIES OPEN"
         title={
@@ -129,151 +129,151 @@ export default function Contact() {
         actions={<Button to="/booking" variant="primary" size="lg" showArrow>Book a Call</Button>}
       />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-12 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]"
-        >
-          <aside className="space-y-6">
-            <div className="glassmorphic-luxury rounded-3xl p-8 glow-luxury">
-              <h2 className="text-xl font-bold text-ast-ivory">Direct reach</h2>
-              <p className="mt-3 text-sm leading-relaxed text-ast-muted">
-                Skip the bureaucracy and speak directly with the developers executing your build.
-              </p>
-              <div className="mt-8 space-y-5 text-sm text-ast-muted">
-                <a href="mailto:muhammadzaman.dev@gmail.com" className="flex items-center gap-3 transition-colors duration-200 hover:text-ast-peach">
-                  <Mail className="h-5 w-5 text-ast-peach" />
-                  muhammadzaman.dev@gmail.com
-                </a>
-                <div className="flex items-center gap-3">
-                  <MapPin className="h-5 w-5 text-ast-peach" />
-                  Worldwide, remote-first
-                </div>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="mt-10 sm:mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"
+      >
+        <aside className="space-y-6">
+          <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 glow-luxury">
+            <h2 className="text-xl font-bold text-ast-ivory">Direct reach</h2>
+            <p className="mt-3 text-sm leading-relaxed text-ast-muted">
+              Skip the bureaucracy and speak directly with the developers executing your build.
+            </p>
+            <div className="mt-8 space-y-5 text-sm text-ast-muted">
+              <a href="mailto:muhammadzaman.dev@gmail.com" className="flex items-center gap-3 transition-colors duration-200 hover:text-ast-peach">
+                <Mail className="h-5 w-5 text-ast-peach" />
+                muhammadzaman.dev@gmail.com
+              </a>
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-ast-peach" />
+                Worldwide, remote-first
               </div>
             </div>
-          </aside>
+          </div>
+        </aside>
 
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            className="glassmorphic-luxury rounded-3xl p-8 shadow-2xl sm:p-10 glow-luxury"
-          >
-            {status.success && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-400"
-              >
-                <CheckCircle2 className="h-5 w-5 shrink-0" />
-                Message received. We will reach out within 24 hours.
-              </motion.div>
-            )}
-            {status.error && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mb-6 flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400"
-              >
-                <AlertCircle className="h-5 w-5 shrink-0" />
-                {status.error}
-              </motion.div>
-            )}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 shadow-2xl glow-luxury"
+        >
+          {status.success && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-400"
+            >
+              <CheckCircle2 className="h-5 w-5 shrink-0" />
+              Message received. We will reach out within 24 hours.
+            </motion.div>
+          )}
+          {status.error && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6 flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400"
+            >
+              <AlertCircle className="h-5 w-5 shrink-0" />
+              {status.error}
+            </motion.div>
+          )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid gap-6 sm:grid-cols-2">
-                <label className="space-y-2">
-                  <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Name *</span>
-                  <input
-                    className={inputClassName}
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder="Your name"
-                  />
-                </label>
-                <label className="space-y-2">
-                  <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Email *</span>
-                  <input
-                    className={inputClassName}
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="email@company.com"
-                  />
-                </label>
-                <label className="space-y-2">
-                  <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Phone</span>
-                  <input
-                    className={inputClassName}
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+1 (555) 000-0000"
-                  />
-                </label>
-                <label className="space-y-2">
-                  <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Service *</span>
-                  <GlassSelect
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    options={serviceOptions}
-                    required
-                    ariaLabel="Select service"
-                  />
-                </label>
-                <label className="space-y-2">
-                  <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Budget *</span>
-                  <GlassSelect
-                    name="budget"
-                    value={formData.budget}
-                    onChange={handleChange}
-                    options={budgetOptions}
-                    required
-                    ariaLabel="Select budget"
-                  />
-                </label>
-                <label className="space-y-2">
-                  <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Timeline *</span>
-                  <GlassSelect
-                    name="timeline"
-                    value={formData.timeline}
-                    onChange={handleChange}
-                    options={timelineOptions}
-                    required
-                    ariaLabel="Select timeline"
-                  />
-                </label>
-              </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid gap-6 sm:grid-cols-2">
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Company</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Name *</span>
                 <input
                   className={inputClassName}
-                  type="text"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleChange}
-                  placeholder="Company or organization"
-                />
-              </label>
-              <label className="block space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Project details *</span>
-                <textarea
-                  className={`${inputClassName} resize-none`}
-                  name="message"
-                  value={formData.message}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
-                  rows={6}
-                  placeholder="Tell us about your project goals and requirements..."
+                  placeholder="Your name"
                 />
               </label>
+              <label className="space-y-2">
+                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Email *</span>
+                <input
+                  className={inputClassName}
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="email@company.com"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Phone</span>
+                <input
+                  className={inputClassName}
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+1 (555) 000-0000"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Service *</span>
+                <GlassSelect
+                  name="service"
+                  value={formData.service}
+                  onChange={handleChange}
+                  options={serviceOptions}
+                  required
+                  ariaLabel="Select service"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Budget *</span>
+                <GlassSelect
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  options={budgetOptions}
+                  required
+                  ariaLabel="Select budget"
+                />
+              </label>
+              <label className="space-y-2">
+                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Timeline *</span>
+                <GlassSelect
+                  name="timeline"
+                  value={formData.timeline}
+                  onChange={handleChange}
+                  options={timelineOptions}
+                  required
+                  ariaLabel="Select timeline"
+                />
+              </label>
+            </div>
+            <label className="space-y-2">
+              <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Company</span>
+              <input
+                className={inputClassName}
+                type="text"
+                name="company"
+                value={formData.company}
+                onChange={handleChange}
+                placeholder="Company or organization"
+              />
+            </label>
+            <label className="block space-y-2">
+              <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Project details *</span>
+              <textarea
+                className={`${inputClassName} resize-none`}
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows={6}
+                placeholder="Tell us about your project goals and requirements..."
+              />
+            </label>
             <Button
               type="submit"
               variant="primary"
@@ -289,7 +289,7 @@ export default function Contact() {
       </motion.div>
 
       {/* FINAL CTA */}
-      <section className="relative py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -302,7 +302,7 @@ export default function Contact() {
               <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
               READY TO START
             </span>
-            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl lg:text-7xl font-display leading-[0.92] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-display leading-[0.92] mb-8">
               LET'S BUILD YOUR NEXT{' '}
               <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                 DIGITAL MASTERPIECE
@@ -312,11 +312,11 @@ export default function Contact() {
               Strategic design, custom development, and AI automation that make your business
               feel as premium as the value you deliver.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[220px]">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+              <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[220px] w-full sm:w-auto">
                 Book a Strategy Call
               </Button>
-              <Button to="/portfolio" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px]">
+              <Button to="/portfolio" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px] w-full sm:w-auto">
                 View Our Work
               </Button>
             </div>
