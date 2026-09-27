@@ -302,7 +302,7 @@ export default function Contact() {
               <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
               READY TO START
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-display leading-[0.92] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-heading leading-[0.92] mb-8">
               LET'S BUILD YOUR NEXT{' '}
               <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                 DIGITAL MASTERPIECE

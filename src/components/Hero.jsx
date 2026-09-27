@@ -8,7 +8,7 @@ const alignmentClasses = {
 
 function AccentText({ children }) {
   return (
-    <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
+    <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">
       {children}
     </span>
   );
@@ -23,6 +23,7 @@ export default function Hero({
   compact = false,
   children,
   className = '',
+  showBlobs = true,
 }) {
   const prefersReducedMotion = useReducedMotion();
   const transition = prefersReducedMotion ? { duration: 0 } : { duration: 0.85, ease: [0.16, 1, 0.3, 1] };
@@ -32,6 +33,14 @@ export default function Hero({
       className={`relative isolate overflow-hidden bg-transparent px-4 sm:px-6 lg:px-8 xl:px-12 ${compact ? 'min-h-[55vh]' : 'min-h-[70vh]'} flex flex-col justify-center ${className}`}
       style={{ aspectRatio: '16 / 9', minHeight: '55vh', contain: 'layout style' }}
     >
+      {showBlobs && (
+        <>
+          <div className="hero-blob hero-blob-1" aria-hidden="true" />
+          <div className="hero-blob hero-blob-2" aria-hidden="true" />
+          <div className="hero-blob hero-blob-3" aria-hidden="true" />
+          <div className="grid-pattern" aria-hidden="true" />
+        </>
+      )}
       <div className="pointer-events-none absolute inset-0 hero-scene-grid" aria-hidden="true" />
 
       <motion.div
@@ -45,9 +54,10 @@ export default function Hero({
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...transition, delay: 0.12 }}
-            className="mb-7 inline-flex items-center gap-3 rounded-full border border-ast-border/80 bg-ast-surface/60 px-4 py-2 text-[11px] font-mono uppercase tracking-[0.24em] text-ast-peach backdrop-blur-md"
+            className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-[11px] font-mono uppercase tracking-[0.24em] text-orange-500 backdrop-blur-[16px]"
+            style={{ fontFamily: "'Inter', sans-serif" }}
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-ast-peach shadow-[0_0_12px_rgba(255,154,120,0.9)] animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-orange-500 shadow-[0_0_12px_rgba(255,85,0,0.9)] animate-pulse" />
             {eyebrow}
           </motion.div>
         )}
@@ -56,7 +66,8 @@ export default function Hero({
           initial={{ opacity: 0, y: 26, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ ...transition, delay: 0.22 }}
-          className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[0.94] tracking-[-0.045em] text-ast-ivory"
+          className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[0.94] tracking-[2px] uppercase text-white"
+          style={{ fontFamily: "'Krona One', sans-serif" }}
         >
           {title}
         </motion.h1>
@@ -65,7 +76,8 @@ export default function Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transition, delay: 0.38 }}
-          className={`mt-6 max-w-2xl text-base leading-relaxed text-ast-muted sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
+          className={`mt-6 max-w-2xl text-base leading-[1.6] text-white sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
+          style={{ fontFamily: "'Krona One', sans-serif" }}
         >
           {subtitle}
         </motion.p>
@@ -89,7 +101,7 @@ export default function Hero({
 
 export function HeroArrow({ label = 'Learn more' }) {
   return (
-    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-ast-peach">
+    <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-orange-500" style={{ fontFamily: "'Inter', sans-serif" }}>
       {label}
       <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
     </span>

@@ -45,10 +45,9 @@ export default function Process() {
                   key={step.num}
                   variants={reveal}
                   whileHover={{ y: -8 }}
-                  className="group relative transform-gpu glassmorphic-card rounded-2xl p-6 sm:p-8 transition-all duration-300 will-change-transform hover:border-ast-warm-orange/40 hover:shadow-[0_10px_30px_rgba(243,107,63,0.15)]"
+                  className="card-3d-glass group"
                 >
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="relative z-10">
+                  <div className="card-inner">
                     <div className="flex items-center justify-between mb-8">
                       <span className="text-2xl font-mono text-ast-muted group-hover:text-ast-peach transition-colors duration-300">
                         {step.num}

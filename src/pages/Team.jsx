@@ -51,19 +51,19 @@ export default function Team() {
         align="left"
       />
 
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, i) => (
+          {/* Upper 3 cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {teamMembers.slice(0, 3).map((member, i) => (
               <motion.div
                 key={member.name}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-ast-warm-orange/40 hover:shadow-[0_0_30px_rgba(243,107,63,0.15)]"
+                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(255,85,0,0.2)] w-full"
               >
-                {/* Photo */}
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <motion.img
                     src={member.image}
@@ -74,27 +74,69 @@ export default function Team() {
                     loading="lazy"
                     whileHover={{ scale: 1.05 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ast-surface via-transparent to-transparent" />
-
-                  {/* Live Status Indicator */}
-                  <div className="absolute top-4 right-4 z-10 glassmorphic-luxury border border-ast-border text-ast-ivory text-[10px] font-mono px-3 py-1 rounded-full flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-ast-accent animate-pulse" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 via-transparent to-transparent" />
+                  <div className="absolute top-4 right-4 z-10 glassmorphic-luxury border border-white/10 text-white text-[10px] font-mono px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
                     AVAILABLE FOR SPRINTS
                   </div>
                 </div>
-
-                {/* Info */}
                 <div className="p-6">
                   <motion.h3
-                    className="text-xl font-bold text-ast-ivory mb-1 transition-colors duration-300 group-hover:text-ast-peach"
+                    className="text-xl font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-500"
                     whileHover={{ x: 4 }}
+                    style={{ fontFamily: "'Krona One', sans-serif" }}
                   >
                     {member.name}
                   </motion.h3>
-                  <p className="text-xs font-mono uppercase tracking-wider text-ast-peach mb-3">
+                  <p className="text-xs font-mono uppercase tracking-wider text-orange-500 mb-3">
                     {member.role}
                   </p>
-                  <p className="text-sm text-ast-muted leading-relaxed mb-6 transition-colors duration-300 group-hover:text-ast-ivory">
+                  <p className="text-sm text-white/70 leading-relaxed mb-6 transition-colors duration-300 group-hover:text-white">
+                    {member.bio}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          {/* Lower 2 cards - centered below top 3, same width */}
+          <div className="flex flex-col sm:flex-row justify-center gap-8 max-w-2xl mx-auto">
+            {teamMembers.slice(3, 5).map((member, i) => (
+              <motion.div
+                key={member.name}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: (i + 3) * 0.08 }}
+                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(255,85,0,0.2)] w-full sm:w-[48%]"
+              >
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <motion.img
+                    src={member.image}
+                    alt={member.name}
+                    width={400}
+                    height={500}
+                    className="w-full h-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-105"
+                    loading="lazy"
+                    whileHover={{ scale: 1.05 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 via-transparent to-transparent" />
+                  <div className="absolute top-4 right-4 z-10 glassmorphic-luxury border border-white/10 text-white text-[10px] font-mono px-3 py-1 rounded-full flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                    AVAILABLE FOR SPRINTS
+                  </div>
+                </div>
+                <div className="p-6">
+                  <motion.h3
+                    className="text-xl font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-500"
+                    whileHover={{ x: 4 }}
+                    style={{ fontFamily: "'Krona One', sans-serif" }}
+                  >
+                    {member.name}
+                  </motion.h3>
+                  <p className="text-xs font-mono uppercase tracking-wider text-orange-500 mb-3">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-white/70 leading-relaxed mb-6 transition-colors duration-300 group-hover:text-white">
                     {member.bio}
                   </p>
                 </div>
@@ -111,7 +153,7 @@ export default function Team() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.1 }}
-            className="text-sm text-ast-muted leading-relaxed"
+            className="text-sm text-white/70 leading-relaxed"
           >
             AST started from frustration — too many agencies deliver
             static sites with no automation behind them. We decided to build
@@ -128,14 +170,14 @@ export default function Team() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(243,107,63,0.06)] will-change-transform"
+          className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-black/10 p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] will-change-transform"
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
-          <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory leading-[0.92] mb-8">
+<div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
+           <div className="relative z-10">
+             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-[0.92] mb-8">
               WANT TO WORK WITH US?
             </h2>
-            <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="text-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
               We're a small team that ships real systems fast.
             </p>
             <Button to="/booking" variant="primary" size="lg" showArrow className="mt-10">

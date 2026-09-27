@@ -36,7 +36,7 @@ const values = [
 export default function About() {
   return (
     <div className="bg-transparent text-ast-ivory min-h-screen overflow-x-hidden">
-      <div className="relative pt-16 pb-12 px-4 sm:px-6 lg:px-8 xl:px-12 border-b border-ast-border overflow-hidden">
+      <div className="relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 xl:px-12 border-b border-ast-border overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <span className="absolute -bottom-20 -right-10 text-[20vw] font-black tracking-tighter text-ast-ivory opacity-[0.04] select-none">
             AST
@@ -76,10 +76,9 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 transition-all duration-500 hover:border-ast-warm-orange/40 hover:shadow-[0_32px_64px_rgba(243,107,63,0.4)]"
+                  className="card-3d-glass group"
                 >
-                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-ast-warm-orange/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="relative z-10">
+                  <div className="card-inner">
                     <div className="mb-6 flex items-center justify-between">
                       <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-peach">
                         <Icon className="h-6 w-6" />
@@ -156,10 +155,9 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 transition-all duration-500 hover:border-ast-warm-orange/40 hover:shadow-[0_32px_64px_rgba(243,107,63,0.4)]"
+                className="card-3d-glass group"
               >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-ast-warm-orange/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative z-10">
+                <div className="card-inner">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-3xl font-black tracking-tighter text-ast-ivory">{step.number}</span>
                     <ArrowRight className="h-4 w-4 text-ast-peach transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -209,10 +207,9 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 transition-all duration-500 hover:border-ast-accent/40 hover:-translate-y-1"
+                className="card-3d-glass group"
               >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-ast-warm-orange/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative z-10">
+                <div className="card-inner">
                   <h3 className="text-lg font-bold mb-3 text-ast-ivory">{value.title}</h3>
                   <p className="text-sm text-ast-muted leading-relaxed mb-4">{value.description}</p>
                   <div className="space-y-2">
@@ -254,10 +251,9 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 transition-all duration-500 hover:border-ast-accent/40 hover:-translate-y-1"
+                className="card-3d-glass group"
               >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-ast-warm-orange/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative z-10">
+                <div className="card-inner">
                   <h3 className="text-lg font-bold mb-3 text-ast-ivory">{value.title}</h3>
                   <p className="text-sm text-ast-muted leading-relaxed mb-4">{value.description}</p>
                   <div className="space-y-2">
@@ -285,7 +281,7 @@ export default function About() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-display leading-[0.92] mb-8">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-heading leading-[0.92] mb-8">
               HAVE SOMETHING WORTH BUILDING?
             </h2>
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">

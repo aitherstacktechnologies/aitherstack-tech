@@ -123,47 +123,11 @@ const categoryIcons = {
 };
 
 export default function Portfolio() {
-  const [expandedCard, setExpandedCard] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const handleCardClick = (projectId) => {
-    if (isMobile) {
-      setExpandedCard(prev => prev === projectId ? null : projectId);
-    }
-  };
-
-  const handleMouseEnter = (projectId) => {
-    if (!isMobile) {
-      setHoveredCard(projectId);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (!isMobile) {
-      setHoveredCard(null);
-    }
-  };
-
-  const handleCTAClick = (e, project) => {
-    e.stopPropagation();
-    if (project.liveUrl && project.liveUrl !== '#') {
-      window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
-    }
-  };
-
-  // Determine if a project is the last one (9th project) to center it
-  const isLastProject = (index) => index === projects.length - 1;
+  const [hoveredImage, setHoveredImage] = useState(null);
 
   return (
-    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-ivory">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-white">
       <Hero
         eyebrow="// PROVEN DEPLOYMENTS"
         title={
@@ -182,8 +146,6 @@ export default function Portfolio() {
           {projects.map((project, index) => {
             const CategoryIcon = categoryIcons[project.category] || Code;
             const isHovered = hoveredCard === project.id;
-            const isExpanded = isMobile ? expandedCard === project.id : isHovered;
-            const isLast = isLastProject(index);
 
             return (
               <motion.div
@@ -192,101 +154,50 @@ export default function Portfolio() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
-                className={`group relative mx-auto w-full max-w-lg transform-gpu will-change-transform ${isLast ? 'md:col-span-2 md:max-w-2xl' : ''}`}
-                onClick={() => handleCardClick(project.id)}
-                onMouseEnter={() => handleMouseEnter(project.id)}
-                onMouseLeave={handleMouseLeave}
-                onKeyDown={(event) => {
-                  if ((event.key === 'Enter' || event.key === ' ') && isMobile) {
-                    event.preventDefault();
-                    handleCardClick(project.id);
-                  }
-                }}
-                role="button"
-                tabIndex={isMobile ? 0 : -1}
-                aria-expanded={isMobile && expandedCard === project.id}
-                style={{ perspective: '1000px' }}
+                className="relative mx-auto w-full max-w-lg transform-gpu will-change-transform"
+                onMouseEnter={() => setHoveredCard(project.id)}
+                onMouseLeave={() => { setHoveredCard(null); setHoveredImage(null); }}
               >
-                {/* Forklift-style Expandable Card */}
-                <div className="relative overflow-hidden rounded-3xl bg-ast-surface/50 border border-ast-border transition-all duration-300 ease-out group-hover:border-ast-warm-orange/50 shadow-2xl group-hover:shadow-ast-accent/10 card-3d-enhanced" style={{ contain: 'layout style paint' }}>
-
-                  {/* Image Section - 70% of card */}
-                  <div className="relative aspect-16/10 flex items-center justify-center p-6 sm:p-12 bg-transparent overflow-hidden">
+                {/* Card */}
+                <div
+                  className="card-3d-glass group overflow-hidden relative"
+                  onMouseEnter={() => setHoveredCard(project.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  {/* Image Section */}
+                  <div className="relative aspect-16/10 flex items-center justify-center overflow-hidden bg-transparent">
                     <motion.img
                       src={project.image}
                       alt={project.title}
                       width={677}
                       height={369}
                       loading={index >= 2 ? 'lazy' : 'eager'}
-                      className="w-full h-full object-cover transition-all duration-300 grayscale group-hover:grayscale-0 opacity-80 group-hover:opacity-100 group-hover:scale-103"
-                      style={{
-                        transformOrigin: 'center center',
-                        willChange: 'transform',
-                      }}
+                      className={`w-full h-full object-cover transition-all duration-500 grayscale group-hover:grayscale-0 opacity-80 ${
+                        isHovered ? 'opacity-100 blur-sm scale-105' : 'opacity-80 group-hover:opacity-100 group-hover:scale-103 group-hover:blur-0'
+                      }`}
+                      style={{ transformOrigin: 'center center' }}
                       whileHover={{ scale: 1.03 }}
+                      onMouseEnter={() => setHoveredImage(project.id)}
+                      onMouseLeave={() => setHoveredImage(null)}
                     />
+
                     {/* Category badge on image */}
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-ast-bg/90 backdrop-blur-sm border border-ast-border text-[10px] font-mono uppercase tracking-wider text-ast-peach">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-sm border border-white/10 text-[10px] font-mono uppercase tracking-wider text-orange-500">
                         <CategoryIcon className="h-3 w-3" />
                         {project.category.split(' & ')[0]}
                       </span>
                     </div>
-                  </div>
 
-                  {/* Expandable Content Section - reveals on hover/click */}
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: isExpanded ? 'auto' : 0, opacity: isExpanded ? 1 : 0 }}
-                    transition={{
-                      height: { duration: 0.3, ease: [0.33, 1, 0.68, 1] },
-                      opacity: { duration: 0.2 }
-                    }}
-                    className="overflow-hidden"
-                  >
-                    <div className="p-6 pt-0 pb-8 space-y-6 text-left">
-                      {/* Project Title & Category */}
-                      <div className="pt-4 border-t border-ast-border">
-                        <h3 className="text-xl sm:text-2xl font-bold text-ast-ivory mb-1">{project.title}</h3>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach/70">{project.category}</span>
-                      </div>
-
-                      {/* Problem → Built → Result */}
-                      <div className="space-y-5">
-                        <div className="relative pl-4 border-l-2 border-ast-accent/30">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-2">Problem</span>
-                          <p className="text-ast-muted text-base leading-relaxed">{project.problem}</p>
-                        </div>
-                        <div className="relative pl-4 border-l-2 border-ast-accent/30">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-2">Solution</span>
-                          <p className="text-ast-muted text-base leading-relaxed">{project.built}</p>
-                        </div>
-                        <div className="relative pl-4 border-l-2 border-ast-accent/30">
-                          <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-2">Result</span>
-                          <p className="text-ast-ivory text-base leading-relaxed font-medium">{project.result}</p>
-                        </div>
-                      </div>
-
-                      {/* Tech Stack Pill Tags */}
-                      <div>
-                        <span className="text-[10px] font-mono uppercase tracking-widest text-ast-peach block mb-3">Engineering Stack</span>
-                        <div className="flex flex-wrap gap-2">
-                          {project.tech.map((t, i) => (
-                            <motion.span
-                              key={t}
-                              initial={{ opacity: 0, scale: 0.9 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              transition={{ delay: 0.1 + i * 0.03 }}
-                              className="text-[11px] font-mono text-ast-muted border border-ast-border px-3 py-1.5 rounded-full bg-ast-surface/50 hover:bg-ast-warm-orange/10 hover:text-ast-peach hover:border-ast-warm-orange/30 transition-all duration-200 cursor-default"
-                            >
-                              {t}
-                            </motion.span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Single CTA - Visit Project only */}
-                      <div className="pt-4 border-t border-ast-border flex flex-col sm:flex-row gap-3 justify-center">
+                    {/* Visit CTA Button on image hover */}
+                    {isHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 10 }}
+                        transition={{ duration: 0.25 }}
+                        className="absolute inset-0 flex items-center justify-center z-20"
+                      >
                         <Button
                           as="a"
                           href={project.liveUrl}
@@ -294,9 +205,92 @@ export default function Portfolio() {
                           variant="primary"
                           size="sm"
                           showArrow
-                          className="flex-1 sm:flex-none"
-                          onClick={(e) => handleCTAClick(e, project)}
                           arrowIcon={ExternalLink}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (project.liveUrl && project.liveUrl !== '#') {
+                              window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+                            }
+                          }}
+                        >
+                          Visit Project
+                        </Button>
+                      </motion.div>
+                    )}
+
+                    {/* Overlay blur on image when hovered */}
+                    {isHovered && (
+                      <div className="absolute inset-0 bg-black/30 pointer-events-none" />
+                    )}
+                  </div>
+
+                  {/* Expandable Content Section - reveals on hover */}
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: isHovered ? 'auto' : 0, opacity: isHovered ? 1 : 0 }}
+                    transition={{
+                      height: { duration: 0.35, ease: [0.33, 1, 0.68, 1] },
+                      opacity: { duration: 0.2 }
+                    }}
+                    className="overflow-hidden flex-1"
+                  >
+                    <div className="p-6 pt-0 pb-8 space-y-6 text-left flex-1">
+                      {/* Project Title & Category */}
+                      <div className="pt-4 border-t border-white/10">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h3>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-orange-500/70">{project.category}</span>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-white/70 text-base leading-relaxed">{project.description}</p>
+
+                      {/* Problem → Built → Result */}
+                      <div className="space-y-5">
+                        <div className="relative pl-4 border-l-2 border-orange-500/30">
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-orange-500 block mb-2">Problem</span>
+                          <p className="text-white/70 text-base leading-relaxed">{project.problem}</p>
+                        </div>
+                        <div className="relative pl-4 border-l-2 border-orange-500/30">
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-orange-500 block mb-2">Solution</span>
+                          <p className="text-white/70 text-base leading-relaxed">{project.built}</p>
+                        </div>
+                        <div className="relative pl-4 border-l-2 border-orange-500/30">
+                          <span className="text-[10px] font-mono uppercase tracking-widest text-orange-500 block mb-2">Result</span>
+                          <p className="text-white text-base leading-relaxed font-medium">{project.result}</p>
+                        </div>
+                      </div>
+
+                      {/* Tech Stack Pill Tags */}
+                      <div>
+                        <span className="text-[10px] font-mono uppercase tracking-widest text-orange-500 block mb-3">Engineering Stack</span>
+                        <div className="flex flex-wrap gap-2">
+                          {project.tech.map((t, i) => (
+                            <span
+                              key={t}
+                              className="text-[11px] font-mono text-white/70 border border-white/10 px-3 py-1.5 rounded-full bg-white/[0.05] hover:bg-orange-500/10 hover:text-orange-500 hover:border-orange-500/30 transition-all duration-200 cursor-default"
+                            >
+                              {t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* CTA */}
+                      <div className="pt-4 border-t border-white/10 flex justify-center">
+                        <Button
+                          as="a"
+                          href={project.liveUrl}
+                          external={project.liveUrl !== '#'}
+                          variant="primary"
+                          size="sm"
+                          showArrow
+                          arrowIcon={ExternalLink}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (project.liveUrl && project.liveUrl !== '#') {
+                              window.open(project.liveUrl, '_blank', 'noopener,noreferrer');
+                            }
+                          }}
                         >
                           Visit Project
                         </Button>
@@ -321,19 +315,19 @@ export default function Portfolio() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
             }}
-            className="relative transform-gpu overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,100,31,0.06)] will-change-transform"
+            className="relative transform-gpu overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-black/10 p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] will-change-transform"
           >
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
 
             <div className="relative z-10">
-              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-ast-peach mb-6">// PROVEN RESULTS</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ast-ivory leading-[0.95] mb-8">
+              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-500 mb-6">// PROVEN RESULTS</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[0.95] mb-8">
                 WANT TO BE OUR <br />
-                <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">
                   NEXT CASE STUDY?
                 </span>
               </h2>
-              <p className="text-ast-muted text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+              <p className="text-white/70 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
                 Let's build a high-converting web platform or automated AI system worth showing off.
               </p>
 

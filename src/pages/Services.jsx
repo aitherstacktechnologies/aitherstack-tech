@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Compass, Code2, Waypoints } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
-import AIPlayground from '../components/AIPlayground';
 
 const monthlyRetainers = [
   {
@@ -131,45 +130,38 @@ function ServiceCard({ service, isRetainer }) {
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
-      whileHover={{ y: -8 }}
-      className={`group relative flex min-w-0 transform-gpu flex-col justify-between overflow-hidden rounded-3xl border p-6 transition-all duration-300 will-change-transform hover:border-ast-accent/40 sm:p-8 ${
-        service.featured
-          ? 'border-ast-accent/40 bg-gradient-to-b from-ast-accent/10 via-ast-surface to-ast-surface shadow-[0_0_25px_rgba(255,100,31,0.12)]'
-          : 'border-ast-border bg-ast-surface/50'
-      }`}
-    >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative z-10 flex flex-col h-full">
-        <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
-          <span className="rounded-full border border-ast-accent/20 bg-ast-accent/10 px-3 py-1 font-mono text-[11px] uppercase text-ast-accent">
-            {service.category}
-          </span>
-          <span className="font-mono text-2xl font-bold text-ast-text">{service.price}</span>
-        </div>
-        <div className="mt-7 flex items-start justify-between gap-4">
-          <h3 className="wrap-break-word text-[clamp(1.25rem,5vw,1.5rem)] font-bold text-ast-text transition-colors group-hover:text-ast-accent">
-            {service.title}
-          </h3>
-          {service.featured && (
-            <span className="shrink-0 rounded-full bg-ast-accent text-ast-bg font-bold text-[10px] tracking-wider uppercase px-2.5 py-0.5">
-              Popular
-            </span>
-          )}
-        </div>
-        {service.badge && (
-          <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-ast-accent/30 bg-ast-accent/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-ast-accent self-start">
-            {service.badge}
-          </span>
-        )}
-        <ul className="mb-8 mt-6 space-y-3 flex-1">
-          {service.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-3 text-sm text-ast-muted">
-              <Check size={16} className="mt-0.5 shrink-0 font-bold text-ast-accent" />
-              <span>{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+className={`card-3d-glass group`}>
+       <div className="card-inner flex flex-col h-full">
+         <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+           <span className="rounded-full border border-orange-500/20 bg-orange-500/10 px-3 py-1 font-mono text-[11px] uppercase text-orange-500">
+             {service.category}
+           </span>
+           <span className="font-mono text-2xl font-bold text-white">{service.price}</span>
+         </div>
+         <div className="mt-7 flex items-start justify-between gap-4">
+           <h3 className="wrap-break-word text-[clamp(1.25rem,5vw,1.5rem)] font-bold text-white transition-colors group-hover:text-orange-500">
+             {service.title}
+           </h3>
+           {service.featured && (
+             <span className="shrink-0 rounded-full bg-orange-500 text-white font-bold text-[10px] tracking-wider uppercase px-2.5 py-0.5">
+               Popular
+             </span>
+           )}
+         </div>
+         {service.badge && (
+           <span className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-orange-500/30 bg-orange-500/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-orange-500 self-start">
+             {service.badge}
+           </span>
+         )}
+         <ul className="mb-8 mt-6 space-y-3 flex-1">
+           {service.features.map((feature) => (
+             <li key={feature} className="flex items-start gap-3 text-sm text-white/70">
+               <Check size={16} className="mt-0.5 shrink-0 font-bold text-orange-500" />
+               <span>{feature}</span>
+             </li>
+           ))}
+         </ul>
+       </div>
       <Button
         to="/booking"
         variant={service.featured ? 'primary' : 'outline'}
@@ -189,21 +181,21 @@ function ExecutionStep({ step }) {
   return (
     <motion.article
       variants={reveal}
-      whileHover={{ y: -6 }}
-      className="group relative transform-gpu overflow-hidden rounded-2xl bg-ast-surface/80 border border-ast-border p-8 transition-all duration-300 hover:border-ast-accent/40 hover:shadow-[0_10px_30px_rgba(255,100,31,0.1)] sm:p-10"
-    >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative flex items-center justify-between">
-        <span className="font-mono text-2xl text-ast-muted transition-colors duration-300 group-hover:text-ast-accent">
-          {step.number}
-        </span>
-        <Icon size={22} className="text-ast-muted transition-colors duration-300 group-hover:text-ast-accent" />
-      </div>
+whileInView={{ opacity: 1, y: 0 }}
+       viewport={{ once: true, amount: 0.1 }}
+       className="card-3d-glass group"
+     >
+       <div className="card-inner">
+         <span className="font-mono text-2xl text-white/70 transition-colors duration-300 group-hover:text-orange-500">
+           {step.number}
+         </span>
+         <Icon size={22} className="text-orange-500 transition-colors duration-300 group-hover:text-orange-500" />
+       </div>
       <div className="relative">
-        <h3 className="mt-12 text-2xl font-semibold text-ast-text transition-colors duration-300 group-hover:text-ast-accent">
+        <h3 className="mt-12 text-2xl font-semibold text-white transition-colors duration-300 group-hover:text-orange-500">
           {step.title}
         </h3>
-        <p className="mt-4 text-sm leading-7 text-ast-muted">{step.description}</p>
+        <p className="mt-4 text-sm leading-7 text-white/70">{step.description}</p>
       </div>
     </motion.article>
   );
@@ -214,16 +206,16 @@ function Guarantee({ guarantee }) {
   return (
     <motion.article
       variants={reveal}
-      whileHover={{ y: -6 }}
-      className="group relative transform-gpu overflow-hidden rounded-3xl border border-ast-border bg-ast-surface/50 p-8 transition-all duration-300 will-change-transform hover:border-ast-accent/40 sm:p-10"
+whileInView={{ opacity: 1, y: 0 }}
+       viewport={{ once: true, amount: 0.1 }}
+       className="card-3d-glass group"
     >
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-      <div className="relative">
-        <Icon size={24} className="text-ast-accent transition-colors duration-300 group-hover:text-ast-accent/70" />
-        <h3 className="mt-8 text-xl font-semibold text-ast-text transition-colors duration-300 group-hover:text-ast-accent">
-          {guarantee.title}
-        </h3>
-        <p className="mt-3 max-w-md text-sm leading-7 text-ast-muted">{guarantee.description}</p>
+      <div className="card-inner">
+<Icon size={24} className="text-orange-500 transition-colors duration-300 group-hover:text-orange-500" />
+         <h3 className="mt-8 text-xl font-semibold text-white transition-colors duration-300 group-hover:text-orange-500">
+           {guarantee.title}
+         </h3>
+         <p className="mt-3 max-w-md text-sm leading-7 text-white/70">{guarantee.description}</p>
       </div>
     </motion.article>
   );
@@ -233,7 +225,7 @@ export default function Services() {
   const [activeTab, setActiveTab] = useState('retainers');
 
   return (
-    <main className="min-h-screen min-w-0 max-w-full overflow-x-hidden bg-transparent text-ast-text">
+    <main className="min-h-screen min-w-0 max-w-full overflow-x-hidden bg-transparent text-white">
       <Hero
         eyebrow="// DIGITAL SYSTEMS"
         title={
@@ -254,156 +246,117 @@ export default function Services() {
       <section className="min-w-0 px-4 py-12 sm:px-6 sm:py-16">
         <div className="mx-auto max-w-6xl">
           <div className="flex justify-center mb-12 sm:mb-16">
-            <div className="flex w-full max-w-md flex-col rounded-2xl bg-ast-surface/80 p-1.5 backdrop-blur-xl sm:inline-flex sm:w-auto sm:max-w-none sm:flex-row sm:rounded-full">
-              <button
-                onClick={() => setActiveTab('projects')}
-                className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${
-                  activeTab === 'projects'
-                    ? 'bg-ast-accent text-ast-bg shadow-[0_0_20px_rgba(255,100,31,0.3)]'
-                    : 'text-ast-muted hover:text-ast-text'
-                }`}
-              >
-                One-Time Projects
-              </button>
-              <button
-                onClick={() => setActiveTab('retainers')}
-                className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${
-                  activeTab === 'retainers'
-                    ? 'bg-ast-accent text-ast-bg shadow-[0_0_20px_rgba(255,100,31,0.3)]'
-                    : 'text-ast-muted hover:text-ast-text'
-                }`}
-              >
-                Monthly Retainers
-              </button>
-            </div>
-          </div>
-          <div className="mb-8 text-center sm:mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
-              Build the next version of your business.
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-ast-muted">
-              Choose a focused build for immediate momentum or ongoing support that keeps your digital system sharp.
-            </p>
-          </div>
-          <AnimatePresence mode="wait">
-            {activeTab === 'projects' ? (
-              <motion.div
-                key="projects"
-                initial="hidden"
-                animate="visible"
-                exit={{ opacity: 0, y: -12 }}
-                variants={gridReveal}
-                className="grid min-w-0 grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2"
-              >
-                {oneTimeProjects.map((project) => (
-                  <ServiceCard key={project.title} service={project} isRetainer={false} />
-                ))}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="retainers"
-                initial="hidden"
-                animate="visible"
-                exit={{ opacity: 0, y: -12 }}
-                variants={gridReveal}
-                className="grid min-w-0 grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2"
-              >
-                {monthlyRetainers.map((plan) => (
-                  <ServiceCard key={plan.title} service={plan} isRetainer={true} />
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </section>
+<div className="flex w-full max-w-md flex-col rounded-2xl bg-white/[0.08] p-1.5 backdrop-blur-xl sm:inline-flex sm:w-auto sm:max-w-none sm:flex-row sm:rounded-full">
+               <button
+                 onClick={() => setActiveTab('projects')}
+                 className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${
+                   activeTab === 'projects'
+                     ? 'bg-orange-500 text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]'
+                     : 'text-white/70 hover:text-white'
+                 }`}
+               >
+                 One-Time Projects
+               </button>
+               <button
+                 onClick={() => setActiveTab('retainers')}
+                 className={`relative w-full rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-widest transition-all duration-500 sm:w-auto sm:px-8 ${
+                   activeTab === 'retainers'
+                     ? 'bg-orange-500 text-white shadow-[0_0_20px_rgba(255,85,0,0.3)]'
+                     : 'text-white/70 hover:text-white'
+                 }`}
+               >
+                 Monthly Retainers
+               </button>
+             </div>
+           </div>
+           <div className="mb-8 text-center sm:mb-12">
+             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+               Build the next version of your business.
+             </h2>
+             <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-white/70">
+               Choose a focused build for immediate momentum or ongoing support that keeps your digital system sharp.
+             </p>
+           </div>
+           <AnimatePresence mode="wait">
+             {activeTab === 'projects' ? (
+               <motion.div
+                 key="projects"
+                 initial="hidden"
+                 animate="visible"
+                 exit={{ opacity: 0, y: -12 }}
+                 variants={gridReveal}
+                 className="grid min-w-0 grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2"
+               >
+                 {oneTimeProjects.map((project) => (
+                   <ServiceCard key={project.title} service={project} isRetainer={false} />
+                 ))}
+               </motion.div>
+             ) : (
+               <motion.div
+                 key="retainers"
+                 initial="hidden"
+                 animate="visible"
+                 exit={{ opacity: 0, y: -12 }}
+                 variants={gridReveal}
+                 className="grid min-w-0 grid-cols-1 gap-8 sm:gap-12 md:grid-cols-2"
+               >
+                 {monthlyRetainers.map((plan) => (
+                   <ServiceCard key={plan.title} service={plan} isRetainer={true} />
+                 ))}
+               </motion.div>
+             )}
+           </AnimatePresence>
+         </div>
+       </section>
 
-      {/* AST Playground on Services Page */}
-      <section className="px-4 py-12 sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 sm:mb-12 text-center">
-            <motion.span
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm"
-            >
-              <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
-              Interactive Demo
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: 0.1 }}
-              className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
-            >
-              Experience the <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">AST Playground</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: 0.2 }}
-              className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-ast-muted"
-            >
-              Select your industry and watch a custom AST agent simulate your workflow automation in real-time.
-            </motion.p>
-          </div>
+       <section className="px-6 py-12 sm:py-16">
+         <div className="mx-auto max-w-6xl">
+           <div className="mb-12 max-w-2xl sm:mb-16">
+             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+               A clear path from first conversation to compounding growth.
+             </h2>
+             <p className="mt-4 text-sm leading-7 text-white/70">
+               A disciplined process keeps every decision clear, useful, and connected to the outcome.
+             </p>
+           </div>
+           <motion.div
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true, amount: 0.1 }}
+             variants={gridReveal}
+             className="relative grid transform-gpu gap-8 will-change-transform sm:gap-12 lg:grid-cols-3"
+           >
+             <div className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-10 hidden border-t border-dashed border-white/10 lg:block" />
+             {executionSteps.map((step) => (
+               <ExecutionStep key={step.number} step={step} />
+             ))}
+           </motion.div>
+         </div>
+       </section>
 
-          <div className="mx-auto max-w-4xl">
-            <AIPlayground />
-          </div>
-        </div>
-      </section>
-
-      <section className="px-6 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 max-w-2xl sm:mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
-              A clear path from first conversation to compounding growth.
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-ast-muted">
-              A disciplined process keeps every decision clear, useful, and connected to the outcome.
-            </p>
-          </div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={gridReveal}
-            className="relative grid transform-gpu gap-8 will-change-transform sm:gap-12 lg:grid-cols-3"
-          >
-            <div className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-10 hidden border-t border-dashed border-ast-border lg:block" />
-            {executionSteps.map((step) => (
-              <ExecutionStep key={step.number} step={step} />
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="border-t border-ast-border px-6 py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-12 max-w-2xl sm:mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-ast-text sm:text-5xl">
-              Built for ownership, speed, and momentum.
-            </h2>
-            <p className="mt-4 text-sm leading-7 text-ast-muted">
-              The details that protect your investment before, during, and after launch.
-            </p>
-          </div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={gridReveal}
-            className="grid transform-gpu gap-8 will-change-transform sm:gap-12 sm:grid-cols-2"
-          >
-            {guarantees.map((guarantee) => (
-              <Guarantee key={guarantee.title} guarantee={guarantee} />
-            ))}
-          </motion.div>
-        </div>
-      </section>
+       <section className="border-t border-white/10 px-6 py-12 sm:py-16">
+         <div className="mx-auto max-w-6xl">
+           <div className="mb-12 max-w-2xl sm:mb-16">
+             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-5xl">
+               Built for ownership, speed, and momentum.
+             </h2>
+             <p className="mt-4 text-sm leading-7 text-white/70">
+               The details that protect your investment before, during, and after launch.
+             </p>
+           </div>
+           <motion.div
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true, amount: 0.1 }}
+             variants={gridReveal}
+             className="grid transform-gpu gap-8 will-change-transform sm:gap-12 sm:grid-cols-2"
+           >
+             {guarantees.map((guarantee) => (
+               <Guarantee key={guarantee.title} guarantee={guarantee} />
+             ))}
+           </motion.div>
+         </div>
+       </section>
 
       <section className="px-6 py-12 sm:py-16">
         <div className="mx-auto max-w-7xl">
@@ -414,12 +367,12 @@ export default function Services() {
             variants={reveal}
             className="transform-gpu will-change-transform"
           >
-            <div className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-8 sm:p-10 lg:p-12 text-center">
-              <div className="absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
-              <div className="relative z-10">
-                <h2 className="mx-auto max-w-3xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ast-text">
-                  LET'S BUILD SOMETHING EXTRAORDINARY.
-                </h2>
+<div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-black/10 p-8 sm:p-10 lg:p-12 text-center">
+               <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
+               <div className="relative z-10">
+                 <h2 className="mx-auto max-w-3xl text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white">
+                   LET'S BUILD SOMETHING EXTRAORDINARY.
+                 </h2>
                 <Button
                   to="/booking"
                   variant="primary"

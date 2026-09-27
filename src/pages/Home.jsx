@@ -14,7 +14,6 @@ import {
 } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
-import AIPlayground from '../components/AIPlayground';
 
 const serviceCards = [
   {
@@ -149,7 +148,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-heading"
               >
                 Signature Solutions for{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
@@ -168,10 +167,9 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0, scale: 1 }}
                     viewport={{ once: true, amount: 0.1 }}
                     transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
+                    className="card-3d-glass group"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="relative z-10 flex flex-col h-full">
+                    <div className="card-inner flex flex-col h-full">
                       <div className="mb-6 flex items-start justify-between">
                         <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
                           <Icon className="h-6 w-6" />
@@ -217,45 +215,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* AST Playground - Interactive AI Demo */}
-        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-10 sm:mb-12 text-center">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm"
-              >
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
-                Interactive Demo
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
-              >
-                Experience the <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">AST Playground</span>
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.2 }}
-                className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-ast-muted"
-              >
-                Select your industry and watch a custom AST agent simulate your workflow automation in real-time.
-              </motion.p>
-            </div>
-
-            <div className="mx-auto max-w-4xl">
-              <AIPlayground />
-            </div>
-          </div>
-        </section>
-
         {/* Tech Stack & Approach Section */}
         <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 border-y border-ast-border">
           <div className="mx-auto max-w-7xl">
@@ -274,7 +233,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-heading"
               >
                 Why We Choose <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">The Right Tool</span>{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">Every Time</span>
@@ -298,10 +257,9 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
+                  className="card-3d-glass group"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="relative z-10">
+                  <div className="card-inner">
                     <div className="mb-7 flex items-center justify-between">
                       <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
                         <category.icon className="h-6 w-6" />
@@ -347,7 +305,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-display"
+                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-heading"
               >
                 Built for Scale.{' '}
                 <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
@@ -366,18 +324,19 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.1 }}
                     transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="group relative overflow-hidden rounded-2xl border border-ast-border bg-ast-surface/50 p-6 sm:p-8 transition-all duration-500 hover:-translate-y-1.5 hover:border-ast-accent/30 hover:shadow-[0_32px_64px_rgba(0,0,0,0.4)] hover:shadow-ast-accent/10"
+                    className="card-3d-glass group"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-ast-accent/10 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="mb-6 flex items-center justify-between">
-                      <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-ast-accent">{item.number}</span>
-                      <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
-                        <Icon className="h-5 w-5" />
+                    <div className="card-inner">
+                      <div className="mb-6 flex items-center justify-between">
+                        <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-ast-accent">{item.number}</span>
+                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
+                          <Icon className="h-5 w-5" />
+                        </div>
                       </div>
-                    </div>
 
-                    <h3 className="text-xl font-semibold text-ast-ivory">{item.title}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-ast-muted">{item.description}</p>
+                      <h3 className="text-xl font-semibold text-ast-ivory">{item.title}</h3>
+                      <p className="mt-4 text-sm leading-relaxed text-ast-muted">{item.description}</p>
+                    </div>
                   </motion.article>
                 );
               })}
@@ -399,7 +358,7 @@ export default function Home() {
                 <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
                 Ready to Begin
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-display leading-[0.92] mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-heading leading-[0.92] mb-8">
                 LET'S BUILD YOUR NEXT{' '}
                 <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
                   DIGITAL MASTERPIECE

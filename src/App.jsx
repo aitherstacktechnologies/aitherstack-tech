@@ -6,7 +6,6 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnimationProvider from './components/AnimationProvider';
 import RouteProgressBar from './components/RouteProgressBar';
-import LiquidBackground from './components/LiquidBackground';
 import { SEOHead } from './lib/usePageMeta';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -20,6 +19,18 @@ const Booking = lazy(() => import('./pages/Booking'));
 const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const FAQ = lazy(() => import('./pages/FAQ'));
+
+function WaterBackground() {
+  return (
+    <div className="water-gradient-bg">
+      <div className="water-layer" />
+      <div className="water-glow-1" />
+      <div className="water-glow-2" />
+      <div className="water-glow-3" />
+      <div className="grain-overlay" />
+    </div>
+  );
+}
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -61,8 +72,8 @@ function AppContent() {
   }, [isLegalPage]);
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent text-ast-text font-sans antialiased w-full page-gradient isolation-isolate">
-      {!isLegalPage && <LiquidBackground />}
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent text-white antialiased w-full">
+      {!isLegalPage && <WaterBackground />}
 
       <Navbar />
 
