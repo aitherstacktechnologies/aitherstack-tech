@@ -21,14 +21,14 @@ export default function CalBooking() {
       >
         <div className="flex flex-col items-center justify-center h-full gap-4 text-white">
           <div className="relative flex items-center justify-center">
-            <Loader2 className="h-10 w-10 animate-spin text-orange-500" aria-hidden="true" />
-            <div className="absolute inset-0 border-4 border-white/10 rounded-full border-t-orange-500 animate-spin" aria-hidden="true" />
+            <Loader2 className="h-10 w-10 animate-spin text-white" aria-hidden="true" />
+            <div className="absolute inset-0 border-4 border-white/10 rounded-full border-t-white animate-spin" aria-hidden="true" />
           </div>
           <div className="text-center">
             <p className="text-sm font-medium text-white">Loading your booking calendar</p>
             <p className="text-xs text-white/50 mt-1">This may take a moment on slower connections</p>
           </div>
-          <CalendarClock className="h-6 w-6 text-orange-500/50 animate-pulse" aria-hidden="true" />
+          <CalendarClock className="h-6 w-6 text-white/40 animate-pulse" aria-hidden="true" />
         </div>
       </div>
     );

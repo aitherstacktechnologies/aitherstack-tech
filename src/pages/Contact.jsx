@@ -1,6 +1,5 @@
 ﻿import React, { useState } from 'react';
 import { AlertCircle, CheckCircle2, Mail, MapPin, ArrowUpRight } from 'lucide-react';
-import { motion } from 'framer-motion';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
 import GlassSelect from '../components/GlassSelect';
@@ -18,7 +17,7 @@ const initialFormData = {
   company: ''
 };
 
-const inputClassName = 'w-full rounded-xl border border-ast-border bg-ast-surface/50 px-4 py-3 text-sm text-ast-ivory outline-none transition-colors placeholder:text-ast-muted focus:border-ast-warm-orange/50 focus:ring-2 focus:ring-ast-warm-orange/20';
+const inputClassName = 'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20';
 
 const serviceOptions = [
   { value: 'Luxury E-Commerce & Web Apps', label: 'Luxury E-Commerce & Web Apps — Starting $1,499' },
@@ -58,7 +57,6 @@ export default function Contact() {
     event.preventDefault();
     setStatus({ loading: true, success: false, error: null });
 
-    // Build form-encoded data to avoid CORS preflight
     const submitData = new URLSearchParams();
     submitData.append('name', formData.name.trim());
     submitData.append('email', formData.email.trim());
@@ -75,7 +73,6 @@ export default function Contact() {
         throw new Error('Application endpoint is not configured.');
       }
 
-      // TEMP: Log payload for debugging
       console.log('Contact submission payload:', Object.fromEntries(submitData));
 
       const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
@@ -92,7 +89,6 @@ export default function Contact() {
         throw new Error(`Server error: ${response.status} - ${text.slice(0, 200)}`);
       }
 
-      // TEMP: Log full response for debugging
       console.log('Apps Script response:', result);
 
       if (!response.ok) {
@@ -115,9 +111,8 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen overflow-x-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12 text-ast-ivory">
+    <main className="min-h-screen overflow-x-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12 text-white">
       <Hero
-        eyebrow="// INQUIRIES OPEN"
         title={
           <>
             Let's Build Your Next<br />
@@ -129,62 +124,44 @@ export default function Contact() {
         actions={<Button to="/booking" variant="primary" size="lg" showArrow>Book a Call</Button>}
       />
 
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="mt-10 sm:mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr]"
-      >
+      <div className="mt-10 sm:mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] reveal">
         <aside className="space-y-6">
-          <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 glow-luxury">
-            <h2 className="text-xl font-bold text-ast-ivory">Direct reach</h2>
-            <p className="mt-3 text-sm leading-relaxed text-ast-muted">
+          <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 glow-luxury reveal">
+            <h2 className="text-xl font-bold text-white text-gradient-shimmer">Direct reach</h2>
+            <p className="mt-3 text-sm leading-relaxed text-white/60">
               Skip the bureaucracy and speak directly with the developers executing your build.
             </p>
-            <div className="mt-8 space-y-5 text-sm text-ast-muted">
-              <a href="mailto:muhammadzaman.dev@gmail.com" className="flex items-center gap-3 transition-colors duration-200 hover:text-ast-peach">
-                <Mail className="h-5 w-5 text-ast-peach" />
+            <div className="mt-8 space-y-5 text-sm text-white/60">
+              <a href="mailto:muhammadzaman.dev@gmail.com" className="flex items-center gap-3 transition-colors duration-200 hover:text-orange-500">
+                <Mail className="h-5 w-5 text-orange-500" />
                 muhammadzaman.dev@gmail.com
               </a>
               <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-ast-peach" />
+                <MapPin className="h-5 w-5 text-orange-500" />
                 Worldwide, remote-first
               </div>
             </div>
           </div>
         </aside>
 
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 shadow-2xl glow-luxury"
-        >
+        <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 shadow-2xl glow-luxury reveal">
           {status.success && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-400"
-            >
+            <div className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-400">
               <CheckCircle2 className="h-5 w-5 shrink-0" />
               Message received. We will reach out within 24 hours.
-            </motion.div>
+            </div>
           )}
           {status.error && (
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-6 flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400"
-            >
+            <div className="mb-6 flex items-center gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400">
               <AlertCircle className="h-5 w-5 shrink-0" />
               {status.error}
-            </motion.div>
+            </div>
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-6 sm:gap-8 sm:grid-cols-2">
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Name *</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Name *</span>
                 <input
                   className={inputClassName}
                   name="name"
@@ -195,7 +172,7 @@ export default function Contact() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Email *</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Email *</span>
                 <input
                   className={inputClassName}
                   type="email"
@@ -207,7 +184,7 @@ export default function Contact() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Phone</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Phone</span>
                 <input
                   className={inputClassName}
                   type="tel"
@@ -218,7 +195,7 @@ export default function Contact() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Service *</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Service *</span>
                 <GlassSelect
                   name="service"
                   value={formData.service}
@@ -229,7 +206,7 @@ export default function Contact() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Budget *</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Budget *</span>
                 <GlassSelect
                   name="budget"
                   value={formData.budget}
@@ -240,7 +217,7 @@ export default function Contact() {
                 />
               </label>
               <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Timeline *</span>
+                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Timeline *</span>
                 <GlassSelect
                   name="timeline"
                   value={formData.timeline}
@@ -252,7 +229,7 @@ export default function Contact() {
               </label>
             </div>
             <label className="space-y-2">
-              <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Company</span>
+              <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Company</span>
               <input
                 className={inputClassName}
                 type="text"
@@ -263,7 +240,7 @@ export default function Contact() {
               />
             </label>
             <label className="block space-y-2">
-              <span className="block text-xs font-mono uppercase tracking-wider text-ast-muted">Project details *</span>
+              <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Project details *</span>
               <textarea
                 className={`${inputClassName} resize-none`}
                 name="message"
@@ -285,30 +262,19 @@ export default function Contact() {
               {status.loading ? 'Sending...' : 'Send Message'}
             </Button>
           </form>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       {/* FINAL CTA */}
       <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(243,107,63,0.06)] will-change-transform"
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
+        <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <span className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm mb-6">
-              <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
-              READY TO START
-            </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-heading leading-[0.92] mb-8">
-              LET'S BUILD YOUR NEXT{' '}
-              <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
-                DIGITAL MASTERPIECE
-              </span>
+            <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-400 mb-6">// READY TO START</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase tracking-tight text-white leading-[0.92] mb-8 text-gradient-shimmer">
+              LET'S BUILD YOUR NEXT DIGITAL MASTERPIECE
             </h2>
-            <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="text-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
               Strategic design, custom development, and AI automation that make your business
               feel as premium as the value you deliver.
             </p>
@@ -321,7 +287,7 @@ export default function Contact() {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </main>
   );

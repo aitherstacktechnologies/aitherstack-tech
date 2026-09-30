@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Cpu, CheckCircle2, ClipboardCheck } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
@@ -10,14 +9,10 @@ const steps = [
   { num: '03', days: 'Days 8–10', title: 'Testing & Handoff', icon: CheckCircle2, description: 'Everything is tested live, deployed to production, and your team gets a full walkthrough of how it all works — so you\'re never dependent on us to understand it.', deliverables: 'Live deployment, recorded walkthrough, documentation, 14-day support window starts', points: ['Live testing', 'Bug fixes', 'Performance tuning', 'Production deployment', 'Documentation handoff', 'Team walkthrough'] },
 ];
 
-const reveal = { hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } } };
-const gridReveal = { hidden: {}, visible: { transition: { staggerChildren: 0.09 } } };
-
 export default function Process() {
   return (
-    <main className="min-h-screen overflow-hidden bg-transparent text-ast-ivory">
+    <main className="min-h-screen overflow-hidden bg-transparent text-white">
       <Hero
-        eyebrow="// EXECUTION FRAMEWORK"
         title={
           <>
             How We Engineer<br />
@@ -31,79 +26,62 @@ export default function Process() {
       {/* PROCESS TIMELINE */}
       <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="mx-auto max-w-6xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={gridReveal}
-            className="grid gap-6 sm:gap-8 lg:grid-cols-3"
-          >
+          <div className="grid gap-6 sm:gap-8 lg:grid-cols-3">
             {steps.map((step) => {
               const Icon = step.icon;
               return (
-                <motion.article
+                <article
                   key={step.num}
-                  variants={reveal}
-                  whileHover={{ y: -8 }}
-                  className="card-3d-glass group"
+                  className="card-3d-glass group reveal"
                 >
                   <div className="card-inner">
                     <div className="flex items-center justify-between mb-8">
-                      <span className="text-2xl font-mono text-ast-muted group-hover:text-ast-peach transition-colors duration-300">
+                      <span className="process-step-number">
                         {step.num}
                       </span>
-                      <div className="p-2 rounded-lg glassmorphic-card text-ast-muted group-hover:text-ast-peach transition-colors">
-                        <Icon size={20} />
+                      <div className="process-step-icon">
+                        <Icon size={24} />
                       </div>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-ast-ivory mb-3">{step.title}</h3>
-                    <div className="inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-ast-border bg-ast-surface/50 text-ast-muted mb-6">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 text-gradient-shimmer">{step.title}</h3>
+                    <div className="inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold border border-white/10 bg-white/5 text-white/60 mb-6">
                       {step.days}
                     </div>
-                    <p className="text-sm leading-relaxed text-ast-muted mb-8">
+                    <p className="text-sm leading-relaxed text-white/70 mb-8">
                       {step.description}
                     </p>
-                    <div className="p-4 rounded-xl glassmorphic-card border border-ast-border">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-ast-peach block mb-2">What you get</span>
-                      <p className="text-xs text-ast-muted leading-relaxed">{step.deliverables}</p>
+                    <div className="p-4 rounded-xl glassmorphic-card border border-white/10">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-orange-400 block mb-2">What you get</span>
+                      <p className="text-xs text-white/60 leading-relaxed">{step.deliverables}</p>
                     </div>
                     <div className="mt-4 space-y-2">
                       {step.points.map((point, i) => (
-                        <div key={i} className="flex items-center gap-2 text-xs text-ast-muted">
-                          <span className="w-1 h-1 rounded-full bg-ast-accent" />
+                        <div key={i} className="flex items-center gap-2 text-xs text-white/60">
+                          <span className="w-1 h-1 rounded-full bg-orange-500" />
                           {point}
                         </div>
                       ))}
                     </div>
                   </div>
-                </motion.article>
+                </article>
               );
             })}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* FINAL CTA SECTION */}
       <section className="relative py-12 sm:py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={{
-            hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-          }}
-          className="relative transform-gpu overflow-hidden rounded-3xl border border-ast-warm-orange/30 glassmorphic-luxury p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(243,107,63,0.06)] will-change-transform glow-luxury"
-        >
-          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
+        <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-600/10 via-transparent to-transparent pointer-events-none" />
 
           <div className="relative z-10">
-            <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-ast-peach mb-6">// DIRECT COLLABORATION</span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-ast-ivory leading-[0.95] mb-8">
+            <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-400 mb-6">// DIRECT COLLABORATION</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white leading-[0.95] mb-8 text-gradient-shimmer">
               WANT TO WORK WITH US <br />
-              <span className="text-gradient-luxury">DIRECTLY?</span>
+              DIRECTLY?
             </h2>
-            <p className="text-ast-muted text-base sm:text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="text-lg text-white/60 max-w-2xl mx-auto mb-12 leading-relaxed">
               We're a small, agile technical team — we move fast and ship production-ready systems.
             </p>
 
@@ -118,7 +96,7 @@ export default function Process() {
               </Button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </section>
     </main>
   );

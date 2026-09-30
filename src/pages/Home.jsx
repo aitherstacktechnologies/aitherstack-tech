@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -106,18 +105,17 @@ const techCategories = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-hidden bg-transparent text-ast-text">
+    <div className="min-h-screen overflow-x-hidden bg-transparent text-white">
       <main className="relative overflow-hidden">
         <Hero
-          eyebrow="// PREMIUM ENGINEERING"
           title={
             <>
-              Premium Digital Experiences,<br />
-              <AccentText>Engineered Without Compromise</AccentText>
+              Engineering the Future<br />
+              of Business.<AccentText>.</AccentText>
             </>
           }
           align="center"
-          subtitle="We design and build websites, AI systems, and digital products for brands that demand more than ordinary — precision, performance, and presence."
+          subtitle="AST combines modern web engineering, intelligent AI systems, and automation to build digital products that perform, convert, and scale."
           actions={
             <>
               <Button to="/booking" variant="primary" size="lg" showArrow className="min-w-[200px] sm:min-w-[220px]">
@@ -131,213 +129,152 @@ export default function Home() {
         />
 
         {/* Value-First Service Cards */}
-        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+        <section className="relative px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 sm:mb-12 text-center">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
-              >
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+            <div className="mb-10 sm:mb-12 text-center reveal">
+              <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
                 Core Capabilities
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-heading"
-              >
+              </span>
+              <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
                 Signature Solutions for{' '}
-                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
-                  Ambitious Brands
-                </span>
-              </motion.h2>
+                Ambitious Brands
+              </h2>
             </div>
 
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-6 sm:gap-8 lg:grid-cols-2">
               {serviceCards.map((card, index) => {
                 const Icon = card.icon;
                 return (
-                  <motion.article
+                  <article
                     key={card.title}
-                    initial={{ opacity: 0, y: 28, scale: 0.98 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="card-3d-glass group"
+                    className="card-uniform group reveal"
+                    style={{ animationDelay: `${index * 120}ms` }}
                   >
                     <div className="card-inner flex flex-col h-full">
-                      <div className="mb-6 flex items-start justify-between">
-                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
-                          <Icon className="h-6 w-6" />
-                        </div>
-                        <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
+                      <div className="card-icon-box">
+                        <Icon className="h-6 w-6" />
                       </div>
-
-                      <h3 className="text-xl sm:text-2xl font-semibold text-ast-ivory leading-snug mb-4">{card.title}</h3>
-                      <p className="text-sm leading-relaxed text-ast-muted mb-6 flex-1">{card.description}</p>
-
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-ast-accent/30 bg-ast-accent/10 px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-ast-accent mb-6 self-start">
-                        {card.badge}
-                      </span>
-
-                      <Link
-                        to={card.link}
-                        className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-ast-accent transition-transform duration-300 hover:translate-x-1"
-                      >
-                        <span>Learn more</span>
-                        <ArrowRight className="h-4 w-4" />
-                      </Link>
+                      <div className="card-content">
+                        <div className="card-number">0{index + 1}</div>
+                        <h3 className="card-title text-gradient-shimmer">{card.title}</h3>
+                        <p className="card-description">{card.description}</p>
+                        <div className="card-badge">{card.badge}</div>
+                        <Link
+                          to={card.link}
+                          className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-orange-500 transition-transform duration-300 hover:translate-x-1"
+                        >
+                          <span>Learn more</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      </div>
                     </div>
-                  </motion.article>
+                  </article>
                 );
               })}
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: 0.4 }}
-              className="mt-12 sm:mt-16 text-center"
-            >
+            <div className="mt-12 sm:mt-16 text-center reveal" style={{ animationDelay: '400ms' }}>
               <Link
                 to="/services"
-                className="inline-flex items-center gap-3 rounded-full border border-ast-accent/40 bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-ast-accent transition-all duration-300 hover:bg-ast-accent hover:text-ast-bg hover:shadow-[0_0_24px_rgba(0,212,255,0.35)]"
+                className="inline-flex items-center gap-3 rounded-full border border-orange-500/40 bg-transparent px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.12em] text-orange-500 transition-all duration-300 hover:border-orange-500 hover:scale-105 hover:shadow-[0_0_24px_rgba(255,85,0,0.35)]"
               >
                 View All Services
                 <ArrowRight className="h-4 w-4" />
               </Link>
-            </motion.div>
+            </div>
           </div>
         </section>
 
         {/* Tech Stack & Approach Section */}
-        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 border-y border-ast-border">
+        <section className="relative px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12 border-y border-white/10">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 sm:mb-12 text-center">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
-              >
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+            <div className="mb-10 sm:mb-12 text-center reveal">
+              <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
                 Our Stack & Approach
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-heading"
-              >
-                Why We Choose <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">The Right Tool</span>{' '}
-                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">Every Time</span>
-              </motion.h2>
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.2 }}
-                className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-ast-muted"
-              >
+              </span>
+              <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
+                Why We Choose The Right Tool{' '}
+                Every Time
+              </h2>
+              <p className="mt-4 max-w-2xl mx-auto text-lg leading-relaxed text-white/70">
                 No dogma. No legacy baggage. We pick the technology that serves the product — not our resume.
-              </motion.p>
+              </p>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {techCategories.map((category, index) => (
-                <motion.article
-                  key={category.title}
-                  initial={{ opacity: 0, y: 28, scale: 0.98 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                  className="card-3d-glass group"
-                >
-                  <div className="card-inner">
-                    <div className="mb-7 flex items-center justify-between">
-                      <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
-                        <category.icon className="h-6 w-6" />
+            <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
+              {techCategories.map((category, index) => {
+                return (
+                  <article
+                    key={category.title}
+                    className="card-3d-glass group reveal"
+                    style={{ animationDelay: `${index * 120}ms` }}
+                  >
+                    <div className="card-inner">
+                      <div className="mb-7 flex items-center justify-between">
+                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-14 w-14 items-center justify-center rounded-xl border border-white/10 bg-white/[0.08] text-orange-500">
+                          <category.icon className="h-6 w-6" />
+                        </div>
+                        <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-white/50">0{index + 1}</span>
                       </div>
-                      <span className="text-[10px] font-medium uppercase tracking-[0.26em] text-ast-muted">0{index + 1}</span>
-                    </div>
 
-                    <h3 className="text-xl sm:text-2xl font-semibold text-ast-ivory">{category.title}</h3>
-                    <p className="mt-4 text-sm leading-relaxed text-ast-muted">{category.description}</p>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white text-gradient-shimmer">{category.title}</h3>
+                      <p className="mt-4 text-sm leading-relaxed text-white/70">{category.description}</p>
 
-                    <div className="mt-6 flex flex-wrap gap-2">
-                      {category.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="text-[11px] font-mono text-ast-muted border border-ast-border px-3 py-1.5 rounded-full bg-ast-surface/50 hover:bg-ast-accent/10 hover:text-ast-accent hover:border-ast-accent/30 transition-all duration-200"
-                        >
-                          {t}
-                        </span>
-                      ))}
+                      <div className="mt-6 flex flex-wrap gap-2">
+                        {category.tech.map((t) => (
+                          <span
+                            key={t}
+                            className="text-[11px] font-mono text-white/50 border border-white/10 px-3 py-1.5 rounded-full bg-white/[0.05] hover:bg-orange-500/10 hover:text-orange-500 hover:border-orange-500/30 transition-all duration-200"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                </motion.article>
-              ))}
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Why Choose Us */}
-        <section className="px-4 py-12 sm:px-6 lg:px-8 xl:px-12 border-y border-ast-border">
+        <section className="px-4 py-12 sm:px-6 lg:px-8 xl:px-12 border-y border-white/10">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-10 sm:mb-12 text-center">
-              <motion.span
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-accent backdrop-blur-sm"
-              >
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-accent animate-pulse" />
+            <div className="mb-10 sm:mb-12 text-center reveal">
+              <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
                 Our Philosophy
-              </motion.span>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ delay: 0.1 }}
-                className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-ast-ivory font-heading"
-              >
+              </span>
+              <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
                 Built for Scale.{' '}
-                <span className="bg-gradient-to-r from-ast-accent via-ast-text to-ast-accent bg-clip-text text-transparent">
-                  Engineered for Prestige.
-                </span>
-              </motion.h2>
+                Engineered for Prestige.
+              </h2>
             </div>
 
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="grid gap-6 sm:gap-8 md:grid-cols-2">
               {whyChooseUs.map((item, index) => {
                 const Icon = item.icon;
                 return (
-                  <motion.article
+                  <article
                     key={item.title}
-                    initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.1 }}
-                    transition={{ duration: 0.6, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
-                    className="card-3d-glass group"
+                    className="card-3d-glass group reveal"
+                    style={{ animationDelay: `${index * 120}ms` }}
                   >
                     <div className="card-inner">
                       <div className="mb-6 flex items-center justify-between">
-                        <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-ast-accent">{item.number}</span>
-                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-accent">
+                        <span className="text-[11px] font-medium uppercase tracking-[0.28em] text-orange-500">{item.number}</span>
+                        <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.08] text-orange-500">
                           <Icon className="h-5 w-5" />
                         </div>
                       </div>
 
-                      <h3 className="text-xl font-semibold text-ast-ivory">{item.title}</h3>
-                      <p className="mt-4 text-sm leading-relaxed text-ast-muted">{item.description}</p>
+                      <h3 className="text-xl font-semibold text-white text-gradient-shimmer">{item.title}</h3>
+                      <p className="mt-4 text-sm leading-relaxed text-white/70">{item.description}</p>
                     </div>
-                  </motion.article>
+                  </article>
                 );
               })}
             </div>
@@ -345,26 +282,19 @@ export default function Home() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-8 sm:p-12 lg:p-16 text-center shadow-[0_0_80px_rgba(255,100,31,0.06)]"
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-ast-accent/10 via-transparent to-transparent pointer-events-none" />
+        <section className="relative px-4 py-12 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+          <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-8 sm:p-12 lg:p-16 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
             <div className="relative z-10">
-              <span className="inline-flex items-center gap-2 rounded-full border border-ast-border bg-ast-surface/50 px-4 py-1.5 text-xs font-mono uppercase tracking-[0.2em] text-ast-peach backdrop-blur-sm mb-6">
-                <span className="relative flex h-1.5 w-1.5 rounded-full bg-ast-peach animate-pulse" />
+              <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-sm mb-6">
+                <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
                 Ready to Begin
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-heading leading-[0.92] mb-8">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold uppercase tracking-tight font-heading leading-[0.92] mb-8 text-gradient-shimmer">
                 LET'S BUILD YOUR NEXT{' '}
-                <span className="bg-gradient-to-r from-ast-peach via-ast-warm-orange to-ast-peach bg-clip-text text-transparent">
-                  DIGITAL MASTERPIECE
-                </span>
+                DIGITAL MASTERPIECE
               </h2>
-              <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed">
+              <p className="text-lg text-white/70 max-w-2xl mx-auto mb-10 sm:mb-12 leading-relaxed">
                 Strategic design, custom development, and AI automation that make your business
                 feel as premium as the value you deliver.
               </p>
@@ -391,7 +321,7 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </div>
         </section>
       </main>
     </div>

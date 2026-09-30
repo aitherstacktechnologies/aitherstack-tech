@@ -1,3 +1,4 @@
+import Lenis from 'lenis';
 import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -5,7 +6,6 @@ import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import AnimationProvider from './components/AnimationProvider';
-import RouteProgressBar from './components/RouteProgressBar';
 import { SEOHead } from './lib/usePageMeta';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -32,11 +32,15 @@ function WaterBackground() {
   );
 }
 
+function PageLoader() {
+  return <div className="min-h-[70vh] w-full" />;
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
 
   return (
-    <Suspense fallback={<div className="min-h-[70vh]" aria-hidden="true" />}>
+    <Suspense fallback={<PageLoader />}>
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
@@ -71,13 +75,39 @@ function AppContent() {
     }
   }, [isLegalPage]);
 
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+
+    const lenis = new Lenis({
+      duration: prefersReducedMotion ? 0 : 1.2,
+      easing: (t) => Math.max(0, 1 - Math.pow(1 - t, 3)),
+      wheelMultiplier: 1.0,
+      touchMultiplier: isTouchDevice ? 2.0 : 1.5,
+      sync: true,
+      lerp: 0.08,
+      smoothWheel: !prefersReducedMotion,
+      touch: !prefersReducedMotion,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    const frameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      lenis.destroy();
+    };
+  }, []);
+
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent text-white antialiased w-full">
       {!isLegalPage && <WaterBackground />}
 
       <Navbar />
-
-      <RouteProgressBar />
 
       <SEOHead />
 

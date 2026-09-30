@@ -95,7 +95,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 md:gap-4">
             <Link
               to="/booking"
-              className="hidden md:flex items-center justify-center gap-2 rounded-full border border-orange-500 bg-orange-500 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 hover:bg-white hover:text-orange-500 hover:border-white hover:shadow-[0_0_24px_rgba(255,85,0,0.4)] hover:-translate-y-0.5"
+              className="hidden md:flex items-center justify-center gap-2 rounded-full border border-orange-500 bg-orange-500 px-5 py-2.5 text-xs font-bold uppercase tracking-[0.16em] text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_24px_rgba(255,85,0,0.5)]"
               aria-label="Book a call"
               style={{ fontFamily: "'Krona One', -apple-system, sans-serif" }}
             >
@@ -211,7 +211,7 @@ export default function Navbar() {
                 <Link
                   to="/booking"
                   onClick={() => setIsOpen(false)}
-                  className="group flex items-center justify-center gap-3 rounded-full border border-orange-500 bg-orange-500/10 px-6 py-4 text-base font-bold uppercase tracking-[0.1em] text-orange-500 transition-all duration-300 hover:bg-orange-500 hover:text-white hover:shadow-[0_0_24px_rgba(255,85,0,0.4)]"
+                  className="group flex items-center justify-center gap-3 rounded-full border border-orange-500 bg-orange-500/10 px-6 py-4 text-base font-bold uppercase tracking-[0.1em] text-orange-500 transition-all duration-300 hover:scale-105 hover:shadow-[0_0_24px_rgba(255,85,0,0.45)]"
                   style={{ fontFamily: "'Krona One', sans-serif" }}
                   aria-label="Book a call"
                 >

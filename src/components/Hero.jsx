@@ -8,7 +8,7 @@ const alignmentClasses = {
 
 function AccentText({ children }) {
   return (
-    <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">
+    <span className="font-heading">
       {children}
     </span>
   );
@@ -30,9 +30,11 @@ export default function Hero({
 
   return (
     <section
-      className={`relative isolate overflow-hidden bg-transparent px-4 sm:px-6 lg:px-8 xl:px-12 ${compact ? 'min-h-[55vh]' : 'min-h-[70vh]'} flex flex-col justify-center ${className}`}
-      style={{ aspectRatio: '16 / 9', minHeight: '55vh', contain: 'layout style' }}
+      className={`relative isolate overflow-hidden bg-transparent px-4 sm:px-6 lg:px-8 xl:px-12 pt-44 pb-16 ${compact ? 'min-h-[50vh]' : 'min-h-[60vh]'} flex flex-col justify-center ${className}`}
     >
+      {/* Ambient Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-orange-600/20 via-transparent to-orange-500/10 blur-[120px] rounded-full pointer-events-none animate-pulse-slow" aria-hidden="true" />
+      
       {showBlobs && (
         <>
           <div className="hero-blob hero-blob-1" aria-hidden="true" />
@@ -54,7 +56,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...transition, delay: 0.12 }}
-            className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.05] px-4 py-2 text-[11px] font-mono uppercase tracking-[0.24em] text-orange-500 backdrop-blur-[16px]"
+            className="mb-6 inline-flex items-center gap-3 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]"
             style={{ fontFamily: "'Inter', sans-serif" }}
           >
             <span className="h-1.5 w-1.5 rounded-full bg-orange-500 shadow-[0_0_12px_rgba(255,85,0,0.9)] animate-pulse" />
@@ -66,7 +68,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 26, filter: 'blur(10px)' }}
           animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           transition={{ ...transition, delay: 0.22 }}
-          className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[0.94] tracking-[2px] uppercase text-white"
+          className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[0.94] tracking-tight uppercase text-gradient-shimmer"
           style={{ fontFamily: "'Krona One', sans-serif" }}
         >
           {title}
@@ -76,7 +78,7 @@ export default function Hero({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ ...transition, delay: 0.38 }}
-          className={`mt-6 max-w-2xl text-base leading-[1.6] text-white sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
+          className={`mt-6 max-w-2xl text-base leading-[1.6] text-white/80 sm:text-lg ${align === 'center' ? 'mx-auto' : ''}`}
           style={{ fontFamily: "'Krona One', sans-serif" }}
         >
           {subtitle}
@@ -87,7 +89,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ ...transition, delay: 0.52 }}
-            className={`mt-8 flex flex-col sm:flex-row items-center gap-3 ${align === 'center' ? 'mx-auto' : ''} flex-wrap`}
+            className={`mt-10 flex flex-col sm:flex-row items-center gap-4 ${align === 'center' ? 'mx-auto' : ''} flex-wrap`}
           >
             {actions}
           </motion.div>

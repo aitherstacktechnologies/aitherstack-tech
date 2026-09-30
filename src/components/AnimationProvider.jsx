@@ -1,55 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import Lenis from 'lenis';
 
 export function AnimationProvider({ children }) {
-  const lenisRef = useRef(null);
-
-  useEffect(() => {
-    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const lenis = new Lenis({
-      duration: prefersReducedMotion ? 0 : 1.1,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: !prefersReducedMotion,
-      wheelMultiplier: prefersReducedMotion ? 0 : 1,
-      syncTouch: !prefersReducedMotion && !isTouchDevice,
-      touchMultiplier: 1,
-    });
-
-    lenisRef.current = lenis;
-    let frameId;
-    let lastFrameTime = 0;
-    const targetFPS = window.innerWidth < 768 ? 30 : 60;
-    const frameInterval = 1000 / targetFPS;
-
-    if (!prefersReducedMotion) {
-      const animate = (time) => {
-        // Throttle frame rate on mobile
-        if (time - lastFrameTime < frameInterval) {
-          frameId = requestAnimationFrame(animate);
-          return;
-        }
-        lastFrameTime = time;
-        lenis.raf(time);
-        frameId = requestAnimationFrame(animate);
-      };
-      frameId = requestAnimationFrame(animate);
-    }
-
-    // Passive scroll listener for Lenis
-    const handleScroll = () => lenis.raf(performance.now());
-    window.addEventListener('scroll', handleScroll, { passive: true });
-
-    return () => {
-      if (frameId) cancelAnimationFrame(frameId);
-      window.removeEventListener('scroll', handleScroll);
-      lenis.destroy();
-    };
-  }, []);
-
   return <>{children}</>;
 }
 
@@ -102,7 +54,7 @@ export function MagneticButton({ children, className = '' }) {
     element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('resize', updateRect, { passive: true });
-    updateRect(); // Initial rect
+    updateRect();
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
       element.removeEventListener('pointerenter', handlePointerEnter);
@@ -145,7 +97,7 @@ export function TiltCard({ children, className = '', intensity = 15 }) {
     element.addEventListener('pointermove', handlePointerMove);
     element.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('resize', updateRect, { passive: true });
-    updateRect(); // Initial rect
+    updateRect();
     return () => {
       if (frameId) cancelAnimationFrame(frameId);
       element.removeEventListener('pointerenter', handlePointerEnter);
@@ -161,15 +113,16 @@ export function TiltCard({ children, className = '', intensity = 15 }) {
   );
 }
 
+/* Simple, performant scroll reveal - no external deps */
 export function ScrollReveal({ children, className = '', stagger = true }) {
   return (
-    <div className={`stagger-children ${className}`} data-scroll-reveal>
+    <div className={`reveal-container ${className}`} data-scroll-reveal>
       {React.Children.map(children, (child, i) => (
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.5, delay: stagger ? i * 0.1 : 0, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, delay: stagger ? i * 0.08 : 0, ease: [0.16, 1, 0.3, 1] }}
           className="transform-gpu will-change-transform"
         >
           {child}

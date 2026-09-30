@@ -123,7 +123,7 @@ export default function PrivacyPolicy() {
                 >
                   <div className="flex items-start gap-4 mb-5">
                     <span className="text-xs font-mono text-ast-peach pt-1">{String(index + 1).padStart(2, '0')}</span>
-                    <h2 className="text-xl sm:text-2xl font-bold text-ast-ivory">{title}</h2>
+                    <h2 className="text-xl sm:text-2xl font-bold text-ast-ivory text-gradient-shimmer">{title}</h2>
                   </div>
                   <div className="border-l-2 border-ast-accent bg-ast-peach/5 px-4 py-3 mb-6">
                     <p className="text-sm text-ast-muted leading-relaxed">

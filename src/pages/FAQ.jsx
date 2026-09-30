@@ -127,7 +127,7 @@ export default function FAQ() {
         >
           <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.92] mb-8">
+            <h2 className="text-4xl font-bold uppercase tracking-tight text-ast-ivory sm:text-6xl leading-[0.92] mb-8 text-gradient-shimmer">
               HAVE MORE QUESTIONS?
             </h2>
             <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">

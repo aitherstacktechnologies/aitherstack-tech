@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ExternalLink, Code, Sparkles, Zap, Layers } from 'lucide-react';
+import React, { useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
 
@@ -101,35 +100,14 @@ const projects = [
     image: '/projects logo/Gemini_Generated_Image_abms9zabms9zabms.jpg',
     liveUrl: '#',
   },
-  {
-    id: 9,
-    title: 'AuraSEO',
-    category: 'AI Voice Assistant & Chatbots',
-    tech: ['React', 'Vite', 'Tailwind', 'Vapi AI', 'OpenAI', 'Supabase'],
-    description: 'AI-powered SEO automation platform that generates, optimizes, and publishes SEO-optimized content at scale.',
-    problem: 'Businesses needed automated SEO content creation that ranks without manual intervention.',
-    built: 'AI-powered content pipeline with Vapi AI for voice-driven content strategy, OpenAI for generation, Supabase for data, deployed on Vercel.',
-    result: 'Automated 500+ SEO articles/month, 3x organic traffic growth, 80% reduction in content costs.',
-    image: '/projects logo/Gemini_Generated_Image_11tm8411tm8411tm.jpg',
-    liveUrl: 'https://auraseo-eosin.vercel.app/',
-  },
 ];
-
-const categoryIcons = {
-  'Luxury E-Commerce & Web Apps': Sparkles,
-  'High-Converting Landing Pages': Zap,
-  'AI Voice Assistant & Chatbots': Code,
-  'UI/UX Design & Brand Systems': Layers,
-};
 
 export default function Portfolio() {
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [hoveredImage, setHoveredImage] = useState(null);
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-transparent text-white">
       <Hero
-        eyebrow="// PROVEN DEPLOYMENTS"
         title={
           <>
             Digital Work,<br />
@@ -144,19 +122,15 @@ export default function Portfolio() {
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-x-12 sm:gap-y-20">
           {projects.map((project, index) => {
-            const CategoryIcon = categoryIcons[project.category] || Code;
             const isHovered = hoveredCard === project.id;
 
             return (
-              <motion.div
+              <div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                className="relative mx-auto w-full max-w-lg transform-gpu will-change-transform"
+                className="relative mx-auto w-full max-w-lg transform-gpu will-change-transform reveal"
+                style={{ animationDelay: `${index * 120}ms` }}
                 onMouseEnter={() => setHoveredCard(project.id)}
-                onMouseLeave={() => { setHoveredCard(null); setHoveredImage(null); }}
+                onMouseLeave={() => setHoveredCard(null)}
               >
                 {/* Card */}
                 <div
@@ -166,36 +140,28 @@ export default function Portfolio() {
                 >
                   {/* Image Section */}
                   <div className="relative aspect-16/10 flex items-center justify-center overflow-hidden bg-transparent">
-                    <motion.img
+                    <img
                       src={project.image}
                       alt={project.title}
                       width={677}
                       height={369}
                       loading={index >= 2 ? 'lazy' : 'eager'}
-                      className={`w-full h-full object-cover transition-all duration-500 grayscale group-hover:grayscale-0 opacity-80 ${
-                        isHovered ? 'opacity-100 blur-sm scale-105' : 'opacity-80 group-hover:opacity-100 group-hover:scale-103 group-hover:blur-0'
-                      }`}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                          isHovered ? 'blur-sm scale-105' : ''}
+                        `}
                       style={{ transformOrigin: 'center center' }}
-                      whileHover={{ scale: 1.03 }}
-                      onMouseEnter={() => setHoveredImage(project.id)}
-                      onMouseLeave={() => setHoveredImage(null)}
                     />
 
                     {/* Category badge on image */}
                     <div className="absolute top-4 left-4 z-10">
                       <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-sm border border-white/10 text-[10px] font-mono uppercase tracking-wider text-orange-500">
-                        <CategoryIcon className="h-3 w-3" />
                         {project.category.split(' & ')[0]}
                       </span>
                     </div>
 
                     {/* Visit CTA Button on image hover */}
                     {isHovered && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 10 }}
-                        transition={{ duration: 0.25 }}
+                      <div
                         className="absolute inset-0 flex items-center justify-center z-20"
                       >
                         <Button
@@ -215,7 +181,7 @@ export default function Portfolio() {
                         >
                           Visit Project
                         </Button>
-                      </motion.div>
+                      </div>
                     )}
 
                     {/* Overlay blur on image when hovered */}
@@ -224,20 +190,17 @@ export default function Portfolio() {
                     )}
                   </div>
 
-                  {/* Expandable Content Section - reveals on hover */}
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: isHovered ? 'auto' : 0, opacity: isHovered ? 1 : 0 }}
-                    transition={{
-                      height: { duration: 0.35, ease: [0.33, 1, 0.68, 1] },
-                      opacity: { duration: 0.2 }
-                    }}
-                    className="overflow-hidden flex-1"
+                  {/* Content Section - card shows only the logo until hover, then details reveal smoothly */}
+                  <div
+                    className={`grid transition-all duration-500 ease-out ${
+                      isHovered ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
+                    }`}
                   >
-                    <div className="p-6 pt-0 pb-8 space-y-6 text-left flex-1">
+                    <div className="overflow-hidden">
+                      <div className="p-6 pt-0 pb-8 space-y-6 text-left">
                       {/* Project Title & Category */}
                       <div className="pt-4 border-t border-white/10">
-                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1">{project.title}</h3>
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-1 text-gradient-shimmer">{project.title}</h3>
                         <span className="text-[10px] font-mono uppercase tracking-widest text-orange-500/70">{project.category}</span>
                       </div>
 
@@ -295,10 +258,11 @@ export default function Portfolio() {
                           Visit Project
                         </Button>
                       </div>
+                      </div>
                     </div>
-                  </motion.div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -307,25 +271,14 @@ export default function Portfolio() {
       {/* FINAL CTA SECTION */}
       <section className="relative px-6 py-12 sm:py-16 text-center sm:py-20 mt-24">
         <div className="mx-auto max-w-5xl">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
-            }}
-            className="relative transform-gpu overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-black/10 p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] will-change-transform"
-          >
+          <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-6 sm:p-10 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
             <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
 
             <div className="relative z-10">
-              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-500 mb-6">// PROVEN RESULTS</span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-[0.95] mb-8">
+              <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-400 mb-6">// PROVEN RESULTS</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white leading-[0.95] mb-8 text-gradient-shimmer">
                 WANT TO BE OUR <br />
-                <span className="bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 bg-clip-text text-transparent">
-                  NEXT CASE STUDY?
-                </span>
+                NEXT CASE STUDY?
               </h2>
               <p className="text-white/70 text-lg max-w-2xl mx-auto mb-12 leading-relaxed">
                 Let's build a high-converting web platform or automated AI system worth showing off.
@@ -342,7 +295,7 @@ export default function Portfolio() {
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

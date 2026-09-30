@@ -1,7 +1,7 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Cpu, Bot, Workflow, Layers } from 'lucide-react';
 import Button from '../components/Button';
+import Hero, { AccentText } from '../components/Hero';
 
 const capabilities = [
   { title: 'WEB ENGINEERING', description: 'Modern websites, web platforms and custom web applications.', details: ['React & TypeScript', 'Tailwind CSS', 'Framer Motion', 'Sub-second load times'], icon: Layers },
@@ -35,268 +35,202 @@ const values = [
 
 export default function About() {
   return (
-    <div className="bg-transparent text-ast-ivory min-h-screen overflow-x-hidden">
-      <div className="relative pt-28 pb-16 px-4 sm:px-6 lg:px-8 xl:px-12 border-b border-ast-border overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute -bottom-20 -right-10 text-[20vw] font-black tracking-tighter text-ast-ivory opacity-[0.04] select-none">
-            AST
-          </span>
-        </div>
-        <div className="relative z-10 max-w-7xl mx-auto">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight uppercase mb-4 leading-[1.1]"
-          >
-            WE BUILD DIGITAL SYSTEMS
-            FOR AMBITIOUS BUSINESSES.
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-base sm:text-lg text-ast-muted max-w-2xl leading-relaxed mt-6"
-          >
-            AST builds modern websites, web applications, AI systems, automation workflows, and custom business software designed around real business needs.
-          </motion.p>
-        </div>
-      </div>
+    <div className="bg-transparent text-white min-h-screen overflow-x-hidden">
+      <Hero
+        title={
+          <>
+            We Build Digital Systems<br />
+            for Ambitious Businesses.<AccentText>.</AccentText>
+          </>
+        }
+        subtitle="AST builds modern websites, web applications, AI systems, automation workflows, and custom business software designed around real business needs."
+        align="center"
+      />
 
       {/* CAPABILITIES */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="mb-10 sm:mb-12 text-center reveal">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+              Core Capabilities
+            </span>
+            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
+              What We Build
+            </h2>
+          </div>
+          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2">
             {capabilities.map((cap, index) => {
               const Icon = cap.icon;
               return (
-                <motion.div
+                <article
                   key={cap.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="card-3d-glass group"
+                  className="card-3d-glass group reveal"
+                  style={{ animationDelay: `${index * 120}ms` }}
                 >
                   <div className="card-inner">
                     <div className="mb-6 flex items-center justify-between">
-                      <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-ast-border bg-ast-surface/80 text-ast-peach">
+                      <div className="group-hover:scale-110 transition-transform duration-500 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/[0.08] text-orange-500">
                         <Icon className="h-6 w-6" />
                       </div>
-                      <span className="text-[10px] font-mono text-ast-peach uppercase tracking-[0.2em]">{cap.title}</span>
+                      <span className="text-[10px] font-mono text-orange-400 uppercase tracking-[0.2em]">{cap.title}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-ast-ivory mb-3">{cap.title}</h3>
-                    <p className="text-sm text-ast-muted leading-relaxed mb-4">{cap.description}</p>
+                    <h3 className="text-xl font-bold text-white mb-3 text-gradient-shimmer">{cap.title}</h3>
+                    <p className="text-sm text-white/60 leading-relaxed mb-4">{cap.description}</p>
                     <ul className="space-y-2">
                       {cap.details.map((detail, i) => (
-                        <li key={i} className="flex items-center gap-2 text-xs text-ast-muted">
-                          <span className="w-1 h-1 rounded-full bg-ast-peach" />
+                        <li key={i} className="flex items-center gap-2 text-xs text-white/60">
+                          <span className="w-1 h-1 rounded-full bg-orange-500" />
                           {detail}
                         </li>
                       ))}
                     </ul>
                   </div>
-                </motion.div>
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* BUILT AROUND THE BUSINESS */}
-      <section className="py-12 sm:py-14 px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
-              BUILT AROUND THE BUSINESS
-            </h2>
-            <p className="text-ast-muted leading-relaxed mb-6 max-w-3xl">
-              Every business has different users, workflows and problems. We don't start with a fixed template — we start by understanding what needs to be built and why.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {['WEB ENGINEERING', 'AI & AUTOMATION', 'CLOUD & API'].map((tag) => (
-                <span
-                  key={tag}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-transparent border border-ast-border text-sm text-ast-ivory"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-ast-peach" />
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
       {/* HOW WE WORK */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            transition={{ duration: 0.6 }}
-            className="mb-12 sm:mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
-              HOW WE WORK
+          <div className="mb-10 sm:mb-12 text-center reveal">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+              Our Process
+            </span>
+            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
+              How We Work
             </h2>
-          </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          </div>
+          <div className="flex flex-wrap justify-center gap-6">
             {howWeWorkSteps.map((step, index) => (
-              <motion.div
+              <article
                 key={step.number}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card-3d-glass group"
+                className="card-3d-glass group reveal w-full sm:w-[calc(50%_-_0.75rem)] lg:w-[calc(33.333%_-_1rem)]"
+                style={{ animationDelay: `${index * 120}ms` }}
               >
                 <div className="card-inner">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl font-black tracking-tighter text-ast-ivory">{step.number}</span>
-                    <ArrowRight className="h-4 w-4 text-ast-peach transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                    <span className="text-3xl font-black tracking-tighter text-white">{step.number}</span>
+                    <ArrowRight className="h-4 w-4 text-orange-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
-                  <h3 className="text-sm font-bold mb-2 text-ast-ivory uppercase tracking-wider">{step.title}</h3>
-                  <p className="text-xs text-ast-muted leading-relaxed mb-4">{step.description}</p>
-                  <div className="pt-4 border-t border-ast-border">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-ast-peach block mb-2">What you get</span>
-                    <p className="text-xs text-ast-muted leading-relaxed">{step.deliverables}</p>
+                  <h3 className="text-sm font-bold mb-2 text-white uppercase tracking-wider text-gradient-shimmer">{step.title}</h3>
+                  <p className="text-xs text-white/60 leading-relaxed mb-4">{step.description}</p>
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-orange-400 block mb-2">What you get</span>
+                    <p className="text-xs text-white/60 leading-relaxed">{step.deliverables}</p>
                   </div>
                   <div className="mt-4 space-y-1">
                     {step.points.map((point, i) => (
-                      <div key={i} className="flex items-center gap-2 text-[10px] text-ast-muted">
-                        <span className="w-1 h-1 rounded-full bg-ast-peach" />
+                      <div key={i} className="flex items-center gap-2 text-[10px] text-white/60">
+                        <span className="w-1 h-1 rounded-full bg-orange-500" />
                         {point}
                       </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* WHY AST */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            className="text-center mb-12 sm:mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
-              WHY AST
+          <div className="mb-10 sm:mb-12 text-center reveal">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+              Why AST
+            </span>
+            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
+              Why AST
             </h2>
-            <p className="text-ast-muted max-w-2xl mx-auto">
-              The principles that guide everything we do at AST.
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+            <p className="text-white/60 max-w-2xl mx-auto mt-4">The principles that guide everything we do at AST.</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-6">
             {whyAst.map((value, index) => (
-              <motion.div
+              <article
                 key={value.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card-3d-glass group"
+                className="card-3d-glass group reveal w-full sm:w-[calc(50%_-_0.75rem)] lg:w-[calc(33.333%_-_1rem)]"
+                style={{ animationDelay: `${index * 120}ms` }}
               >
                 <div className="card-inner">
-                  <h3 className="text-lg font-bold mb-3 text-ast-ivory">{value.title}</h3>
-                  <p className="text-sm text-ast-muted leading-relaxed mb-4">{value.description}</p>
+                  <h3 className="text-lg font-bold mb-3 text-white text-gradient-shimmer">{value.title}</h3>
+                  <p className="text-sm text-white/60 leading-relaxed mb-4">{value.description}</p>
                   <div className="space-y-2">
                     {value.points.map((point, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-ast-muted">
-                        <span className="w-1 h-1 rounded-full bg-ast-peach" />
+                      <div key={i} className="flex items-center gap-2 text-xs text-white/60">
+                        <span className="w-1 h-1 rounded-full bg-orange-500" />
                         {point}
                       </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* OUR VALUES */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            className="text-center mb-12 sm:mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight uppercase mb-4">
-              OUR VALUES
+          <div className="mb-10 sm:mb-12 text-center reveal">
+            <span className="inline-flex items-center gap-2 rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-1.5 text-xs font-mono uppercase tracking-widest text-orange-400 backdrop-blur-[16px]">
+              <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+              Our Values
+            </span>
+            <h2 className="mt-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight font-heading text-gradient-shimmer">
+              Our Values
             </h2>
-            <p className="text-ast-muted max-w-2xl mx-auto">
-              The principles that guide everything we do at AST.
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <p className="text-white/60 max-w-2xl mx-auto mt-4">The principles that guide everything we do at AST.</p>
+          </div>
+          <div className="grid gap-6 sm:gap-8 sm:grid-cols-2">
             {values.map((value, index) => (
-              <motion.div
+              <article
                 key={value.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="card-3d-glass group"
+                className="card-3d-glass group reveal"
+                style={{ animationDelay: `${index * 120}ms` }}
               >
                 <div className="card-inner">
-                  <h3 className="text-lg font-bold mb-3 text-ast-ivory">{value.title}</h3>
-                  <p className="text-sm text-ast-muted leading-relaxed mb-4">{value.description}</p>
+                  <h3 className="text-lg font-bold mb-3 text-white text-gradient-shimmer">{value.title}</h3>
+                  <p className="text-sm text-white/60 leading-relaxed mb-4">{value.description}</p>
                   <div className="space-y-2">
                     {value.points.map((point, i) => (
-                      <div key={i} className="flex items-center gap-2 text-xs text-ast-muted">
-                        <span className="w-1 h-1 rounded-full bg-ast-peach" />
+                      <div key={i} className="flex items-center gap-2 text-xs text-white/60">
+                        <span className="w-1 h-1 rounded-full bg-orange-500" />
                         {point}
                       </div>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          className="relative overflow-hidden rounded-3xl border border-ast-border bg-gradient-to-b from-ast-surface/50 to-ast-bg/10 p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,100,31,0.06)] will-change-transform"
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-ast-warm-orange/10 via-transparent to-transparent pointer-events-none" />
+      <section className="relative px-4 py-12 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+        <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold uppercase tracking-tight text-ast-ivory font-heading leading-[0.92] mb-8">
-              HAVE SOMETHING WORTH BUILDING?
+            <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-400 mb-6">// THE TEAM</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white leading-[0.92] mb-8 text-gradient-shimmer">
+              WANT TO WORK WITH US?
             </h2>
-            <p className="text-lg text-ast-muted max-w-2xl mx-auto mb-12 leading-relaxed">
-              Tell us what you're trying to solve. We'll explore the technology needed to turn it into a working product.
+            <p className="text-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+              We're a small team that ships real systems fast.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-              <Button to="/contact" variant="primary" size="lg" showArrow className="min-w-[220px] w-full sm:w-auto">
-                START A PROJECT
-              </Button>
-              <Button to="/team" variant="ghost" size="lg" showArrow arrowIcon={ArrowUpRight} className="min-w-[220px] w-full sm:w-auto">
-                MEET THE TEAM
-              </Button>
-            </div>
+            <Button to="/booking" variant="primary" size="lg" showArrow className="mt-10">
+              Book a Call
+            </Button>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import Button from '../components/Button';
 import Hero, { AccentText } from '../components/Hero';
 
@@ -9,12 +8,6 @@ const teamMembers = [
     role: "Full Stack Developer",
     bio: "Architects scalable Web3 & React platforms with sub-second performance and clean component design.",
     image: "/team/zaman.jpg"
-  },
-  {
-    name: "Ahmed Zaman",
-    role: "AI & Automations Lead",
-    bio: "Engineers custom Retell AI voice agents, autonomous LLM workflows, and CRM pipelines.",
-    image: "/team/ahmed.jpg"
   },
   {
     name: "Hurairah",
@@ -38,9 +31,8 @@ const teamMembers = [
 
 export default function Team() {
   return (
-    <div className="overflow-x-hidden pt-12 bg-transparent">
+    <div className="overflow-x-hidden pt-16 bg-transparent">
       <Hero
-        eyebrow="// THE ENGINEERING SQUAD"
         title={
           <>
             Fewer Meetings.<br />
@@ -51,28 +43,23 @@ export default function Team() {
         align="left"
       />
 
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 xl:px-12">
+      <section className="px-4 py-12 sm:px-6 sm:py-16 lg:px-8 xl:px-12">
         <div className="max-w-7xl mx-auto">
-          {/* Upper 3 cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
-            {teamMembers.slice(0, 3).map((member, i) => (
-              <motion.div
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 sm:gap-x-12 sm:gap-y-20">
+            {teamMembers.map((member, i) => (
+              <article
                 key={member.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(255,85,0,0.2)] w-full"
+                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(255,85,0,0.2)] w-full max-w-lg mx-auto reveal"
+                style={{ animationDelay: `${i * 120}ms` }}
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <motion.img
+                <div className="relative aspect-square overflow-hidden">
+                  <img
                     src={member.image}
                     alt={member.name}
-                    width={400}
-                    height={500}
-                    className="w-full h-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-105"
+                    width={1024}
+                    height={1024}
+                    className="w-full h-full object-cover object-top transition-transform duration-[400ms] ease-out group-hover:scale-105"
                     loading="lazy"
-                    whileHover={{ scale: 1.05 }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 via-transparent to-transparent" />
                   <div className="absolute top-4 right-4 z-10 glassmorphic-luxury border border-white/10 text-white text-[10px] font-mono px-3 py-1 rounded-full flex items-center gap-1.5">
@@ -80,101 +67,43 @@ export default function Team() {
                     AVAILABLE FOR SPRINTS
                   </div>
                 </div>
-                <div className="p-6">
-                  <motion.h3
-                    className="text-xl font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-500"
-                    whileHover={{ x: 4 }}
-                    style={{ fontFamily: "'Krona One', sans-serif" }}
-                  >
+                <div className="p-6 sm:p-8">
+                  <h3 className="text-xl font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-500 text-gradient-shimmer">
                     {member.name}
-                  </motion.h3>
+                  </h3>
                   <p className="text-xs font-mono uppercase tracking-wider text-orange-500 mb-3">
                     {member.role}
                   </p>
-                  <p className="text-sm text-white/70 leading-relaxed mb-6 transition-colors duration-300 group-hover:text-white">
+                  <p className="text-sm text-white/70 leading-relaxed transition-colors duration-300 group-hover:text-white">
                     {member.bio}
                   </p>
                 </div>
-              </motion.div>
-            ))}
-          </div>
-          {/* Lower 2 cards - centered below top 3, same width */}
-          <div className="flex flex-col sm:flex-row justify-center gap-8 max-w-2xl mx-auto">
-            {teamMembers.slice(3, 5).map((member, i) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.1 }}
-                transition={{ duration: 0.5, delay: (i + 3) * 0.08 }}
-                className="founder-card group relative glassmorphic-card rounded-3xl overflow-hidden transition-all duration-300 hover:border-orange-500/40 hover:shadow-[0_0_30px_rgba(255,85,0,0.2)] w-full sm:w-[48%]"
-              >
-                <div className="relative aspect-[4/5] overflow-hidden">
-                  <motion.img
-                    src={member.image}
-                    alt={member.name}
-                    width={400}
-                    height={500}
-                    className="w-full h-full object-cover transition-transform duration-[400ms] ease-out group-hover:scale-105"
-                    loading="lazy"
-                    whileHover={{ scale: 1.05 }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-orange-500/10 via-transparent to-transparent" />
-                  <div className="absolute top-4 right-4 z-10 glassmorphic-luxury border border-white/10 text-white text-[10px] font-mono px-3 py-1 rounded-full flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-                    AVAILABLE FOR SPRINTS
-                  </div>
-                </div>
-                <div className="p-6">
-                  <motion.h3
-                    className="text-xl font-bold text-white mb-1 transition-colors duration-300 group-hover:text-orange-500"
-                    whileHover={{ x: 4 }}
-                    style={{ fontFamily: "'Krona One', sans-serif" }}
-                  >
-                    {member.name}
-                  </motion.h3>
-                  <p className="text-xs font-mono uppercase tracking-wider text-orange-500 mb-3">
-                    {member.role}
-                  </p>
-                  <p className="text-sm text-white/70 leading-relaxed mb-6 transition-colors duration-300 group-hover:text-white">
-                    {member.bio}
-                  </p>
-                </div>
-              </motion.div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: Why We Started */}
+      {/* SECTION 3 */}
       <section className="px-4 py-10 sm:px-6 sm:py-12 lg:px-8 xl:px-12 pb-12">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.1 }}
-            className="text-sm text-white/70 leading-relaxed"
-          >
+        <div className="max-w-3xl mx-auto text-center reveal">
+          <p className="text-sm text-white/70 leading-relaxed">
             AST started from frustration — too many agencies deliver
             static sites with no automation behind them. We decided to build
             the opposite: a team that ships AI agents, automation pipelines,
             and high-converting sites that actually run your business while
             you sleep.
-          </motion.p>
+          </p>
         </div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.05] to-black/10 p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] will-change-transform"
-        >
-<div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
-           <div className="relative z-10">
-             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight text-white leading-[0.92] mb-8">
+      <section className="relative px-4 py-12 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+        <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
+          <div className="relative z-10">
+            <span className="inline-block text-[10px] font-mono uppercase tracking-[0.3em] text-orange-400 mb-6">// THE TEAM</span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-white leading-[0.92] mb-8 text-gradient-shimmer">
               WANT TO WORK WITH US?
             </h2>
             <p className="text-lg text-white/70 max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -184,7 +113,7 @@ export default function Team() {
               Book a Call
             </Button>
           </div>
-        </motion.div>
+        </div>
       </section>
     </div>
   );

@@ -17,7 +17,7 @@ const Button = forwardRef(
     disabled = false,
     type = 'button',
     fullWidth = false,
-    showArrow = false,
+    showArrow = true,
     arrowIcon = ArrowUpRight,
     ...props
   }, ref) => {
@@ -42,7 +42,6 @@ const Button = forwardRef(
     const commonProps = {
       ref,
       className: combinedClassName,
-      whileTap: { scale: 0.98 },
       style: { willChange: 'transform' },
       disabled,
       ...props,
@@ -56,7 +55,7 @@ const Button = forwardRef(
         >
           <span>{children}</span>
           {showArrow && (
-            <span className="flex-shrink-0 transition-transform duration-200">
+            <span className="btn-arrow flex-shrink-0 transition-transform duration-200">
               <ArrowIcon className="h-4 w-4" />
             </span>
           )}
@@ -74,7 +73,7 @@ const Button = forwardRef(
         >
           <span>{children}</span>
           {(showArrow || external) && (
-            <span className="flex-shrink-0 transition-transform duration-200">
+            <span className="btn-arrow flex-shrink-0 transition-transform duration-200">
               {arrowIcon ? <ArrowIcon className="h-4 w-4" /> : <ExternalLink className="h-4 w-4" />}
             </span>
           )}
@@ -89,7 +88,7 @@ const Button = forwardRef(
       >
         <span>{children}</span>
         {showArrow && (
-          <span className="flex-shrink-0 transition-transform duration-200">
+          <span className="btn-arrow flex-shrink-0 transition-transform duration-200">
             <ArrowIcon className="h-4 w-4" />
           </span>
         )}
