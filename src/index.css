@@ -1221,6 +1221,27 @@ h1, h2, h3, h4, h5, h6, p, span {
 }
 
 /* Responsive portfolio cards */
+/* Shared scroller for dropdown option panels (GlassSelect + legal jump menus) */
+.options-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 85, 0, 0.45) transparent;
+}
+
+.options-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  display: block;
+}
+
+.options-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.options-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 85, 0, 0.45);
+  border-radius: 999px;
+}
+
 section .grid > div {
   min-width: 0;
   max-width: 100%;

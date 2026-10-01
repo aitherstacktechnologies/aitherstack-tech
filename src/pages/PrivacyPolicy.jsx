@@ -69,7 +69,7 @@ export default function PrivacyPolicy() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute z-20 w-full border border-ast-border bg-ast-surface shadow-xl"
+                className="absolute z-20 w-full border border-ast-border bg-ast-bg/90 backdrop-blur-md shadow-xl rounded-b-[20px] max-h-[60vh] overflow-y-auto options-scroll"
               >
                 {sections.map(([id, title], index) => (
                   <button
@@ -78,8 +78,8 @@ export default function PrivacyPolicy() {
                     onClick={() => jumpToSection(id)}
                     className={`block w-full px-4 py-3 text-left text-sm transition-colors ${
                       activeSection === id
-                        ? 'bg-ast-peach/10 text-ast-peach'
-                        : 'text-ast-muted hover:bg-ast-surface/50'
+                        ? 'bg-ast-peach/15 text-ast-peach'
+                        : 'text-ast-peach/75 hover:bg-ast-peach/10 hover:text-ast-peach'
                     }`}
                   >
                     {String(index + 1).padStart(2, '0')} / {title}

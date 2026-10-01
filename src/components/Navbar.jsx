@@ -149,7 +149,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={transition}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-[16px] md:hidden"
+            className="fixed inset-0 z-[60] bg-black md:hidden"
           >
             <motion.nav
               initial={{ opacity: 0, y: 18 }}

@@ -20,22 +20,43 @@ const initialFormData = {
 const inputClassName = 'w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-white/40 focus:border-orange-500/50 focus:ring-2 focus:ring-orange-500/20';
 
 const serviceOptions = [
-  { value: 'Luxury E-Commerce & Web Apps', label: 'Luxury E-Commerce & Web Apps — Starting $1,499' },
-  { value: 'High-Converting Landing Pages', label: 'High-Converting Landing Pages — Starting $499' },
-  { value: 'AI Voice Assistant & Chatbot Setup', label: 'AI Voice Assistant & Chatbot Setup — Starting $899' },
-  { value: 'UI/UX Design & Brand System', label: 'UI/UX Design & Brand System — Starting $599' },
-  { value: 'Website Maintenance & Support', label: 'Website Maintenance & Support — $299/mo' },
-  { value: 'AI Agent & Voice Bot Management', label: 'AI Agent & Voice Bot Management — $499/mo' },
-  { value: 'Performance Marketing & Social Media', label: 'Performance Marketing & Social Media — $599/mo' },
-  { value: 'Dedicated Developer Support', label: 'Dedicated Developer Support — $899/mo' },
+  { value: 'Luxury E-Commerce & Web Apps', label: 'High-Conversion Web Platforms — Starting $1,499', group: 'One-Time Projects' },
+  { value: 'High-Converting Landing Pages', label: 'Conversion Systems — Starting $499', group: 'One-Time Projects' },
+  { value: 'AI Voice Assistant & Chatbot Setup', label: 'AI & Automation — Starting $899', group: 'One-Time Projects' },
+  { value: 'UI/UX Design & Brand System', label: 'Design Systems — Starting $599', group: 'One-Time Projects' },
+  { value: 'Website Maintenance & Support', label: 'Care & Stability — $299/mo', group: 'Monthly Retainers (Fixed Pricing)' },
+  { value: 'AI Agent & Voice Bot Management', label: 'AI Operations — $499/mo', group: 'Monthly Retainers (Fixed Pricing)' },
+  { value: 'Performance Marketing & Social Media', label: 'Growth Engine — $599/mo', group: 'Monthly Retainers (Fixed Pricing)' },
+  { value: 'Dedicated Developer Support', label: 'Embedded Engineering — $899/mo', group: 'Monthly Retainers (Fixed Pricing)' },
 ];
 
+// Monthly retainer services have a fixed package price — Budget does not apply
+const retainerServices = new Set([
+  'Website Maintenance & Support',
+  'AI Agent & Voice Bot Management',
+  'Performance Marketing & Social Media',
+  'Dedicated Developer Support',
+]);
+
+const retainerPackages = {
+  'Website Maintenance & Support': 'Care & Stability',
+  'AI Agent & Voice Bot Management': 'AI Operations',
+  'Performance Marketing & Social Media': 'Growth Engine',
+  'Dedicated Developer Support': 'Embedded Engineering',
+};
+
+const retainerPrices = {
+  'Website Maintenance & Support': '$299/mo',
+  'AI Agent & Voice Bot Management': '$499/mo',
+  'Performance Marketing & Social Media': '$599/mo',
+  'Dedicated Developer Support': '$899/mo',
+};
+
 const budgetOptions = [
-  { value: '$299 - $999', label: '$299 - $999' },
+  { value: '< $1k', label: '< $1k' },
   { value: '$1k - $3k', label: '$1k - $3k' },
   { value: '$3k - $5k', label: '$3k - $5k' },
-  { value: '$5k - $10k', label: '$5k - $10k' },
-  { value: '$10k+ / Enterprise', label: '$10k+ / Enterprise' },
+  { value: '$5k+', label: '$5k+' },
 ];
 
 const timelineOptions = [
@@ -49,8 +70,14 @@ export default function Contact() {
   const [formData, setFormData] = useState(initialFormData);
   const [status, setStatus] = useState({ loading: false, success: false, error: null });
 
+  const budgetDisabled = retainerServices.has(formData.service);
+
   const handleChange = (event) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
+    const next = { ...formData, [event.target.name]: event.target.value };
+    if (event.target.name === 'service' && retainerServices.has(next.service)) {
+      next.budget = '';
+    }
+    setFormData(next);
   };
 
   const handleSubmit = async (event) => {
@@ -124,27 +151,27 @@ export default function Contact() {
         actions={<Button to="/booking" variant="primary" size="lg" showArrow>Book a Call</Button>}
       />
 
-      <div className="mt-10 sm:mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] reveal">
-        <aside className="space-y-6">
-          <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 glow-luxury reveal">
+      <div className="mt-10 sm:mt-12 grid gap-8 min-w-0 lg:grid-cols-[0.8fr_1.2fr] reveal">
+        <aside className="space-y-6 min-w-0">
+          <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 glow-luxury reveal min-w-0">
             <h2 className="text-xl font-bold text-white text-gradient-shimmer">Direct reach</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/60">
               Skip the bureaucracy and speak directly with the developers executing your build.
             </p>
             <div className="mt-8 space-y-5 text-sm text-white/60">
               <a href="mailto:muhammadzaman.dev@gmail.com" className="flex items-center gap-3 transition-colors duration-200 hover:text-orange-500">
-                <Mail className="h-5 w-5 text-orange-500" />
-                muhammadzaman.dev@gmail.com
+                <Mail className="h-5 w-5 shrink-0 text-orange-500" />
+                <span className="min-w-0 break-all">muhammadzaman.dev@gmail.com</span>
               </a>
               <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-orange-500" />
-                Worldwide, remote-first
+                <MapPin className="h-5 w-5 shrink-0 text-orange-500" />
+                <span className="min-w-0 break-words">Worldwide, remote-first</span>
               </div>
             </div>
           </div>
         </aside>
 
-        <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 shadow-2xl glow-luxury reveal">
+        <div className="glassmorphic-luxury rounded-3xl p-6 sm:p-8 shadow-2xl glow-luxury reveal min-w-0">
           {status.success && (
             <div className="mb-6 flex items-center gap-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 text-sm text-emerald-400">
               <CheckCircle2 className="h-5 w-5 shrink-0" />
@@ -205,17 +232,34 @@ export default function Contact() {
                   ariaLabel="Select service"
                 />
               </label>
-              <label className="space-y-2">
-                <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Budget *</span>
-                <GlassSelect
-                  name="budget"
-                  value={formData.budget}
-                  onChange={handleChange}
-                  options={budgetOptions}
-                  required
-                  ariaLabel="Select budget"
-                />
-              </label>
+              {budgetDisabled ? (
+                <div className="flex items-center justify-between gap-4 rounded-xl border border-orange-500/40 bg-orange-500/10 px-4 py-3.5 backdrop-blur-md">
+                  <div className="min-w-0">
+                    <p className="text-xs font-mono uppercase tracking-wider text-orange-400">
+                      Packages Have Fixed Monthly Pricing
+                    </p>
+                    <p className="mt-1 text-sm text-white/70">
+                      {retainerPackages[formData.service] || 'Monthly retainer package'}
+                    </p>
+                  </div>
+                  <span className="shrink-0 text-xl font-bold text-orange-500">
+                    {retainerPrices[formData.service] || ''}
+                  </span>
+                </div>
+              ) : (
+                <label className="space-y-2">
+                  <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Budget *</span>
+                  <GlassSelect
+                    name="budget"
+                    value={formData.budget}
+                    onChange={handleChange}
+                    options={budgetOptions}
+                    required
+                    placeholder="Select budget"
+                    ariaLabel="Select budget"
+                  />
+                </label>
+              )}
               <label className="space-y-2">
                 <span className="block text-xs font-mono uppercase tracking-wider text-white/50">Timeline *</span>
                 <GlassSelect
@@ -266,7 +310,7 @@ export default function Contact() {
       </div>
 
       {/* FINAL CTA */}
-      <section className="relative py-12 sm:py-16 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-7xl mx-auto">
+      <section className="relative py-12 sm:py-16 max-w-7xl mx-auto">
         <div className="relative overflow-hidden rounded-3xl border border-orange-500/30 glassmorphic-luxury p-6 sm:p-10 lg:p-12 text-center shadow-[0_0_80px_rgba(255,85,0,0.06)] reveal">
           <div className="absolute inset-0 bg-gradient-to-b from-orange-500/10 via-transparent to-transparent pointer-events-none" />
           <div className="relative z-10">

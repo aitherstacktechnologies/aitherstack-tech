@@ -39,12 +39,23 @@ const GLASS_SELECT_STYLES = `
     border-bottom-right-radius: 0;
     background: rgba(13, 11, 10, 0.5);
   }
+  .glass-select__trigger:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+  .glass-select__trigger:disabled:hover,
+  .glass-select__trigger:disabled:focus {
+    border-color: rgba(255, 255, 255, 0.08);
+    background: rgba(13, 11, 10, 0.4);
+    box-shadow: none;
+  }
   .glass-select__value {
     flex: 1;
+    min-width: 0;
     text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   .glass-select__icon {
     flex-shrink: 0;
@@ -65,14 +76,16 @@ const GLASS_SELECT_STYLES = `
     z-index: 100;
     margin-top: 2px;
     padding: 0.5rem;
-    background: rgba(13, 11, 10, 0.6);
+    background: rgba(13, 11, 10, 0.75);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-top: none;
     border-radius: 0 0 0.75rem 0.75rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+    max-height: min(60vh, 20rem);
+    overflow-x: hidden;
+    overflow-y: auto;
     animation: glassSelectSlide 0.15s ease-out;
   }
   @keyframes glassSelectSlide {
@@ -88,7 +101,7 @@ const GLASS_SELECT_STYLES = `
     background: transparent;
     border: none;
     border-radius: 0.5rem;
-    color: #F4EDE3;
+    color: #FF7A00;
     font-size: 0.875rem;
     font-family: inherit;
     text-align: left;
@@ -98,29 +111,40 @@ const GLASS_SELECT_STYLES = `
   }
   .glass-select__option:hover,
   .glass-select__option:focus {
-    background: rgba(255, 120, 70, 0.15);
+    background: rgba(255, 85, 0, 0.15);
   }
   .glass-select__option[aria-selected="true"] {
-    background: rgba(255, 120, 70, 0.2);
-    color: #F4EDE3;
+    background: rgba(255, 85, 0, 0.22);
+    color: #FFD180;
   }
   .glass-select__option[aria-selected="true"]:hover,
   .glass-select__option[aria-selected="true"]:focus {
-    background: rgba(255, 120, 70, 0.3);
+    background: rgba(255, 85, 0, 0.3);
   }
   .glass-select__option-text {
     flex: 1;
+    min-width: 0;
     text-align: left;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
   .glass-select__check {
     flex-shrink: 0;
     margin-left: 0.75rem;
     width: 1rem;
     height: 1rem;
-    color: #FF9A78;
+    color: #FF7A00;
+  }
+  .glass-select__group {
+    display: block;
+    padding: 0.75rem 0.875rem 0.375rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: #FF7A00;
   }
   .glass-select__label {
     display: block;
@@ -276,27 +300,36 @@ export default function GlassSelect({
       {isOpen && (
         <div
           ref={optionsRef}
-          className="glass-select__options"
+          className="glass-select__options options-scroll"
           role="listbox"
           aria-label={ariaLabel || label}
         >
-          {options.map((option, index) => (
-            <button
-              key={option.value}
-              ref={(el) => { optionRefs.current[index] = el; }}
-              type="button"
-              className="glass-select__option"
-              role="option"
-              aria-selected={option.value === value}
-              aria-disabled={disabled}
-              onClick={() => handleOptionClick(option.value)}
-              onMouseEnter={() => setFocusedIndex(index)}
-              onMouseLeave={() => setFocusedIndex(-1)}
-            >
-              <span className="glass-select__option-text">{option.label}</span>
-              {option.value === value && <Check className="glass-select__check" aria-hidden="true" />}
-            </button>
-          ))}
+          {options.map((option, index) => {
+            const showGroup = option.group && option.group !== options[index - 1]?.group;
+            return (
+              <React.Fragment key={option.value}>
+                {showGroup && (
+                  <div className="glass-select__group" role="presentation">
+                    {option.group}
+                  </div>
+                )}
+                <button
+                  type="button"
+                  ref={(el) => { optionRefs.current[index] = el; }}
+                  className="glass-select__option"
+                  role="option"
+                  aria-selected={option.value === value}
+                  aria-disabled={disabled}
+                  onClick={() => handleOptionClick(option.value)}
+                  onMouseEnter={() => setFocusedIndex(index)}
+                  onMouseLeave={() => setFocusedIndex(-1)}
+                >
+                  <span className="glass-select__option-text">{option.label}</span>
+                  {option.value === value && <Check className="glass-select__check" aria-hidden="true" />}
+                </button>
+              </React.Fragment>
+            );
+          })}
         </div>
       )}
     </div>
